@@ -28,6 +28,9 @@ Route::prefix('api')->group(function () {
     // 設定用ユーザー情報更新
     Route::post('/user/setting', 'UserController@update');
 
+    // プロフィール情報取得
+    Route::get('/profile/{id}', 'UserController@profile_index');
+
     // 投稿一覧取得
     Route::post('/post', 'PostController@index');
     // 投稿API

@@ -28,11 +28,11 @@
 						</v-list-item-icon>
 						<v-list-item-title>投稿一覧</v-list-item-title>
 					</v-list-item>
-					<v-list-item to="/mypage" v-if="isLogin">
+					<v-list-item :to="`/profile/${this.isLoginUserId}`" v-if="isLogin">
 						<v-list-item-icon>
 							<v-icon>mdi-account-circle</v-icon>
 						</v-list-item-icon>
-						<v-list-item-title>マイページ</v-list-item-title>
+						<v-list-item-title>プロフィール</v-list-item-title>
 					</v-list-item>
 					<v-list-item to="/setting" v-if="isLogin">
 						<v-list-item-icon>
@@ -90,6 +90,9 @@ export default {
 	computed: {
 		isLogin() {
 			return this.$store.getters["auth/check"];
+		},
+		isLoginUserId() {
+			return this.$store.getters["auth/userId"];
 		},
 		username() {
 			return this.$store.getters["auth/username"];

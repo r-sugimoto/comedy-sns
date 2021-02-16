@@ -4,7 +4,7 @@ import Home from "./components/pages/Home.vue";
 import Setting from "./components/pages/Setting.vue";
 import SystemError from "./components/pages/SystemError.vue";
 import NotFound from "./components/pages/NotFound.vue";
-import Mypage from "./components/pages/Mypage.vue";
+import Profile from "./components/pages/Profile.vue";
 import Login from "./components/pages/Login.vue";
 import Register from "./components/pages/Register.vue";
 import Post from "./components/pages/Post.vue";
@@ -24,6 +24,13 @@ export default new Router({
 			path: "/setting",
 			name: "setting",
 			component: Setting,
+			beforeEnter(to, from, next) {
+				if (store.getters["auth/check"]) {
+					next();
+				} else {
+					next("/");
+				}
+			},
 		},
 		{
 			path: "/login",
@@ -43,7 +50,7 @@ export default new Router({
 			component: Register,
 			beforeEnter(to, from, next) {
 				if (store.getters["auth/check"]) {
-					next("/post");
+					next("/");
 				} else {
 					next();
 				}
@@ -72,16 +79,10 @@ export default new Router({
 			props: true,
 		},
 		{
-			path: "/mypage",
-			name: "mypage",
-			component: Mypage,
-			beforeEnter(to, from, next) {
-				if (!store.getters["auth/check"]) {
-					next("/");
-				} else {
-					next();
-				}
-			},
+			path: "/profile/:id",
+			name: "profile",
+			component: Profile,
+			props: true,
 		},
 		{
 			path: "/500",
