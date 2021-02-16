@@ -47,12 +47,12 @@
 						outlined
 					/>
 				</validation-provider>
-				<v-checkbox
+				<!-- <v-checkbox
 					v-model="loginForm.remember"
 					label="ログインしたままにする"
 					name="remember"
 					class="mb-0"
-				></v-checkbox>
+				></v-checkbox> -->
 				<v-btn
 					@click="login"
 					class="mt-2"
