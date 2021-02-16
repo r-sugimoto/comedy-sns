@@ -16235,18 +16235,6 @@ var render = function() {
                 ])
               }),
               _vm._v(" "),
-              _c("v-checkbox", {
-                staticClass: "mb-0",
-                attrs: { label: "ログインしたままにする", name: "remember" },
-                model: {
-                  value: _vm.loginForm.remember,
-                  callback: function($$v) {
-                    _vm.$set(_vm.loginForm, "remember", $$v)
-                  },
-                  expression: "loginForm.remember"
-                }
-              }),
-              _vm._v(" "),
               _c(
                 "v-btn",
                 {
