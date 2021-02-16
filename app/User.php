@@ -29,7 +29,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'email_verified_at'
     ];
 
     /**
@@ -58,6 +58,15 @@ class User extends Authenticatable
     public function tags()
     {
         return $this->belongsToMany('App\Tag');
+    }
+
+    public function prefecture(){
+        return $this->belongsTo('App\Prefecture');
+    }
+
+    public function follows()
+    {
+        return $this->belongsToMany('App\Follow');
     }
 
     public function updateUser($request)
@@ -120,11 +129,7 @@ class User extends Authenticatable
         return $this->likes()->where('post_id',$postId)->first();
     }
 
-    public function getThumbnailUrlAttribute()
-    {
-        return Storage::cloud()->url($this->attributes['thumbnail']);
-    }
-
+    // プロフィール画像をAWSにアップ
     public function updateUserThumbnail($file){
         $date = Carbon::now();
         $extension = $file->extension();
@@ -143,4 +148,11 @@ class User extends Authenticatable
             throw $exception;
         }
     }
+
+    // 画像URL取得
+    public function getThumbnailUrlAttribute()
+    {
+        return Storage::cloud()->url($this->attributes['thumbnail']);
+    }
+
 }

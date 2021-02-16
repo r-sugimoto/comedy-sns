@@ -154,6 +154,7 @@ export default {
 		};
 	},
 	methods: {
+		// ユーザー情報設定
 		async postUserSetting() {
 			const isValid = await this.$refs.observer.validate();
 			if (isValid) {
@@ -173,9 +174,6 @@ export default {
 				formData.append("introduction", this.userSettingForm.introduction);
 				formData.append("prefecture_id", this.userSettingForm.prefectureId);
 				formData.append("tags", JSON.stringify(this.userSettingForm.tags));
-
-				console.log(JSON.stringify(this.userSettingForm.tags));
-				console.log(this.userSettingForm.tags);
 				if (this.userSettingForm.pictureFile.length) {
 					formData.append("thumbnail", this.userSettingForm.pictureFile[0]);
 				}
@@ -192,6 +190,7 @@ export default {
 				}
 			}
 		},
+		// ユーザー情報取得
 		async getUserSetting() {
 			const response = await axios.get("/api/user/setting");
 			if (response.status === OK) {
