@@ -1,0 +1,115 @@
+// Vuetifyカスタマイズ用
+.v-btn {
+	text-decoration: none !important;
+}
+
+.v-list-item {
+	text-decoration: none !important;
+}
+
+.v-text-field__details {
+	padding-left: 0px !important;
+}
+
+.v-text-field--outlined fieldset {
+	border-color: currentColor !important;
+}
+
+/* タグカスタム */
+.ti-input {
+	background: #f4f8fa;
+	border-radius: 4px;
+	border-color: rgb(244, 248, 250);
+	margin-bottom: 10px;
+}
+.vue-tags-input .ti-tag {
+	position: relative;
+	background: #ebde6e;
+	color: #283944;
+}
+.ti-new-tag-input-wrapper {
+	font-size: 16px !important;
+}
+.ti-tag {
+	background: #00bcd4 !important;
+	color: #fff;
+}
+.ti-deletion-mark {
+	background: red !important;
+}
+.tag-error-text {
+	font-size: 12px;
+	height: 14px;
+}
+
+// 独自クラス
+// 共通
+.tc-w {
+	color: #fff;
+}
+.ta-c {
+	text-align: center;
+}
+.td-none {
+	text-decoration: none !important;
+}
+.c-cyan {
+	color: $cyan !important;
+}
+.ta-r {
+	text-align: right;
+}
+
+/* fab */
+.fab-container {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	z-index: 8;
+	padding: 48px;
+}
+
+.input-label {
+	color: #333;
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 4px !important;
+}
+
+.auth-form {
+	padding: 32px 56px 56px;
+	margin-top: 60px;
+}
+@media screen and (max-width: 599px) {
+	// スマホ用
+	.xs-pl-pr {
+		padding-left: 4px !important;
+		padding-right: 4px !important;
+	}
+	.xs-f-size {
+		font-size: 16px !important;
+	}
+	.input-label span {
+		display: inline-block;
+	}
+	/* fab */
+	.fab-container {
+		padding: 24px;
+	}
+	.auth-form {
+		padding: 10px 10px 30px;
+		margin-top: 0px;
+	}
+
+	.header-btn {
+		height: 28px;
+		min-width: 50px;
+	}
+	.header-btn a {
+		font-size: 0.75rem;
+	}
+
+	.dialog-custom {
+		width: 100% !important;
+	}
+}
