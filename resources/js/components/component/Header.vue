@@ -24,9 +24,9 @@
 					</v-list-item>
 					<v-list-item to="/post">
 						<v-list-item-icon>
-							<v-icon>mdi-newspaper-variant</v-icon>
+							<v-icon>mdi-comment-multiple-outline</v-icon>
 						</v-list-item-icon>
-						<v-list-item-title>投稿一覧</v-list-item-title>
+						<v-list-item-title>タイムライン</v-list-item-title>
 					</v-list-item>
 					<v-list-item :to="`/profile/${this.isLoginUserId}`" v-if="isLogin">
 						<v-list-item-icon>
