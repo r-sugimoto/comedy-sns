@@ -1,10 +1,10 @@
 <template>
-	<v-card class="mx-auto auth-form" max-width="480" elevation="0" tile>
+	<v-card class="mx-auto auth-form" max-width="640" elevation="0" tile>
 		<v-card-title
 			class="justify-center mt-2 mb-5"
 			style="border-bottom: 1px solid #e5e5e5"
 		>
-			<h2 class="cyan--text font-weight-bold mb-0">プロフィール情報設定</h2>
+			<h2 class="cyan--text font-weight-bold mb-0">プロフィール設定</h2>
 		</v-card-title>
 		<validation-observer ref="observer">
 			<v-form>
@@ -27,7 +27,7 @@
 					</v-file-input>
 				</validation-provider>
 				<div class="text-center">
-					<v-avatar size="100" color="gray">
+					<v-avatar size="200" color="gray">
 						<v-img :src="preview"></v-img>
 					</v-avatar>
 				</div>
@@ -112,17 +112,18 @@
 					name="remember"
 					class="m-0"
 				></v-checkbox>
-				<v-btn
-					@click="postUserSetting"
-					class="mt-2"
-					color="cyan"
-					elevation="0"
-					large
-					rounded
-					block
-				>
-					<span class="tc-w">設定</span>
-				</v-btn>
+				<div class="text-right">
+					<v-btn
+						@click="postUserSetting"
+						class="mt-2"
+						color="cyan"
+						elevation="0"
+						large
+						rounded
+					>
+						<span class="tc-w">設定</span>
+					</v-btn>
+				</div>
 			</v-form>
 		</validation-observer>
 	</v-card>

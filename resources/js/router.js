@@ -11,6 +11,7 @@ import Post from "./components/pages/Post.vue";
 import PostDetail from "./components/pages/PostDetail.vue";
 import Recruit from "./components/pages/Recruit.vue";
 import RecruitDetail from "./components/pages/RecruitDetail.vue";
+import FollowList from "./components/pages/FollowList.vue";
 
 export default new Router({
 	mode: "history",
@@ -82,6 +83,18 @@ export default new Router({
 			path: "/profile/:id",
 			name: "profile",
 			component: Profile,
+			props: true,
+		},
+		{
+			path: "/profile/:id/following",
+			name: "following",
+			component: FollowList,
+			props: true,
+		},
+		{
+			path: "/profile/:id/followers",
+			name: "followers",
+			component: FollowList,
 			props: true,
 		},
 		{
