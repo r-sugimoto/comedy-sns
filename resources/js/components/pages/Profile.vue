@@ -3,7 +3,7 @@
 		<v-card tile elevation="0" class="mx-auto pb-5" max-width="640">
 			<v-row>
 				<v-col cols="12" sm="4" md="4" lg="4" xl="4" class="pt-0 pb-0">
-					<div class="text-center">
+					<div class="text-center mt-5">
 						<v-avatar size="150" color="gray">
 							<v-img :src="profiles.thumbnail_url"></v-img>
 						</v-avatar>
@@ -47,7 +47,7 @@
 				</v-col>
 			</v-row>
 		</v-card>
-		<ProfileTabs></ProfileTabs>
+		<ProfileTabs :user-id="id"></ProfileTabs>
 	</div>
 </template>
 

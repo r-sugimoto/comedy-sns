@@ -50,9 +50,7 @@
 			</v-list>
 		</v-navigation-drawer>
 		<v-app-bar color="cyan" dark tile fixed elevation="0">
-			<v-toolbar-title>
-				<router-link to="/" class="title"><span>Comedy SNS</span></router-link>
-			</v-toolbar-title>
+			<router-link to="/" class="title"><span>Comedy SNS</span></router-link>
 			<v-spacer></v-spacer>
 			<div class="header-btn mr-1" v-if="!isLogin">
 				<router-link to="/login">ログイン</router-link>
