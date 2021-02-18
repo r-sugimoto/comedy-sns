@@ -139,4 +139,38 @@ class PostController extends Controller
     
         return response($post, 201);
     }
+
+    // プロフィールページ取得
+    public function profile_post(Request $request){
+        $user_id = $request->user_id;
+        $like = $request->like;
+        $comment = $request->comment;
+        $type = $request->type;
+        $posts = Post::select('id', 'user_id', 'title','message', 'recruit_id', 'created_at')
+        // 絞り込み：タイムライン
+            ->when($type === 1, function ($query){
+                return $query->whereNull('recruit_id');
+            })
+        // 絞り込み：相方募集投稿
+            ->when($type === 2, function ($query){
+                return $query->whereNotNull('recruit_id');
+            })
+            ->where('user_id', '=', $user_id)
+            ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'likes', 'comments','recruit.prefecture','recruit.prefecture.region', 'recruit.generation'])
+        // いいねした投稿
+            ->when($like, function ($query, $like){
+                return $query->whereHas('likes', function($query) use($like) {
+                    return $query->where('likes.user_id', $like);
+                });
+            })
+        //　コメントした投稿
+            ->when($comment, function ($query, $comment){
+                return $query->whereHas('comments', function($query) use($comment) {
+                    return $query->where('comments.user_id', $comment);
+                });
+            })
+            ->orderBy(Post::CREATED_AT, 'desc')->paginate(10);
+        
+        return $posts;
+    }
 }
