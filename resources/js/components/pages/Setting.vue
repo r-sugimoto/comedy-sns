@@ -1,10 +1,10 @@
 <template>
-	<v-card class="mx-auto auth-form" max-width="480" elevation="0" tile>
+	<v-card class="mx-auto auth-form" max-width="640" elevation="0" tile>
 		<v-card-title
 			class="justify-center mt-2 mb-5"
 			style="border-bottom: 1px solid #e5e5e5"
 		>
-			<h2 class="cyan--text font-weight-bold mb-0">プロフィール情報設定</h2>
+			<h2 class="cyan--text font-weight-bold mb-0">プロフィール設定</h2>
 		</v-card-title>
 		<validation-observer ref="observer">
 			<v-form>
@@ -27,7 +27,7 @@
 					</v-file-input>
 				</validation-provider>
 				<div class="text-center">
-					<v-avatar size="100" color="gray">
+					<v-avatar size="200" color="gray">
 						<v-img :src="preview"></v-img>
 					</v-avatar>
 				</div>
@@ -112,17 +112,18 @@
 					name="remember"
 					class="m-0"
 				></v-checkbox>
-				<v-btn
-					@click="postUserSetting"
-					class="mt-2"
-					color="cyan"
-					elevation="0"
-					large
-					rounded
-					block
-				>
-					<span class="tc-w">設定</span>
-				</v-btn>
+				<div class="text-right">
+					<v-btn
+						@click="postUserSetting"
+						class="mt-2"
+						color="cyan"
+						elevation="0"
+						large
+						rounded
+					>
+						<span class="tc-w">設定</span>
+					</v-btn>
+				</div>
 			</v-form>
 		</validation-observer>
 	</v-card>
@@ -154,6 +155,7 @@ export default {
 		};
 	},
 	methods: {
+		// ユーザー情報設定
 		async postUserSetting() {
 			const isValid = await this.$refs.observer.validate();
 			if (isValid) {
@@ -173,9 +175,6 @@ export default {
 				formData.append("introduction", this.userSettingForm.introduction);
 				formData.append("prefecture_id", this.userSettingForm.prefectureId);
 				formData.append("tags", JSON.stringify(this.userSettingForm.tags));
-
-				console.log(JSON.stringify(this.userSettingForm.tags));
-				console.log(this.userSettingForm.tags);
 				if (this.userSettingForm.pictureFile.length) {
 					formData.append("thumbnail", this.userSettingForm.pictureFile[0]);
 				}
@@ -192,6 +191,7 @@ export default {
 				}
 			}
 		},
+		// ユーザー情報取得
 		async getUserSetting() {
 			const response = await axios.get("/api/user/setting");
 			if (response.status === OK) {

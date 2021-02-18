@@ -1,6 +1,6 @@
 <template>
 	<v-app :style="{ background: $vuetify.theme.themes.light.background }">
-		<Header />
+		<Header></Header>
 		<v-main style="margin-top: 64px !important">
 			<FlashMessage />
 			<DefaultLoading />

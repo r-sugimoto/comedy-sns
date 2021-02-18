@@ -1,7 +1,7 @@
 <template>
 	<v-card class="post-form mb-5 p-2" tile elevation="0">
 		<v-card-title class="c-cyan">
-			<p class="font-weight-bold mb-0">投稿検索</p>
+			<p class="font-weight-bold mb-0">タイムライン検索</p>
 		</v-card-title>
 		<validation-observer ref="observer">
 			<v-form>
