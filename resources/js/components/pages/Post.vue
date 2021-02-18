@@ -4,10 +4,10 @@
 			<NewPost v-if="isLogin" @addPostReload="postReload"></NewPost>
 		</v-fab-transition>
 		<v-row>
-			<v-col class="pb-0 pt-0 xs-pl-pr" cols="12" lg="4" xl="4">
+			<v-col class="pb-0 pt-0" cols="12" lg="4" xl="4">
 				<SearchPost></SearchPost>
 			</v-col>
-			<v-col class="pb-0 pt-0 xs-pl-pr" lg="8" xl="8">
+			<v-col class="pb-0 pt-0" lg="8" xl="8">
 				<v-card
 					class="mb-4"
 					v-for="post in posts"

@@ -11048,11 +11048,6 @@ a.text-dark:focus {
 }
 
 @media screen and (max-width: 599px) {
-  .xs-pl-pr {
-    padding-left: 4px !important;
-    padding-right: 4px !important;
-  }
-
   .xs-f-size {
     font-size: 16px !important;
   }

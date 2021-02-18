@@ -4,10 +4,10 @@
 			<NewRecruit v-if="isLogin" @addPostReload="postReload"></NewRecruit>
 		</v-fab-transition>
 		<v-row>
-			<v-col class="pb-0 pt-0 xs-pl-pr" cols="12" lg="4" xl="4">
+			<v-col class="pb-0 pt-0" cols="12" lg="4" xl="4">
 				<SearchRecruit></SearchRecruit>
 			</v-col>
-			<v-col class="pb-0 pt-0 xs-pl-pr" lg="8" xl="8">
+			<v-col class="pb-0 pt-0" lg="8" xl="8">
 				<v-card
 					class="mb-4"
 					v-for="post in posts"
@@ -110,7 +110,7 @@ export default {
 	methods: {
 		postReload() {
 			this.page = 1;
-			this.posts = [];
+			this.posts.splice(0, this.posts.length);
 			this.$refs.infiniteLoading.stateChanger.reset();
 		},
 		async infiniteHandler($state) {
@@ -191,7 +191,6 @@ export default {
 	},
 	watch: {
 		$route(to, from) {
-			this.posts.splice(0, this.posts.length);
 			this.postReload();
 		},
 	},
