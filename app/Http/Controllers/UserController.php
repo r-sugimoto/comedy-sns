@@ -26,4 +26,10 @@ class UserController extends Controller
 
         return response($user, 201);
     }
+
+    // プロフィールページ情報取得
+    public function profile_index(string $id){
+        $user = User::where('id', $id)->with(['tags', 'prefecture'])->first();
+        return $user;
+    }
 }

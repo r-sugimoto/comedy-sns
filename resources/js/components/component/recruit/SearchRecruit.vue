@@ -6,45 +6,34 @@
 		<validation-observer ref="observer">
 			<v-form>
 				<v-row>
-					<v-col
-						cols="12"
-						sm="6"
-						md="6"
-						lg="12"
-						xl="12"
-						class="pb-0 pt-0 xs-p-0"
-					>
-						<v-row>
-							<v-col cols="6" class="pr-0"
-								><p class="input-label">エリア</p>
-								<v-select
-									v-model="regionId"
-									:items="regions"
-									item-text="name"
-									item-value="id"
-									placeholder="選択してください"
-									background-color="#f4f8fa"
-									outlined
-									clearable
-								>
-								</v-select
-							></v-col>
-							<v-col cols="6">
-								<p class="input-label">都道府県</p>
-								<v-select
-									v-model="prefectureId"
-									:items="prefectures"
-									item-text="name"
-									item-value="id"
-									placeholder="選択してください"
-									background-color="#f4f8fa"
-									outlined
-									clearable
-								>
-								</v-select
-							></v-col>
-						</v-row>
-					</v-col>
+					<v-col cols="12" sm="6" md="6" lg="6" xl="6" class="pb-0 pt-0 xs-p-0"
+						><p class="input-label">エリア</p>
+						<v-select
+							v-model="regionId"
+							:items="regions"
+							item-text="name"
+							item-value="id"
+							placeholder="選択してください"
+							background-color="#f4f8fa"
+							outlined
+							clearable
+						>
+						</v-select
+					></v-col>
+					<v-col cols="12" sm="6" md="6" lg="6" xl="6" class="pb-0 pt-0 xs-p-0">
+						<p class="input-label">都道府県</p>
+						<v-select
+							v-model="prefectureId"
+							:items="prefectures"
+							item-text="name"
+							item-value="id"
+							placeholder="選択してください"
+							background-color="#f4f8fa"
+							outlined
+							clearable
+						>
+						</v-select
+					></v-col>
 					<v-col
 						class="pb-0 pt-0 xs-p-0"
 						cols="12"
