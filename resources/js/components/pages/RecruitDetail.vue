@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-row>
-			<v-col class="pb-0 pt-0 xs-pl-pr">
+			<v-col class="pb-0 pt-0">
 				<div class="pl-0 mb-2">
 					<RouteBack :path-name="'recruit'"></RouteBack>
 				</div>
