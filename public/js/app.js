@@ -2740,6 +2740,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3975,7 +3985,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../util */ "./resources/js/util.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../util */ "./resources/js/util.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3983,10 +4009,152 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      follow: false
+    };
   },
-  props: {},
-  methods: {}
+  props: {
+    UserId: String
+  },
+  methods: {
+    isFollow: function isFollow() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response, _response;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (_this.isLogin) {
+                  _context.next = 3;
+                  break;
+                }
+
+                alert("フォロー機能を使うにはログインしてください。");
+                return _context.abrupt("return", false);
+
+              case 3:
+                if (!_this.follow) {
+                  _context.next = 10;
+                  break;
+                }
+
+                _context.next = 6;
+                return axios["delete"]("/api/profile/".concat(_this.UserId, "/follow"));
+
+              case 6:
+                response = _context.sent;
+
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                  _this.follow = false;
+                } else {
+                  _this.$store.commit("error/setCode", response.status);
+                }
+
+                _context.next = 14;
+                break;
+
+              case 10:
+                _context.next = 12;
+                return axios.put("/api/profile/".concat(_this.UserId, "/follow"));
+
+              case 12:
+                _response = _context.sent;
+
+                if (_response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                  _this.follow = true;
+                } else {
+                  _this.$store.commit("error/setCode", _response.status);
+                }
+
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    followCheck: function followCheck() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post("/api/follow/check/".concat(_this2.UserId));
+
+              case 2:
+                response = _context2.sent;
+
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                  _this2.follow = Boolean(response.data);
+                } else {
+                  _this2.$store.commit("error/setCode", response.status);
+                }
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    }
+  },
+  computed: {
+    isLogin: function isLogin() {
+      return this.$store.getters["auth/check"];
+    },
+    isLoginUserId: function isLoginUserId() {
+      return this.$store.getters["auth/userId"];
+    }
+  },
+  created: function created() {
+    var _this3 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return _this3.followCheck();
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
+  },
+  watch: {
+    $route: function $route(to, from) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return _this4.followCheck();
+
+              case 2:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    }
+  }
 });
 
 /***/ }),
@@ -4083,13 +4251,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      tabs: "tab-1",
+      selectValue: 0,
       posts: [],
       page: 1,
+      post: this.UserId,
       like: null,
       comment: null,
       searchType: null,
@@ -4113,12 +4289,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     profileTabs: function profileTabs(val) {
+      this.selectValue = val;
       this.page = 1;
       this.posts.splice(0, this.posts.length);
+      this.post = null;
       this.comment = null;
       this.like = null;
 
-      if (val === 1) {
+      if (val === 0) {
+        this.post = this.UserId;
+      } else if (val === 1) {
         this.comment = this.UserId;
       } else if (val === 2) {
         this.like = this.UserId;
@@ -4145,6 +4325,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.post("/api/profile/post?page=".concat(_this.page), {
                   user_id: _this.UserId,
                   type: _this.searchType,
+                  post: _this.post,
                   like: _this.like,
                   comment: _this.comment
                 });
@@ -4179,6 +4360,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    }
+  },
+  watch: {
+    $route: function $route(to, from) {
+      this.tabs = "tab-1";
+      this.profileTabs(0);
     }
   }
 });
@@ -5744,6 +5931,9 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       required: true
     }
+  },
+  created: function created() {
+    console.log(this.$route);
   }
 });
 
@@ -6485,6 +6675,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -6526,6 +6717,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                  _this.check = false;
+                  console.log(response.data);
                   _this.profiles = response.data;
 
                   if (_this.profiles.published_age_flg === 1) {
@@ -6568,6 +6761,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee2);
     }))();
+  },
+  watch: {
+    $route: function $route(to, from) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return _this3.showProfile();
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    }
   }
 });
 
@@ -7886,7 +8100,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.profile-tabs {\n\tmax-width: 640px;\n\tmargin: auto;\n}\n", ""]);
+exports.push([module.i, "\n.profile-tabs {\n\tmax-width: 800px;\n\tmargin: auto;\n}\n", ""]);
 
 // exports
 
@@ -13968,17 +14182,27 @@ var render = function() {
                 { staticClass: "pl-3" },
                 [
                   _c(
-                    "v-avatar",
-                    { staticClass: "mr-1", attrs: { size: "30" } },
+                    "router-link",
+                    {
+                      staticClass: "black--text text-decoration-none",
+                      attrs: { to: "/profile/" + _vm.post.user.id }
+                    },
                     [
-                      _c("v-img", {
-                        attrs: { src: _vm.post.user.thumbnail_url }
-                      })
+                      _c(
+                        "v-avatar",
+                        { staticClass: "mr-1", attrs: { size: "30" } },
+                        [
+                          _c("v-img", {
+                            attrs: { src: _vm.post.user.thumbnail_url }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(_vm._s(_vm.post.user.name))])
                     ],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(_vm.post.user.name))])
+                  )
                 ],
                 1
               ),
@@ -14094,17 +14318,27 @@ var render = function() {
                 { staticClass: "pl-3" },
                 [
                   _c(
-                    "v-avatar",
-                    { staticClass: "mr-1", attrs: { size: "30" } },
+                    "router-link",
+                    {
+                      staticClass: "black--text text-decoration-none",
+                      attrs: { to: "/profile/" + _vm.post.user.id }
+                    },
                     [
-                      _c("v-img", {
-                        attrs: { src: _vm.post.user.thumbnail_url }
-                      })
+                      _c(
+                        "v-avatar",
+                        { staticClass: "mr-1", attrs: { size: "30" } },
+                        [
+                          _c("v-img", {
+                            attrs: { src: _vm.post.user.thumbnail_url }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(_vm._s(_vm.post.user.name))])
                     ],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(_vm.post.user.name))])
+                  )
                 ],
                 1
               ),
@@ -15437,11 +15671,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "v-btn",
-    { attrs: { color: "cyan", large: "", rounded: "", outlined: "" } },
-    [_vm._v("フォロー")]
-  )
+  return _vm.UserId !== String(_vm.isLoginUserId)
+    ? _c(
+        "v-btn",
+        {
+          class: { "white--text cyan": _vm.follow, "cyan--text": !_vm.follow },
+          attrs: { large: "", rounded: "", outlined: "" },
+          on: { click: _vm.isFollow }
+        },
+        [
+          _vm._v("フォロー "),
+          _vm.follow ? _c("span", [_vm._v("済")]) : _vm._e()
+        ]
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -15500,7 +15743,16 @@ var render = function() {
     [
       _c(
         "v-tabs",
-        { attrs: { "background-color": "cyan", dark: "", "max-width": "640" } },
+        {
+          attrs: { "background-color": "cyan", dark: "" },
+          model: {
+            value: _vm.tabs,
+            callback: function($$v) {
+              _vm.tabs = $$v
+            },
+            expression: "tabs"
+          }
+        },
         [
           _c(
             "v-tab",
@@ -15517,6 +15769,7 @@ var render = function() {
           _c(
             "v-tab",
             {
+              attrs: { append: "" },
               on: {
                 click: function($event) {
                   return _vm.profileTabs(1)
@@ -15529,6 +15782,7 @@ var render = function() {
           _c(
             "v-tab",
             {
+              attrs: { append: "" },
               on: {
                 click: function($event) {
                   return _vm.profileTabs(2)
@@ -15548,7 +15802,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-col",
-            { attrs: { cols: "6" } },
+            { attrs: { cols: "12", sm: "6", md: "6", lg: "6", xl: "6" } },
             [
               _c("v-select", {
                 attrs: {
@@ -15584,10 +15838,18 @@ var render = function() {
       _vm._v(" "),
       _c(
         "infinite-loading",
-        { ref: "infiniteLoading", on: { infinite: _vm.infiniteHandler } },
+        {
+          ref: "infiniteLoading",
+          attrs: { spinner: "spiral" },
+          on: { infinite: _vm.infiniteHandler }
+        },
         [
           _c("div", { attrs: { slot: "no-more" }, slot: "no-more" }, [
             _vm._v("全件取得しました。")
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { slot: "no-results" }, slot: "no-results" }, [
+            _vm._v("データが見つかりませんでした。")
           ])
         ]
       )
@@ -17902,7 +18164,7 @@ var render = function() {
         "v-card",
         {
           staticClass: "mx-auto pb-5",
-          attrs: { tile: "", elevation: "0", "max-width": "640" }
+          attrs: { tile: "", elevation: "0", "max-width": "800" }
         },
         [
           _c(
@@ -17936,7 +18198,7 @@ var render = function() {
                         [
                           _c("Message", { staticClass: "mr-3" }),
                           _vm._v(" "),
-                          _c("Follow")
+                          _c("Follow", { attrs: { "user-id": _vm.id } })
                         ],
                         1
                       )
@@ -17950,7 +18212,7 @@ var render = function() {
                 "v-col",
                 { attrs: { cols: "12", sm: "8", md: "8", lg: "8", xl: "8" } },
                 [
-                  _c("v-card-title", { staticClass: "font-weight-bold" }, [
+                  _c("v-card-title", { staticClass: "font-weight-bold pl-2" }, [
                     _vm._v(
                       "\n\t\t\t\t\t" + _vm._s(_vm.profiles.name) + "\n\t\t\t\t"
                     )
@@ -17958,7 +18220,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-card-actions",
-                    { staticClass: "pl-0" },
+                    { staticClass: "pl-2" },
                     [
                       _c(
                         "v-btn",
@@ -17969,7 +18231,11 @@ var render = function() {
                             text: ""
                           }
                         },
-                        [_vm._v("0 フォロー中")]
+                        [
+                          _vm._v(
+                            _vm._s(_vm.profiles.follow_count) + " フォロー"
+                          )
+                        ]
                       ),
                       _vm._v(" "),
                       _c(
@@ -17981,13 +18247,17 @@ var render = function() {
                             text: ""
                           }
                         },
-                        [_vm._v("1 フォロワー")]
+                        [
+                          _vm._v(
+                            _vm._s(_vm.profiles.follower_count) + " フォロワー"
+                          )
+                        ]
                       )
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _c("v-card-actions", { staticClass: "pl-0" }, [
+                  _c("v-card-actions", { staticClass: "pl-2" }, [
                     _c("span", { staticClass: "mr-3" }, [
                       _vm._v("年齢：" + _vm._s(_vm.profiles.age))
                     ]),
@@ -17999,7 +18269,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-card-text",
-                    { staticClass: "font-weight-bold p-0 mb-1" },
+                    { staticClass: "font-weight-bold p-0 pl-2 pr-2 mb-1" },
                     [
                       _vm._v(
                         "\n\t\t\t\t\t" +
@@ -18012,6 +18282,7 @@ var render = function() {
                   _vm._l(_vm.profiles.tags, function(tag) {
                     return _c("Tag", {
                       key: "profile-tags-" + tag.id,
+                      staticClass: "pl-2",
                       attrs: { "tag-item": tag, "push-name": "" }
                     })
                   })

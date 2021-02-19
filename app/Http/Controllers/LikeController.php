@@ -9,12 +9,12 @@ class LikeController extends Controller
     public function like($postId)
     {
         \Auth::user()->like($postId);
-        return "success";
+        return "true";
     }
 
     public function unlike($postId)
     {
         \Auth::user()->unlike($postId);
-        return "success";
+        return "true";
     }
 }
