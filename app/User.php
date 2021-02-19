@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -42,7 +43,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'thumbnail_url'
+        'thumbnail_url', 'follow_count', 'follower_count'
     ];
 
     public function posts()
@@ -64,9 +65,16 @@ class User extends Authenticatable
         return $this->belongsTo('App\Prefecture');
     }
 
-    public function follows()
+    // フォローユーザー
+    public function follow_users()
     {
-        return $this->belongsToMany('App\Follow');
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'follow_user_id')->withTimestamps();
+    }
+
+    // フォロワーユーザー
+    public function follower_users()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follow_user_id', 'user_id')->withTimestamps();
     }
 
     public function updateUser($request)
@@ -129,6 +137,35 @@ class User extends Authenticatable
         return $this->likes()->where('post_id',$postId)->first();
     }
 
+    // フォロー機能
+    public function follow($userId)
+    {
+        $exist = $this->is_follow($userId);
+
+        if($exist){
+            return false;
+        }else{
+            $this->follow_users()->attach($userId);
+            return true;
+        }
+    }
+    public function unfollow($userId)
+    {     
+        $exist = $this->is_follow($userId);
+
+        if($exist){
+            $this->follow_users()->detach($userId);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    // フォロー済かチェック
+    public function is_follow($userId)
+    {
+        return $this->follow_users()->where('follow_user_id',$userId)->first();
+    }
+
     // プロフィール画像をAWSにアップ
     public function updateUserThumbnail($file){
         $date = Carbon::now();
@@ -148,7 +185,16 @@ class User extends Authenticatable
             throw $exception;
         }
     }
-
+    // フォロー数取得
+    public function getFollowCountAttribute()
+    {
+        return $this->follow_users()->count();
+    }
+    // フォロワー数取得
+    public function getFollowerCountAttribute()
+    {
+        return $this->follower_users()->count();
+    }
     // 画像URL取得
     public function getThumbnailUrlAttribute()
     {

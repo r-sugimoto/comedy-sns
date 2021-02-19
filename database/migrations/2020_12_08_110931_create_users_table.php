@@ -22,9 +22,9 @@
 						$table->string('password'); //パスワード
 						$table->string('remember_token',100)->nullable();  //ログイン保持
 						$table->integer('age')->nullable(); //年齢
-						$table->integer('published_age_flg')->nullable()->default(0); //年齢公開：非公開
+						$table->integer('published_age_flg')->nullable()->default(1); //0:年齢公開 1：非公開
 						$table->integer('prefecture_id')->nullable(); //都道府県区分
-						$table->integer('published_prefecture_flg')->nullable()->default(0); //都道府県公開：非公開
+						$table->integer('published_prefecture_flg')->nullable()->default(1); //0:都道府県公開： 1:非公開
 						$table->text('introduction')->nullable(); //自己紹介文
 						$table->string('thumbnail')->nullable(); //サムネイル画像パス
 						$table->softDeletes(); //削除フラグ

@@ -58,6 +58,14 @@ Route::prefix('api')->group(function () {
     // いいね解除
     Route::delete('/post/{id}/like', 'LikeController@unlike');
 
+    // フォロー機能
+    Route::put('/profile/{id}/follow', 'UserController@follow');
+    // フォロー解除
+    Route::delete('/profile/{id}/follow', 'UserController@unfollow');
+
+    // フォロー済かチェックする
+    Route::post('/follow/check/{id}', 'FollowController@follow_check');
+
     // タグ検索
     Route::post('/tag/search', 'TagController@search');
 

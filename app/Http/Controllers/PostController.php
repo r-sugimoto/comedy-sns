@@ -140,9 +140,10 @@ class PostController extends Controller
         return response($post, 201);
     }
 
-    // プロフィールページ取得
+    // プロフィールページ投稿取得
     public function profile_post(Request $request){
         $user_id = $request->user_id;
+        $post = $request->post;
         $like = $request->like;
         $comment = $request->comment;
         $type = $request->type;
@@ -155,7 +156,9 @@ class PostController extends Controller
             ->when($type === 2, function ($query){
                 return $query->whereNotNull('recruit_id');
             })
-            ->where('user_id', '=', $user_id)
+            ->when($post, function ($query, $post){
+                return $query->where('user_id', '=', $post);
+            })
             ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'likes', 'comments','recruit.prefecture','recruit.prefecture.region', 'recruit.generation'])
         // いいねした投稿
             ->when($like, function ($query, $like){
