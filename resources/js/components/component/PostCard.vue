@@ -25,10 +25,15 @@
 			</div>
 			<Product :product-items="post.products"></Product>
 			<v-card-actions class="pl-3">
-				<v-avatar size="30" class="mr-1">
-					<v-img :src="post.user.thumbnail_url"></v-img>
-				</v-avatar>
-				<span>{{ post.user.name }}</span>
+				<router-link
+					:to="`/profile/${post.user.id}`"
+					class="black--text text-decoration-none"
+				>
+					<v-avatar size="30" class="mr-1">
+						<v-img :src="post.user.thumbnail_url"></v-img>
+					</v-avatar>
+					<span>{{ post.user.name }}</span>
+				</router-link>
 			</v-card-actions>
 			<v-card-actions class="pl-3 pt-0">
 				<v-icon color="blue-grey lighten-3" class="mr-1">
@@ -73,10 +78,15 @@
 			</div>
 			<Product :product-items="post.products"></Product>
 			<v-card-actions class="pl-3">
-				<v-avatar size="30" class="mr-1">
-					<v-img :src="post.user.thumbnail_url"></v-img>
-				</v-avatar>
-				<span>{{ post.user.name }}</span>
+				<router-link
+					:to="`/profile/${post.user.id}`"
+					class="black--text text-decoration-none"
+				>
+					<v-avatar size="30" class="mr-1">
+						<v-img :src="post.user.thumbnail_url"></v-img>
+					</v-avatar>
+					<span>{{ post.user.name }}</span>
+				</router-link>
 			</v-card-actions>
 			<v-card-actions class="pl-3 pt-0">
 				<v-icon color="blue-grey lighten-3" class="mr-1">
