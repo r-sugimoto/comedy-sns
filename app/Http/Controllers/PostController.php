@@ -22,7 +22,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $tag = $request->tag;
-        $posts = Post::select('id', 'user_id', 'title','message', 'created_at')
+        $posts = Post::select('id', 'user_id', 'recruit_id','title','message', 'created_at')
         ->whereNull('recruit_id')->where('message', 'like', "%$request->freeword%")
         ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags'])
         ->when($tag, function ($query, $tag){
