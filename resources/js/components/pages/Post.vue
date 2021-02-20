@@ -15,7 +15,7 @@
 							v-model="searchType"
 							:items="types"
 							placeholder="絞り込む"
-							backgrond-cuolor="#fff"
+							background-color="#fff"
 							hide-details
 							outlined
 							clearable

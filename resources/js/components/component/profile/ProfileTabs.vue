@@ -5,7 +5,7 @@
 			<v-tab @click="profileTabs(1)">コメントした投稿</v-tab>
 			<v-tab @click="profileTabs(2)">いいね</v-tab>
 		</v-tabs>
-		<v-row>
+		<v-row class="pt-1 pb-1">
 			<v-spacer></v-spacer>
 			<v-col cols="12" sm="6" md="6" lg="6" xl="6">
 				<v-select

@@ -1,10 +1,5 @@
 <template>
-	<v-card
-		class="post-form p-2"
-		:class="{ 'mb-5': !isLogin }"
-		tile
-		elevation="0"
-	>
+	<v-card class="p-2" :class="{ 'mb-5': !isLogin }" tile elevation="0">
 		<v-card-title class="c-cyan">
 			<p class="font-weight-bold mb-0">相方募集検索</p>
 		</v-card-title>

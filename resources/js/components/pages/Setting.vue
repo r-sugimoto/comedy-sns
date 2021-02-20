@@ -1,132 +1,131 @@
 <template>
-	<v-card class="mx-auto auth-form" max-width="640" elevation="0" tile>
-		<v-card-title
-			class="justify-center mt-2 mb-5"
-			style="border-bottom: 1px solid #e5e5e5"
-		>
-			<h2 class="cyan--text font-weight-bold mb-0">プロフィール設定</h2>
-		</v-card-title>
-		<validation-observer ref="observer">
-			<v-form>
-				<validation-provider
-					v-slot="{ errors }"
-					rules="size:2000|mimes:jpeg,png,jpg,gif"
-					name="プロフィール画像"
-				>
-					<p class="input-label">プロフィール画像</p>
-					<v-file-input
-						:error-messages="errors"
-						background-color="#f4f8fa"
-						placeholder="拡張子：jpeg,png,jpg,gif"
-						@change="pictureHandleFile()"
-						prepend-icon=""
-						v-model="pictureValue"
-						:rules="pictureRules"
-						outlined
+	<div>
+		<v-card class="mx-auto p-2 m-0 mt-n3" max-width="800" elevation="0" tile>
+			<v-card-title class="justify-center mt-2 mb-5">
+				<h2 class="cyan--text font-weight-bold mb-0">プロフィール設定</h2>
+			</v-card-title>
+			<validation-observer ref="observer">
+				<v-form>
+					<validation-provider
+						v-slot="{ errors }"
+						rules="size:2000|mimes:jpeg,png,jpg,gif"
+						name="プロフィール画像"
 					>
-					</v-file-input>
-				</validation-provider>
-				<div class="text-center">
-					<v-avatar size="200" color="gray">
-						<v-img :src="preview"></v-img>
-					</v-avatar>
-				</div>
-				<validation-provider
-					v-slot="{ errors }"
-					name="ユーザー名"
-					rules="required|max:20"
-				>
-					<p class="input-label">ユーザ名</p>
-					<v-text-field
-						:error-messages="errors"
-						background-color="#f4f8fa"
-						type="text"
-						name="name"
-						v-model="userSettingForm.name"
-						required
-						outlined
+						<p class="input-label">プロフィール画像</p>
+						<v-file-input
+							:error-messages="errors"
+							background-color="#f4f8fa"
+							placeholder="拡張子：jpeg,png,jpg,gif"
+							@change="pictureHandleFile()"
+							prepend-icon=""
+							v-model="pictureValue"
+							:rules="pictureRules"
+							outlined
+						>
+						</v-file-input>
+					</validation-provider>
+					<div class="text-center">
+						<v-avatar size="200" color="gray">
+							<v-img :src="preview"></v-img>
+						</v-avatar>
+					</div>
+					<validation-provider
+						v-slot="{ errors }"
+						name="ユーザー名"
+						rules="required|max:20"
+					>
+						<p class="input-label">ユーザ名</p>
+						<v-text-field
+							:error-messages="errors"
+							background-color="#f4f8fa"
+							type="text"
+							name="name"
+							v-model="userSettingForm.name"
+							required
+							outlined
+						/>
+					</validation-provider>
+					<validation-provider
+						v-slot="{ errors }"
+						name="自己紹介文"
+						rules="max:280"
+					>
+						<p class="input-label">自己紹介文</p>
+						<v-textarea
+							:error-messages="errors"
+							background-color="#f4f8fa"
+							type="text"
+							name="message"
+							v-model="userSettingForm.introduction"
+							required
+							outlined
+						></v-textarea>
+					</validation-provider>
+					<p class="input-label">タグ</p>
+					<vue-tags-input
+						placeholder="タグを5個まで入力できます"
+						v-model="tag"
+						:tags="userSettingForm.tags"
+						@tags-changed="(newTags) => (userSettingForm.tags = newTags)"
+						@before-adding-tag="checkTag"
 					/>
-				</validation-provider>
-				<validation-provider
-					v-slot="{ errors }"
-					name="自己紹介文"
-					rules="max:280"
-				>
-					<p class="input-label">自己紹介文</p>
-					<v-textarea
-						:error-messages="errors"
-						background-color="#f4f8fa"
-						type="text"
-						name="message"
-						v-model="userSettingForm.introduction"
-						required
-						outlined
-					></v-textarea>
-				</validation-provider>
-				<p class="input-label">タグ</p>
-				<vue-tags-input
-					placeholder="タグを5個まで入力できます"
-					v-model="tag"
-					:tags="userSettingForm.tags"
-					@tags-changed="(newTags) => (userSettingForm.tags = newTags)"
-					@before-adding-tag="checkTag"
-				/>
-				<div class="v-messages__message error--text tag-error-text">
-					{{ tagError }}
-				</div>
-				<validation-provider v-slot="{ errors }" name="年齢" rules="max:3">
-					<p class="input-label">年齢</p>
+					<div class="v-messages__message error--text tag-error-text">
+						{{ tagError }}
+					</div>
+					<validation-provider v-slot="{ errors }" name="年齢" rules="max:3">
+						<p class="input-label">年齢</p>
+						<v-select
+							:error-messages="errors"
+							background-color="#f4f8fa"
+							type="text"
+							name="age"
+							v-model="userSettingForm.age"
+							:items="ages"
+							clearable
+							required
+							outlined
+						>
+						</v-select>
+					</validation-provider>
+					<v-checkbox
+						v-model="userSettingForm.publishedAge"
+						label="年齢を非公開にする"
+						name="remember"
+						class="m-0"
+					></v-checkbox>
+					<p class="input-label">都道府県</p>
 					<v-select
-						:error-messages="errors"
+						v-model="userSettingForm.prefectureId"
+						:items="prefectures"
+						item-text="name"
+						item-value="id"
 						background-color="#f4f8fa"
-						type="text"
-						name="age"
-						v-model="userSettingForm.age"
-						:items="ages"
-						clearable
-						required
 						outlined
+						clearable
 					>
 					</v-select>
-				</validation-provider>
-				<v-checkbox
-					v-model="userSettingForm.publishedAge"
-					label="年齢を非公開にする"
-					name="remember"
-					class="m-0"
-				></v-checkbox>
-				<p class="input-label">都道府県</p>
-				<v-select
-					v-model="userSettingForm.prefectureId"
-					:items="prefectures"
-					item-text="name"
-					item-value="id"
-					background-color="#f4f8fa"
-					outlined
-					clearable
-				>
-				</v-select>
-				<v-checkbox
-					v-model="userSettingForm.publishedPrefecture"
-					label="都道府県を非公開にする"
-					name="remember"
-					class="m-0"
-				></v-checkbox>
-				<div class="text-right">
-					<v-btn
-						@click="postUserSetting"
-						class="mt-2"
-						color="cyan"
-						elevation="0"
-						large
-						rounded
-					>
-						<span class="tc-w">設定</span>
-					</v-btn>
-				</div>
-			</v-form>
-		</validation-observer>
-	</v-card>
+					<v-checkbox
+						v-model="userSettingForm.publishedPrefecture"
+						label="都道府県を非公開にする"
+						name="remember"
+						class="m-0"
+					></v-checkbox>
+					<div class="text-right">
+						<v-btn
+							@click="postUserSetting"
+							class="mt-2"
+							color="cyan"
+							elevation="0"
+							large
+							rounded
+						>
+							<span class="tc-w">設定</span>
+						</v-btn>
+					</div>
+				</v-form>
+			</validation-observer>
+		</v-card>
+	</div>
 </template>
 
 <script>
