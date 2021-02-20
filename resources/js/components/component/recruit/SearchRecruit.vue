@@ -1,5 +1,10 @@
 <template>
-	<v-card class="post-form mb-5 p-2" tile elevation="0">
+	<v-card
+		class="post-form p-2"
+		:class="{ 'mb-5': !isLogin }"
+		tile
+		elevation="0"
+	>
 		<v-card-title class="c-cyan">
 			<p class="font-weight-bold mb-0">相方募集検索</p>
 		</v-card-title>
@@ -259,6 +264,11 @@ export default {
 			this.items.splice(0, this.items.length);
 			this.name = "";
 			this.id = "";
+		},
+	},
+	computed: {
+		isLogin() {
+			return this.$store.getters["auth/check"];
 		},
 	},
 	watch: {

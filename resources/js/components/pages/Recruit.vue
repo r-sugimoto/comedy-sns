@@ -8,6 +8,22 @@
 				<SearchRecruit></SearchRecruit>
 			</v-col>
 			<v-col class="pb-0 pt-0" lg="8" xl="8">
+				<v-row v-if="isLogin" class="pt-1 pb-1">
+					<v-spacer></v-spacer>
+					<v-col cols="12" sm="6" md="6" lg="6" xl="6">
+						<v-select
+							v-model="searchType"
+							:items="types"
+							placeholder="絞り込む"
+							backgrond-cuolor="#fff"
+							hide-details
+							outlined
+							clearable
+							@change="postReload"
+						>
+						</v-select>
+					</v-col>
+				</v-row>
 				<PostCard
 					v-for="post in posts"
 					:key="`posts-${post.id}`"
@@ -40,6 +56,8 @@ export default {
 			region: null,
 			generation: null,
 			page: 1,
+			searchType: null,
+			types: [{ text: "フォロー済", value: 1 }],
 		};
 	},
 	components: {
@@ -91,9 +109,11 @@ export default {
 				prefecture: this.prefecture,
 				region: this.region,
 				generation: this.generation,
+				type: this.searchType,
 			});
 			if (response.status === OK) {
 				if (this.page === 1 && response.data.data.length === 0) {
+					this.searchType = null;
 					this.$store.dispatch("flash/showFlashMessage", {
 						show: true,
 						message: "投稿が見つかりませんでした。 投稿一覧TOPへ戻ります。",
@@ -102,6 +122,7 @@ export default {
 					});
 					setTimeout(() => {
 						this.$router.push({ name: "recruit" }).catch((err) => {});
+						this.postReload();
 					}, 2000);
 				} else {
 					if (response.data.data.length !== 0) {

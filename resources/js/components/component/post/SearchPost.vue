@@ -1,5 +1,10 @@
 <template>
-	<v-card class="post-form mb-5 p-2" tile elevation="0">
+	<v-card
+		class="post-form p-2"
+		:class="{ 'mb-5': !isLogin }"
+		tile
+		elevation="0"
+	>
 		<v-card-title class="c-cyan">
 			<p class="font-weight-bold mb-0">タイムライン検索</p>
 		</v-card-title>
@@ -145,6 +150,11 @@ export default {
 			this.id = "";
 		},
 	},
+	computed: {
+		isLogin() {
+			return this.$store.getters["auth/check"];
+		},
+	},
 	watch: {
 		// タグ検索機能
 		async search(val) {
@@ -173,8 +183,4 @@ export default {
 	padding: 0;
 	padding-bottom: 10px;
 }
-/* .v-text-field {
-	padding-top: 0px;
-	margin-top: 0px;
-} */
 </style>

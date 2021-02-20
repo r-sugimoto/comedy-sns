@@ -22,12 +22,19 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $tag = $request->tag;
+        // 検索タイプ
+        $type = $request->type;
         $posts = Post::select('id', 'user_id', 'recruit_id','title','message', 'created_at')
         ->whereNull('recruit_id')->where('message', 'like', "%$request->freeword%")
-        ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags'])
+        ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'user.follow_users'])
         ->when($tag, function ($query, $tag){
             return $query->whereHas('tags', function($query) use($tag) {
                 return $query->where('id', $tag);
+            });
+        })
+        ->when($type, function ($query){
+            return $query->whereHas('user.follower_users', function($query){
+                return $query->where('user_id', Auth::user()->id);
             });
         })
         ->orderBy(Post::CREATED_AT, 'desc')->paginate(10);
@@ -86,9 +93,11 @@ class PostController extends Controller
         $prefecture = $request->prefecture;
         $region = $request->region;
         $generation = $request->generation;
+        // 検索タイプ
+        $type = $request->type;
         $posts = Post::select('id', 'user_id', 'title','message', 'recruit_id', 'created_at')
             ->whereNotNull('recruit_id')->where('message', 'like', "%$request->freeword%")
-            ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'recruit.prefecture','recruit.prefecture.region', 'recruit.generation'])
+            ->with(['user:id,name,thumbnail', 'user.follower_users', 'products:id,name,type', 'tags', 'recruit.prefecture','recruit.prefecture.region', 'recruit.generation'])
             ->when($tag, function ($query, $tag){
                 return $query->whereHas('tags', function($query) use($tag) {
                     return $query->where('id', $tag);
@@ -107,6 +116,11 @@ class PostController extends Controller
             ->when($generation, function ($query, $generation){
                 return $query->whereHas('recruit.generation', function($query) use($generation) {
                     return $query->where('id', $generation);
+                });
+            })
+            ->when($type, function ($query){
+                return $query->whereHas('user.follower_users', function($query){
+                    return $query->where('user_id', Auth::user()->id);
                 });
             })
         ->orderBy(Post::CREATED_AT, 'desc')->paginate(10);
