@@ -801,12 +801,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dialog: false,
-      message: null
+      message: null,
+      btnLoading: false
     };
   },
   props: {
@@ -838,17 +840,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 self = _this;
 
                 if (!isValid) {
-                  _context.next = 9;
+                  _context.next = 10;
                   break;
                 }
 
-                _context.next = 7;
+                _this.btnLoading = true;
+                _context.next = 8;
                 return axios.post("/api/post/reply", {
                   message: _this.message,
                   id: _this.PostId
                 });
 
-              case 7:
+              case 8:
                 response = _context.sent;
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["CREATED"]) {
@@ -864,7 +867,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.$store.commit("error/setCode", response.status);
                 }
 
-              case 9:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -1526,11 +1529,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3212,11 +3210,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5400,7 +5393,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-//
 //
 //
 //
@@ -8735,6 +8727,7 @@ var render = function() {
                     {
                       staticClass: "justify-right",
                       attrs: {
+                        loading: _vm.btnLoading,
                         color: "cyan",
                         elevation: "0",
                         rounded: "",
@@ -9530,7 +9523,7 @@ var render = function() {
   return _c(
     "v-card",
     {
-      staticClass: "post-form p-2",
+      staticClass: "p-2",
       class: { "mb-5": !_vm.isLogin },
       attrs: { tile: "", elevation: "0" }
     },
@@ -9858,6 +9851,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-row",
+        { staticClass: "pt-1 pb-1" },
         [
           _c("v-spacer"),
           _vm._v(" "),
@@ -11033,7 +11027,7 @@ var render = function() {
   return _c(
     "v-card",
     {
-      staticClass: "post-form p-2",
+      staticClass: "p-2",
       class: { "mb-5": !_vm.isLogin },
       attrs: { tile: "", elevation: "0" }
     },
@@ -11743,7 +11737,7 @@ var render = function() {
                             attrs: {
                               items: _vm.types,
                               placeholder: "絞り込む",
-                              "backgrond-cuolor": "#fff",
+                              "background-color": "#fff",
                               "hide-details": "",
                               outlined: "",
                               clearable: ""
@@ -12327,7 +12321,7 @@ var render = function() {
                             attrs: {
                               items: _vm.types,
                               placeholder: "絞り込む",
-                              "backgrond-cuolor": "#fff",
+                              "background-color": "#fff",
                               "hide-details": "",
                               outlined: "",
                               clearable: ""
@@ -12970,287 +12964,302 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-card",
-    {
-      staticClass: "mx-auto auth-form",
-      attrs: { "max-width": "640", elevation: "0", tile: "" }
-    },
+    "div",
     [
       _c(
-        "v-card-title",
+        "v-card",
         {
-          staticClass: "justify-center mt-2 mb-5",
-          staticStyle: { "border-bottom": "1px solid #e5e5e5" }
+          staticClass: "mx-auto p-2 m-0 mt-n3",
+          attrs: { "max-width": "800", elevation: "0", tile: "" }
         },
         [
-          _c("h2", { staticClass: "cyan--text font-weight-bold mb-0" }, [
-            _vm._v("プロフィール設定")
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "validation-observer",
-        { ref: "observer" },
-        [
+          _c("v-card-title", { staticClass: "justify-center mt-2 mb-5" }, [
+            _c("h2", { staticClass: "cyan--text font-weight-bold mb-0" }, [
+              _vm._v("プロフィール設定")
+            ])
+          ]),
+          _vm._v(" "),
           _c(
-            "v-form",
+            "validation-observer",
+            { ref: "observer" },
             [
-              _c("validation-provider", {
-                attrs: {
-                  rules: "size:2000|mimes:jpeg,png,jpg,gif",
-                  name: "プロフィール画像"
-                },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(ref) {
-                      var errors = ref.errors
-                      return [
-                        _c("p", { staticClass: "input-label" }, [
-                          _vm._v("プロフィール画像")
-                        ]),
-                        _vm._v(" "),
-                        _c("v-file-input", {
-                          attrs: {
-                            "error-messages": errors,
-                            "background-color": "#f4f8fa",
-                            placeholder: "拡張子：jpeg,png,jpg,gif",
-                            "prepend-icon": "",
-                            rules: _vm.pictureRules,
-                            outlined: ""
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.pictureHandleFile()
-                            }
-                          },
-                          model: {
-                            value: _vm.pictureValue,
-                            callback: function($$v) {
-                              _vm.pictureValue = $$v
-                            },
-                            expression: "pictureValue"
-                          }
-                        })
-                      ]
-                    }
-                  }
-                ])
-              }),
-              _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "text-center" },
+                "v-form",
                 [
-                  _c(
-                    "v-avatar",
-                    { attrs: { size: "200", color: "gray" } },
-                    [_c("v-img", { attrs: { src: _vm.preview } })],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("validation-provider", {
-                attrs: { name: "ユーザー名", rules: "required|max:20" },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(ref) {
-                      var errors = ref.errors
-                      return [
-                        _c("p", { staticClass: "input-label" }, [
-                          _vm._v("ユーザ名")
-                        ]),
-                        _vm._v(" "),
-                        _c("v-text-field", {
-                          attrs: {
-                            "error-messages": errors,
-                            "background-color": "#f4f8fa",
-                            type: "text",
-                            name: "name",
-                            required: "",
-                            outlined: ""
-                          },
-                          model: {
-                            value: _vm.userSettingForm.name,
-                            callback: function($$v) {
-                              _vm.$set(_vm.userSettingForm, "name", $$v)
-                            },
-                            expression: "userSettingForm.name"
-                          }
-                        })
-                      ]
-                    }
-                  }
-                ])
-              }),
-              _vm._v(" "),
-              _c("validation-provider", {
-                attrs: { name: "自己紹介文", rules: "max:280" },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(ref) {
-                      var errors = ref.errors
-                      return [
-                        _c("p", { staticClass: "input-label" }, [
-                          _vm._v("自己紹介文")
-                        ]),
-                        _vm._v(" "),
-                        _c("v-textarea", {
-                          attrs: {
-                            "error-messages": errors,
-                            "background-color": "#f4f8fa",
-                            type: "text",
-                            name: "message",
-                            required: "",
-                            outlined: ""
-                          },
-                          model: {
-                            value: _vm.userSettingForm.introduction,
-                            callback: function($$v) {
-                              _vm.$set(_vm.userSettingForm, "introduction", $$v)
-                            },
-                            expression: "userSettingForm.introduction"
-                          }
-                        })
-                      ]
-                    }
-                  }
-                ])
-              }),
-              _vm._v(" "),
-              _c("p", { staticClass: "input-label" }, [_vm._v("タグ")]),
-              _vm._v(" "),
-              _c("vue-tags-input", {
-                attrs: {
-                  placeholder: "タグを5個まで入力できます",
-                  tags: _vm.userSettingForm.tags
-                },
-                on: {
-                  "tags-changed": function(newTags) {
-                    return (_vm.userSettingForm.tags = newTags)
-                  },
-                  "before-adding-tag": _vm.checkTag
-                },
-                model: {
-                  value: _vm.tag,
-                  callback: function($$v) {
-                    _vm.tag = $$v
-                  },
-                  expression: "tag"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "v-messages__message error--text tag-error-text"
-                },
-                [_vm._v("\n\t\t\t\t" + _vm._s(_vm.tagError) + "\n\t\t\t")]
-              ),
-              _vm._v(" "),
-              _c("validation-provider", {
-                attrs: { name: "年齢", rules: "max:3" },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(ref) {
-                      var errors = ref.errors
-                      return [
-                        _c("p", { staticClass: "input-label" }, [
-                          _vm._v("年齢")
-                        ]),
-                        _vm._v(" "),
-                        _c("v-select", {
-                          attrs: {
-                            "error-messages": errors,
-                            "background-color": "#f4f8fa",
-                            type: "text",
-                            name: "age",
-                            items: _vm.ages,
-                            clearable: "",
-                            required: "",
-                            outlined: ""
-                          },
-                          model: {
-                            value: _vm.userSettingForm.age,
-                            callback: function($$v) {
-                              _vm.$set(_vm.userSettingForm, "age", $$v)
-                            },
-                            expression: "userSettingForm.age"
-                          }
-                        })
-                      ]
-                    }
-                  }
-                ])
-              }),
-              _vm._v(" "),
-              _c("v-checkbox", {
-                staticClass: "m-0",
-                attrs: { label: "年齢を非公開にする", name: "remember" },
-                model: {
-                  value: _vm.userSettingForm.publishedAge,
-                  callback: function($$v) {
-                    _vm.$set(_vm.userSettingForm, "publishedAge", $$v)
-                  },
-                  expression: "userSettingForm.publishedAge"
-                }
-              }),
-              _vm._v(" "),
-              _c("p", { staticClass: "input-label" }, [_vm._v("都道府県")]),
-              _vm._v(" "),
-              _c("v-select", {
-                attrs: {
-                  items: _vm.prefectures,
-                  "item-text": "name",
-                  "item-value": "id",
-                  "background-color": "#f4f8fa",
-                  outlined: "",
-                  clearable: ""
-                },
-                model: {
-                  value: _vm.userSettingForm.prefectureId,
-                  callback: function($$v) {
-                    _vm.$set(_vm.userSettingForm, "prefectureId", $$v)
-                  },
-                  expression: "userSettingForm.prefectureId"
-                }
-              }),
-              _vm._v(" "),
-              _c("v-checkbox", {
-                staticClass: "m-0",
-                attrs: { label: "都道府県を非公開にする", name: "remember" },
-                model: {
-                  value: _vm.userSettingForm.publishedPrefecture,
-                  callback: function($$v) {
-                    _vm.$set(_vm.userSettingForm, "publishedPrefecture", $$v)
-                  },
-                  expression: "userSettingForm.publishedPrefecture"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "text-right" },
-                [
-                  _c(
-                    "v-btn",
-                    {
-                      staticClass: "mt-2",
-                      attrs: {
-                        color: "cyan",
-                        elevation: "0",
-                        large: "",
-                        rounded: ""
-                      },
-                      on: { click: _vm.postUserSetting }
+                  _c("validation-provider", {
+                    attrs: {
+                      rules: "size:2000|mimes:jpeg,png,jpg,gif",
+                      name: "プロフィール画像"
                     },
-                    [_c("span", { staticClass: "tc-w" }, [_vm._v("設定")])]
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var errors = ref.errors
+                          return [
+                            _c("p", { staticClass: "input-label" }, [
+                              _vm._v("プロフィール画像")
+                            ]),
+                            _vm._v(" "),
+                            _c("v-file-input", {
+                              attrs: {
+                                "error-messages": errors,
+                                "background-color": "#f4f8fa",
+                                placeholder: "拡張子：jpeg,png,jpg,gif",
+                                "prepend-icon": "",
+                                rules: _vm.pictureRules,
+                                outlined: ""
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.pictureHandleFile()
+                                }
+                              },
+                              model: {
+                                value: _vm.pictureValue,
+                                callback: function($$v) {
+                                  _vm.pictureValue = $$v
+                                },
+                                expression: "pictureValue"
+                              }
+                            })
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-center" },
+                    [
+                      _c(
+                        "v-avatar",
+                        { attrs: { size: "200", color: "gray" } },
+                        [_c("v-img", { attrs: { src: _vm.preview } })],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("validation-provider", {
+                    attrs: { name: "ユーザー名", rules: "required|max:20" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var errors = ref.errors
+                          return [
+                            _c("p", { staticClass: "input-label" }, [
+                              _vm._v("ユーザ名")
+                            ]),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                "error-messages": errors,
+                                "background-color": "#f4f8fa",
+                                type: "text",
+                                name: "name",
+                                required: "",
+                                outlined: ""
+                              },
+                              model: {
+                                value: _vm.userSettingForm.name,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.userSettingForm, "name", $$v)
+                                },
+                                expression: "userSettingForm.name"
+                              }
+                            })
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("validation-provider", {
+                    attrs: { name: "自己紹介文", rules: "max:280" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var errors = ref.errors
+                          return [
+                            _c("p", { staticClass: "input-label" }, [
+                              _vm._v("自己紹介文")
+                            ]),
+                            _vm._v(" "),
+                            _c("v-textarea", {
+                              attrs: {
+                                "error-messages": errors,
+                                "background-color": "#f4f8fa",
+                                type: "text",
+                                name: "message",
+                                required: "",
+                                outlined: ""
+                              },
+                              model: {
+                                value: _vm.userSettingForm.introduction,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.userSettingForm,
+                                    "introduction",
+                                    $$v
+                                  )
+                                },
+                                expression: "userSettingForm.introduction"
+                              }
+                            })
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "input-label" }, [_vm._v("タグ")]),
+                  _vm._v(" "),
+                  _c("vue-tags-input", {
+                    attrs: {
+                      placeholder: "タグを5個まで入力できます",
+                      tags: _vm.userSettingForm.tags
+                    },
+                    on: {
+                      "tags-changed": function(newTags) {
+                        return (_vm.userSettingForm.tags = newTags)
+                      },
+                      "before-adding-tag": _vm.checkTag
+                    },
+                    model: {
+                      value: _vm.tag,
+                      callback: function($$v) {
+                        _vm.tag = $$v
+                      },
+                      expression: "tag"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "v-messages__message error--text tag-error-text"
+                    },
+                    [
+                      _vm._v(
+                        "\n\t\t\t\t\t" + _vm._s(_vm.tagError) + "\n\t\t\t\t"
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("validation-provider", {
+                    attrs: { name: "年齢", rules: "max:3" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var errors = ref.errors
+                          return [
+                            _c("p", { staticClass: "input-label" }, [
+                              _vm._v("年齢")
+                            ]),
+                            _vm._v(" "),
+                            _c("v-select", {
+                              attrs: {
+                                "error-messages": errors,
+                                "background-color": "#f4f8fa",
+                                type: "text",
+                                name: "age",
+                                items: _vm.ages,
+                                clearable: "",
+                                required: "",
+                                outlined: ""
+                              },
+                              model: {
+                                value: _vm.userSettingForm.age,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.userSettingForm, "age", $$v)
+                                },
+                                expression: "userSettingForm.age"
+                              }
+                            })
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("v-checkbox", {
+                    staticClass: "m-0",
+                    attrs: { label: "年齢を非公開にする", name: "remember" },
+                    model: {
+                      value: _vm.userSettingForm.publishedAge,
+                      callback: function($$v) {
+                        _vm.$set(_vm.userSettingForm, "publishedAge", $$v)
+                      },
+                      expression: "userSettingForm.publishedAge"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "input-label" }, [_vm._v("都道府県")]),
+                  _vm._v(" "),
+                  _c("v-select", {
+                    attrs: {
+                      items: _vm.prefectures,
+                      "item-text": "name",
+                      "item-value": "id",
+                      "background-color": "#f4f8fa",
+                      outlined: "",
+                      clearable: ""
+                    },
+                    model: {
+                      value: _vm.userSettingForm.prefectureId,
+                      callback: function($$v) {
+                        _vm.$set(_vm.userSettingForm, "prefectureId", $$v)
+                      },
+                      expression: "userSettingForm.prefectureId"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-checkbox", {
+                    staticClass: "m-0",
+                    attrs: {
+                      label: "都道府県を非公開にする",
+                      name: "remember"
+                    },
+                    model: {
+                      value: _vm.userSettingForm.publishedPrefecture,
+                      callback: function($$v) {
+                        _vm.$set(
+                          _vm.userSettingForm,
+                          "publishedPrefecture",
+                          $$v
+                        )
+                      },
+                      expression: "userSettingForm.publishedPrefecture"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-right" },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "mt-2",
+                          attrs: {
+                            color: "cyan",
+                            elevation: "0",
+                            large: "",
+                            rounded: ""
+                          },
+                          on: { click: _vm.postUserSetting }
+                        },
+                        [_c("span", { staticClass: "tc-w" }, [_vm._v("設定")])]
+                      )
+                    ],
+                    1
                   )
                 ],
                 1
