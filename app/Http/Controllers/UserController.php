@@ -29,9 +29,7 @@ class UserController extends Controller
 
     // プロフィールページ情報取得
     public function profile_index(string $id){
-        $user = User::where('id', $id)->with(['tags', 'prefecture', 'follower_users' => function($query) use ($id){
-            $query->where('user_id', Auth::user()->id);
-        }])->first();
+        $user = User::where('id', $id)->with(['tags', 'prefecture'])->first();
         return $user;
     }
 
@@ -45,6 +43,18 @@ class UserController extends Controller
     {
         Auth::user()->unfollow($userId);
         return "true";
+    }
+
+    public function following($userId)
+    {
+        $user = User::where('id', $userId)->with('follow_users')->first();
+        return $user;
+    }
+
+    public function followers($userId)
+    {
+        $user = User::where('id', $userId)->with('follower_users')->first();
+        return $user;
     }
 
 }

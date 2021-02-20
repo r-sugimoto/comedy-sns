@@ -11025,6 +11025,11 @@ a.text-dark:focus {
   text-align: right;
 }
 
+.profile-tabs {
+  max-width: 800px;
+  margin: auto;
+}
+
 /* fab */
 
 .fab-container {
