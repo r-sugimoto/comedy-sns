@@ -63,6 +63,11 @@ Route::prefix('api')->group(function () {
     // フォロー解除
     Route::delete('/profile/{id}/follow', 'UserController@unfollow');
 
+    // フォロー取得
+    Route::get('/profile/{id}/following', 'UserController@following');
+    // フォロワー取得
+    Route::get('/profile/{id}/followers', 'UserController@followers');
+
     // フォロー済かチェックする
     Route::post('/follow/check/{id}', 'FollowController@follow_check');
 

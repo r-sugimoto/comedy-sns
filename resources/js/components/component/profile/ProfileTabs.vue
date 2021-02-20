@@ -2,8 +2,8 @@
 	<div class="profile-tabs">
 		<v-tabs background-color="cyan" v-model="tabs" dark>
 			<v-tab @click="profileTabs(0)">投稿</v-tab>
-			<v-tab @click="profileTabs(1)" append>コメントした投稿</v-tab>
-			<v-tab @click="profileTabs(2)" append>いいね</v-tab>
+			<v-tab @click="profileTabs(1)">コメントした投稿</v-tab>
+			<v-tab @click="profileTabs(2)">いいね</v-tab>
 		</v-tabs>
 		<v-row>
 			<v-spacer></v-spacer>
@@ -123,9 +123,4 @@ export default {
 };
 </script>
 
-<style>
-.profile-tabs {
-	max-width: 800px;
-	margin: auto;
-}
-</style>
+<style></style>
