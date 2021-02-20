@@ -1592,6 +1592,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1734,6 +1739,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.items.splice(0, this.items.length);
       this.name = "";
       this.id = "";
+    }
+  },
+  computed: {
+    isLogin: function isLogin() {
+      return this.$store.getters["auth/check"];
     }
   },
   watch: {
@@ -3319,6 +3329,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3590,6 +3605,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.items.splice(0, this.items.length);
       this.name = "";
       this.id = "";
+    }
+  },
+  computed: {
+    isLogin: function isLogin() {
+      return this.$store.getters["auth/check"];
     }
   },
   watch: {
@@ -4134,6 +4154,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4144,7 +4180,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       posts: [],
       freeword: "",
       tag: null,
-      page: 1
+      page: 1,
+      searchType: null,
+      types: [{
+        text: "フォロー済",
+        value: 1
+      }]
     };
   },
   components: {
@@ -4184,7 +4225,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 4;
                 return axios.post("/api/post?page=".concat(_this.page), {
                   freeword: _this.freeword,
-                  tag: _this.tag
+                  tag: _this.tag,
+                  type: _this.searchType
                 });
 
               case 4:
@@ -4192,6 +4234,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_4__["OK"]) {
                   if (_this.page === 1 && response.data.data.length === 0) {
+                    _this.searchType = null;
+
                     _this.$store.dispatch("flash/showFlashMessage", {
                       show: true,
                       message: "投稿が見つかりませんでした。 投稿一覧TOPへ戻ります。",
@@ -4203,6 +4247,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       _this.$router.push({
                         name: "post"
                       })["catch"](function (err) {});
+
+                      _this.postReload();
                     }, 2000);
                   } else {
                     if (response.data.data.length !== 0) {
@@ -4724,6 +4770,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4737,7 +4799,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       prefecture: null,
       region: null,
       generation: null,
-      page: 1
+      page: 1,
+      searchType: null,
+      types: [{
+        text: "フォロー済",
+        value: 1
+      }]
     };
   },
   components: {
@@ -4801,7 +4868,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   tag: _this.tag,
                   prefecture: _this.prefecture,
                   region: _this.region,
-                  generation: _this.generation
+                  generation: _this.generation,
+                  type: _this.searchType
                 });
 
               case 7:
@@ -4809,6 +4877,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_4__["OK"]) {
                   if (_this.page === 1 && response.data.data.length === 0) {
+                    _this.searchType = null;
+
                     _this.$store.dispatch("flash/showFlashMessage", {
                       show: true,
                       message: "投稿が見つかりませんでした。 投稿一覧TOPへ戻ります。",
@@ -4820,6 +4890,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       _this.$router.push({
                         name: "recruit"
                       })["catch"](function (err) {});
+
+                      _this.postReload();
                     }, 2000);
                   } else {
                     if (response.data.data.length !== 0) {
@@ -5794,7 +5866,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.v-card__title {\n\tpadding: 0;\n\tpadding-bottom: 10px;\n}\n/* .v-text-field {\n\tpadding-top: 0px;\n\tmargin-top: 0px;\n} */\n", ""]);
+exports.push([module.i, "\n.v-card__title {\n\tpadding: 0;\n\tpadding-bottom: 10px;\n}\n", ""]);
 
 // exports
 
@@ -9457,7 +9529,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-card",
-    { staticClass: "post-form mb-5 p-2", attrs: { tile: "", elevation: "0" } },
+    {
+      staticClass: "post-form p-2",
+      class: { "mb-5": !_vm.isLogin },
+      attrs: { tile: "", elevation: "0" }
+    },
     [
       _c("v-card-title", { staticClass: "c-cyan" }, [
         _c("p", { staticClass: "font-weight-bold mb-0" }, [
@@ -10956,7 +11032,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-card",
-    { staticClass: "post-form mb-5 p-2", attrs: { tile: "", elevation: "0" } },
+    {
+      staticClass: "post-form p-2",
+      class: { "mb-5": !_vm.isLogin },
+      attrs: { tile: "", elevation: "0" }
+    },
     [
       _c("v-card-title", { staticClass: "c-cyan" }, [
         _c("p", { staticClass: "font-weight-bold mb-0" }, [
@@ -11640,6 +11720,51 @@ var render = function() {
             "v-col",
             { staticClass: "pb-0 pt-0", attrs: { lg: "8", xl: "8" } },
             [
+              _vm.isLogin
+                ? _c(
+                    "v-row",
+                    { staticClass: "pt-1 pb-1" },
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        {
+                          attrs: {
+                            cols: "12",
+                            sm: "6",
+                            md: "6",
+                            lg: "6",
+                            xl: "6"
+                          }
+                        },
+                        [
+                          _c("v-select", {
+                            attrs: {
+                              items: _vm.types,
+                              placeholder: "絞り込む",
+                              "backgrond-cuolor": "#fff",
+                              "hide-details": "",
+                              outlined: "",
+                              clearable: ""
+                            },
+                            on: { change: _vm.postReload },
+                            model: {
+                              value: _vm.searchType,
+                              callback: function($$v) {
+                                _vm.searchType = $$v
+                              },
+                              expression: "searchType"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
               _vm._l(_vm.posts, function(post) {
                 return _c("PostCard", {
                   key: "posts-" + post.id,
@@ -12179,6 +12304,51 @@ var render = function() {
             "v-col",
             { staticClass: "pb-0 pt-0", attrs: { lg: "8", xl: "8" } },
             [
+              _vm.isLogin
+                ? _c(
+                    "v-row",
+                    { staticClass: "pt-1 pb-1" },
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        {
+                          attrs: {
+                            cols: "12",
+                            sm: "6",
+                            md: "6",
+                            lg: "6",
+                            xl: "6"
+                          }
+                        },
+                        [
+                          _c("v-select", {
+                            attrs: {
+                              items: _vm.types,
+                              placeholder: "絞り込む",
+                              "backgrond-cuolor": "#fff",
+                              "hide-details": "",
+                              outlined: "",
+                              clearable: ""
+                            },
+                            on: { change: _vm.postReload },
+                            model: {
+                              value: _vm.searchType,
+                              callback: function($$v) {
+                                _vm.searchType = $$v
+                              },
+                              expression: "searchType"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
               _vm._l(_vm.posts, function(post) {
                 return _c("PostCard", {
                   key: "posts-" + post.id,
