@@ -46,6 +46,9 @@ export default {
 			}
 		},
 		async followCheck() {
+			if (!this.isLogin) {
+				return false;
+			}
 			const response = await axios.post(`/api/follow/check/${this.UserId}`);
 			if (response.status === OK) {
 				this.follow = Boolean(response.data);
