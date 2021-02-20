@@ -4006,6 +4006,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4032,7 +4034,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
                 }
 
-                alert("フォロー機能を使うにはログインしてください。");
+                alert("フォローするにはログインしてください。");
                 return _context.abrupt("return", false);
 
               case 3:
@@ -6323,13 +6325,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _component_Like_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/Like.vue */ "./resources/js/components/component/Like.vue");
-/* harmony import */ var _component_Comment_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component/Comment.vue */ "./resources/js/components/component/Comment.vue");
-/* harmony import */ var _component_Product_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component/Product.vue */ "./resources/js/components/component/Product.vue");
-/* harmony import */ var _component_Tag_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../component/Tag.vue */ "./resources/js/components/component/Tag.vue");
-/* harmony import */ var _component_post_NewPost_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../component/post/NewPost.vue */ "./resources/js/components/component/post/NewPost.vue");
-/* harmony import */ var _component_post_SearchPost_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../component/post/SearchPost.vue */ "./resources/js/components/component/post/SearchPost.vue");
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../util */ "./resources/js/util.js");
+/* harmony import */ var _component_post_NewPost_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/post/NewPost.vue */ "./resources/js/components/component/post/NewPost.vue");
+/* harmony import */ var _component_post_SearchPost_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component/post/SearchPost.vue */ "./resources/js/components/component/post/SearchPost.vue");
+/* harmony import */ var _component_PostCard_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component/PostCard.vue */ "./resources/js/components/component/PostCard.vue");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util */ "./resources/js/util.js");
 
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -6375,51 +6374,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
 
 
 
@@ -6434,12 +6388,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   components: {
-    Like: _component_Like_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Comment: _component_Comment_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Product: _component_Product_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Tag: _component_Tag_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    NewPost: _component_post_NewPost_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    SearchPost: _component_post_SearchPost_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    PostCard: _component_PostCard_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    NewPost: _component_post_NewPost_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    SearchPost: _component_post_SearchPost_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
     postReload: function postReload() {
@@ -6451,7 +6402,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var tag, response;
+        var tag, response, _this$posts;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -6478,7 +6430,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 4:
                 response = _context.sent;
 
-                if (response.status === _util__WEBPACK_IMPORTED_MODULE_7__["OK"]) {
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_4__["OK"]) {
                   if (_this.page === 1 && response.data.data.length === 0) {
                     _this.$store.dispatch("flash/showFlashMessage", {
                       show: true,
@@ -6493,19 +6445,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       })["catch"](function (err) {});
                     }, 2000);
                   } else {
-                    setTimeout(function () {
-                      if (response.data.data.length !== 0) {
-                        var _this$posts;
+                    if (response.data.data.length !== 0) {
+                      _this.page++;
 
-                        _this.page++;
+                      (_this$posts = _this.posts).push.apply(_this$posts, _toConsumableArray(response.data.data));
 
-                        (_this$posts = _this.posts).push.apply(_this$posts, _toConsumableArray(response.data.data));
-
-                        $state.loaded();
-                      } else {
-                        $state.complete();
-                      }
-                    }, 1500);
+                      $state.loaded();
+                    } else {
+                      $state.complete();
+                    }
                   }
                 } else {
                   $state.complete();
@@ -6726,7 +6674,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this.$store.commit("loading/setLoading", false);
 
                     _this.$router.push({
-                      name: "post"
+                      name: "not-found"
                     });
                   }
                 } else {
@@ -6881,17 +6829,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
                   _this.check = false;
-                  console.log(response.data);
-                  _this.profiles = response.data;
 
-                  if (_this.profiles.published_age_flg === 1) {
-                    _this.profiles.age = "非公開";
-                  }
+                  if (response.data.length !== 0) {
+                    _this.profiles = response.data;
 
-                  if (_this.profiles.published_prefecture_flg !== 1) {
-                    if (_this.profiles.prefecture) {
-                      _this.prefectureName = _this.profiles.prefecture.name;
+                    if (_this.profiles.published_age_flg === 1) {
+                      _this.profiles.age = "非公開";
                     }
+
+                    if (_this.profiles.published_prefecture_flg !== 1) {
+                      if (_this.profiles.prefecture) {
+                        _this.prefectureName = _this.profiles.prefecture.name;
+                      }
+                    }
+                  } else {
+                    _this.$router.push({
+                      name: "not-found"
+                    });
                   }
                 } else {
                   _this.$store.commit("error/setCode", response.status);
@@ -6961,15 +6915,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _component_Like_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/Like.vue */ "./resources/js/components/component/Like.vue");
-/* harmony import */ var _component_Comment_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component/Comment.vue */ "./resources/js/components/component/Comment.vue");
-/* harmony import */ var _component_Product_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component/Product.vue */ "./resources/js/components/component/Product.vue");
-/* harmony import */ var _component_Tag_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../component/Tag.vue */ "./resources/js/components/component/Tag.vue");
-/* harmony import */ var _component_recruit_NewRecruit_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../component/recruit/NewRecruit.vue */ "./resources/js/components/component/recruit/NewRecruit.vue");
-/* harmony import */ var _component_recruit_SearchRecruit_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../component/recruit/SearchRecruit.vue */ "./resources/js/components/component/recruit/SearchRecruit.vue");
-/* harmony import */ var _component_recruit_RecruitContents_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../component/recruit/RecruitContents.vue */ "./resources/js/components/component/recruit/RecruitContents.vue");
-/* harmony import */ var _component_recruit_Apply_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../component/recruit/Apply.vue */ "./resources/js/components/component/recruit/Apply.vue");
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../util */ "./resources/js/util.js");
+/* harmony import */ var _component_recruit_NewRecruit_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/recruit/NewRecruit.vue */ "./resources/js/components/component/recruit/NewRecruit.vue");
+/* harmony import */ var _component_recruit_SearchRecruit_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component/recruit/SearchRecruit.vue */ "./resources/js/components/component/recruit/SearchRecruit.vue");
+/* harmony import */ var _component_PostCard_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component/PostCard.vue */ "./resources/js/components/component/PostCard.vue");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util */ "./resources/js/util.js");
 
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -7015,61 +6964,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
 
 
 
@@ -7087,14 +6981,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   components: {
-    Like: _component_Like_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Comment: _component_Comment_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Product: _component_Product_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Tag: _component_Tag_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    NewRecruit: _component_recruit_NewRecruit_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    SearchRecruit: _component_recruit_SearchRecruit_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    RecruitContents: _component_recruit_RecruitContents_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    Apply: _component_recruit_Apply_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    PostCard: _component_PostCard_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    NewRecruit: _component_recruit_NewRecruit_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    SearchRecruit: _component_recruit_SearchRecruit_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
     postReload: function postReload() {
@@ -7106,7 +6995,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var tag, pre, region, generation, response;
+        var tag, pre, region, generation, response, _this$posts;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -7157,7 +7047,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 7:
                 response = _context.sent;
 
-                if (response.status === _util__WEBPACK_IMPORTED_MODULE_9__["OK"]) {
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_4__["OK"]) {
                   if (_this.page === 1 && response.data.data.length === 0) {
                     _this.$store.dispatch("flash/showFlashMessage", {
                       show: true,
@@ -7172,19 +7062,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       })["catch"](function (err) {});
                     }, 2000);
                   } else {
-                    setTimeout(function () {
-                      if (response.data.data.length !== 0) {
-                        var _this$posts;
+                    if (response.data.data.length !== 0) {
+                      _this.page++;
 
-                        _this.page++;
+                      (_this$posts = _this.posts).push.apply(_this$posts, _toConsumableArray(response.data.data));
 
-                        (_this$posts = _this.posts).push.apply(_this$posts, _toConsumableArray(response.data.data));
-
-                        $state.loaded();
-                      } else {
-                        $state.complete();
-                      }
-                    }, 1500);
+                      $state.loaded();
+                    } else {
+                      $state.complete();
+                    }
                   }
                 } else {
                   $state.complete();
@@ -7414,7 +7300,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this.$store.commit("loading/setLoading", false);
 
                     _this.$router.push({
-                      name: "recruit"
+                      name: "not-found"
                     });
                   }
                 } else {
@@ -15790,12 +15676,13 @@ var render = function() {
         "v-btn",
         {
           class: { "white--text cyan": _vm.follow, "cyan--text": !_vm.follow },
-          attrs: { large: "", rounded: "", outlined: "" },
+          attrs: { large: "", rounded: "", outlined: "", width: "120" },
           on: { click: _vm.isFollow }
         },
         [
-          _vm._v("フォロー "),
-          _vm.follow ? _c("span", [_vm._v("済")]) : _vm._e()
+          _vm._v("フォロー"),
+          _vm.follow ? _c("span", [_vm._v("中")]) : _vm._e(),
+          !_vm.follow ? _c("span", [_vm._v("する")]) : _vm._e()
         ]
       )
     : _vm._e()
@@ -17885,150 +17772,29 @@ var render = function() {
             { staticClass: "pb-0 pt-0", attrs: { lg: "8", xl: "8" } },
             [
               _vm._l(_vm.posts, function(post) {
-                return _c(
-                  "v-card",
-                  {
-                    key: "posts-" + post.id,
-                    staticClass: "mb-4",
-                    attrs: { color: "cyan lighten-4", tile: "", elevation: "0" }
-                  },
-                  [
-                    _c(
-                      "v-card-title",
-                      { staticClass: "font-weight-bold pl-3 pt-2" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "black--text",
-                            attrs: { to: "/post/" + post.id }
-                          },
-                          [
-                            _vm._v(
-                              "\n\t\t\t\t\t\t" +
-                                _vm._s(post.title) +
-                                "\n\t\t\t\t\t"
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-text",
-                      { staticClass: "font-weight-bold pl-3 pt-0 pb-2" },
-                      [
-                        _vm._v(
-                          "\n\t\t\t\t\t" + _vm._s(post.message) + "\n\t\t\t\t"
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "mb-4 pl-3" },
-                      _vm._l(post.tags, function(tag) {
-                        return _c("Tag", {
-                          key: "tags-" + tag.id,
-                          attrs: { "tag-item": tag, "push-name": "post" }
-                        })
-                      }),
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("Product", {
-                      attrs: { "product-items": post.products }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-actions",
-                      { staticClass: "pl-3" },
-                      [
-                        _c(
-                          "v-avatar",
-                          { staticClass: "mr-1", attrs: { size: "30" } },
-                          [
-                            _c("v-img", {
-                              attrs: { src: post.user.thumbnail_url }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("span", [_vm._v(_vm._s(post.user.name))])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-actions",
-                      { staticClass: "pl-3 pt-0" },
-                      [
-                        _c(
-                          "v-icon",
-                          {
-                            staticClass: "mr-1",
-                            attrs: { color: "blue-grey lighten-3" }
-                          },
-                          [
-                            _vm._v(
-                              "\n\t\t\t\t\t\tmdi-clock-outline\n\t\t\t\t\t"
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "text--disabled" }, [
-                          _vm._v(_vm._s(post.created_at))
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-actions",
-                      { staticClass: "pl-3 pt-0" },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "ml-1 mr-2" },
-                          [
-                            _c("Comment", {
-                              attrs: {
-                                "comments-count": post.comments_count,
-                                "post-id": post.id,
-                                url: "/post/" + post.id
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("Like", {
-                          attrs: {
-                            "likes-count": post.likes_count,
-                            "liked-by-user": post.liked_by_user,
-                            "post-id": post.id
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
+                return _c("PostCard", {
+                  key: "posts-" + post.id,
+                  attrs: { post: post }
+                })
               }),
               _vm._v(" "),
               _c(
                 "infinite-loading",
                 {
                   ref: "infiniteLoading",
+                  attrs: { spinner: "spiral" },
                   on: { infinite: _vm.infiniteHandler }
                 },
                 [
                   _c("div", { attrs: { slot: "no-more" }, slot: "no-more" }, [
                     _vm._v("全件取得しました。")
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { attrs: { slot: "no-results" }, slot: "no-results" },
+                    [_vm._v("データが見つかりませんでした。")]
+                  )
                 ]
               )
             ],
@@ -18545,176 +18311,29 @@ var render = function() {
             { staticClass: "pb-0 pt-0", attrs: { lg: "8", xl: "8" } },
             [
               _vm._l(_vm.posts, function(post) {
-                return _c(
-                  "v-card",
-                  {
-                    key: "posts-" + post.id,
-                    staticClass: "mb-4",
-                    attrs: { elevation: "0", tile: "" }
-                  },
-                  [
-                    _c(
-                      "v-card-title",
-                      { staticClass: "font-weight-bold pl-3 pt-2" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "black--text",
-                            attrs: { to: "/recruit/" + post.id }
-                          },
-                          [
-                            _vm._v(
-                              "\n\t\t\t\t\t\t" +
-                                _vm._s(post.title) +
-                                "\n\t\t\t\t\t"
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-text",
-                      { staticClass: "font-weight-bold pl-3 pt-0 pb-2" },
-                      [
-                        _vm._v(
-                          "\n\t\t\t\t\t" + _vm._s(post.message) + "\n\t\t\t\t"
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "mb-4 pl-3" },
-                      _vm._l(post.tags, function(tag) {
-                        return _c("Tag", {
-                          key: "tags-" + tag.id,
-                          attrs: { "tag-item": tag, "push-name": "recruit" }
-                        })
-                      }),
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "pl-3 mb-2" },
-                      [
-                        _c("RecruitContents", {
-                          attrs: { "recruit-content": post.recruit }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("Product", {
-                      attrs: { "product-items": post.products }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-actions",
-                      { staticClass: "pl-3" },
-                      [
-                        _c(
-                          "v-avatar",
-                          { staticClass: "mr-1", attrs: { size: "30" } },
-                          [
-                            _c("v-img", {
-                              attrs: { src: post.user.thumbnail_url }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("span", [_vm._v(_vm._s(post.user.name))])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-actions",
-                      { staticClass: "pl-3 pt-0" },
-                      [
-                        _c(
-                          "v-icon",
-                          {
-                            staticClass: "mr-1",
-                            attrs: { color: "blue-grey lighten-3" }
-                          },
-                          [
-                            _vm._v(
-                              "\n\t\t\t\t\t\tmdi-clock-outline\n\t\t\t\t\t"
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "text--disabled" }, [
-                          _vm._v(_vm._s(post.created_at))
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-actions",
-                      { staticClass: "pl-1 pt-0" },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "mr-2" },
-                          [
-                            _c("Apply", {
-                              attrs: {
-                                "post-id": post.id,
-                                "user-id-check":
-                                  post.user.id === _vm.isLoginUserId
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "mr-2" },
-                          [
-                            _c("Comment", {
-                              attrs: {
-                                "comments-count": post.comments_count,
-                                "post-id": post.id,
-                                url: "/recruit/" + post.id
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("Like", {
-                          attrs: {
-                            "likes-count": post.likes_count,
-                            "liked-by-user": post.liked_by_user,
-                            "post-id": post.id
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
+                return _c("PostCard", {
+                  key: "posts-" + post.id,
+                  attrs: { post: post }
+                })
               }),
               _vm._v(" "),
               _c(
                 "infinite-loading",
                 {
                   ref: "infiniteLoading",
+                  attrs: { spinner: "spiral" },
                   on: { infinite: _vm.infiniteHandler }
                 },
                 [
                   _c("div", { attrs: { slot: "no-more" }, slot: "no-more" }, [
                     _vm._v("全件取得しました。")
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { attrs: { slot: "no-results" }, slot: "no-results" },
+                    [_vm._v("データが見つかりませんでした。")]
+                  )
                 ]
               )
             ],

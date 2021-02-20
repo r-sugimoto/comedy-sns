@@ -151,7 +151,7 @@ export default {
 					this.comments = this.posts[0].comments;
 				} else {
 					this.$store.commit("loading/setLoading", false);
-					this.$router.push({ name: "recruit" });
+					this.$router.push({ name: "not-found" });
 				}
 			} else {
 				this.$store.commit("error/setCode", response.status);

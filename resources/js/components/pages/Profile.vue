@@ -82,15 +82,18 @@ export default {
 			const response = await axios.get(`/api/profile/${this.id}`);
 			if (response.status === OK) {
 				this.check = false;
-				console.log(response.data);
-				this.profiles = response.data;
-				if (this.profiles.published_age_flg === 1) {
-					this.profiles.age = "非公開";
-				}
-				if (this.profiles.published_prefecture_flg !== 1) {
-					if (this.profiles.prefecture) {
-						this.prefectureName = this.profiles.prefecture.name;
+				if (response.data.length !== 0) {
+					this.profiles = response.data;
+					if (this.profiles.published_age_flg === 1) {
+						this.profiles.age = "非公開";
 					}
+					if (this.profiles.published_prefecture_flg !== 1) {
+						if (this.profiles.prefecture) {
+							this.prefectureName = this.profiles.prefecture.name;
+						}
+					}
+				} else {
+					this.$router.push({ name: "not-found" });
 				}
 			} else {
 				this.$store.commit("error/setCode", response.status);
