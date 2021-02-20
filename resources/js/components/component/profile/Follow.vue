@@ -6,7 +6,9 @@
 		large
 		rounded
 		outlined
-		>フォロー <span v-if="follow">済</span></v-btn
+		width="120"
+		>フォロー<span v-if="follow">中</span
+		><span v-if="!follow">する</span></v-btn
 	>
 </template>
 
@@ -24,7 +26,7 @@ export default {
 	methods: {
 		async isFollow() {
 			if (!this.isLogin) {
-				alert("フォロー機能を使うにはログインしてください。");
+				alert("フォローするにはログインしてください。");
 				return false;
 			}
 			if (this.follow) {
