@@ -57,4 +57,10 @@ class UserController extends Controller
         return $user;
     }
 
+    // チャットルーム情報取得
+    public function chat_index()
+    {
+        $user = Auth::user()->with(['rooms.users'])->get();
+        return $user;
+    }
 }

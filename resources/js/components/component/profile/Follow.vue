@@ -1,6 +1,5 @@
 <template>
 	<v-btn
-		v-if="UserId !== String(isLoginUserId)"
 		@click="isFollow"
 		:class="{ 'white--text cyan': follow, 'cyan--text': !follow }"
 		large
@@ -62,9 +61,6 @@ export default {
 	computed: {
 		isLogin() {
 			return this.$store.getters["auth/check"];
-		},
-		isLoginUserId() {
-			return this.$store.getters["auth/userId"];
 		},
 	},
 	async created() {
