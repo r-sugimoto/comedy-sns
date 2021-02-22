@@ -4031,19 +4031,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (_this.isLogin) {
-                  _context.next = 3;
-                  break;
-                }
-
-                alert("チャット機能を使うにはログインしてください。");
-                return _context.abrupt("return", false);
-
-              case 3:
-                _context.next = 5;
+                _context.next = 2;
                 return axios.get("/api/chat/new/".concat(_this.id));
 
-              case 5:
+              case 2:
                 response = _context.sent;
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
@@ -4053,15 +4044,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       id: response.data.id
                     }
                   });
-
-                  console.log(response.data.id);
                 } else if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["CREATED"]) {
-                  console.log(response.data.id);
+                  _this.$router.push({
+                    name: "chat-detail",
+                    params: {
+                      id: response.data.id
+                    }
+                  });
                 } else {
                   _this.$store.commit("error/setCode", response.status);
                 }
 
-              case 7:
+              case 4:
               case "end":
                 return _context.stop();
             }
