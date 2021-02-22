@@ -14,19 +14,17 @@ export default {
 	},
 	methods: {
 		async createChat() {
-			if (!this.isLogin) {
-				alert("チャット機能を使うにはログインしてください。");
-				return false;
-			}
 			const response = await axios.get(`/api/chat/new/${this.id}`);
 			if (response.status === OK) {
 				this.$router.push({
 					name: "chat-detail",
 					params: { id: response.data.id },
 				});
-				console.log(response.data.id);
 			} else if (response.status === CREATED) {
-				console.log(response.data.id);
+				this.$router.push({
+					name: "chat-detail",
+					params: { id: response.data.id },
+				});
 			} else {
 				this.$store.commit("error/setCode", response.status);
 			}
