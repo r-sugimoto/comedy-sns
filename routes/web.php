@@ -71,6 +71,19 @@ Route::prefix('api')->group(function () {
     // フォロー済かチェックする
     Route::post('/follow/check/{id}', 'FollowController@follow_check');
 
+    // チャットルーム取得
+    Route::get('/chat', 'RoomController@index');
+    // チャットルーム作成
+    Route::get('/chat/new/{id}', 'RoomController@create');
+    // チャット相手の情報取得
+    Route::get('/chat/info/{id}', 'RoomController@info');
+
+    // チャットメッセージ取得
+    Route::get('/chat/{id}', 'MessageController@index');
+
+    // メッセージ作成
+    Route::post('/chat/message/new', 'MessageController@create');
+
     // タグ検索
     Route::post('/tag/search', 'TagController@search');
 

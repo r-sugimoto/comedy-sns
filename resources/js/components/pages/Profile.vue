@@ -7,8 +7,8 @@
 						<v-avatar size="150" color="gray">
 							<v-img :src="profiles.thumbnail_url"></v-img>
 						</v-avatar>
-						<div class="mt-5">
-							<Message class="mr-3"></Message>
+						<div class="mt-5" v-if="id !== String(isLoginUserId)">
+							<ChatAction :id="id" class="mr-3"></ChatAction>
 							<Follow :user-id="id"></Follow>
 						</div>
 					</div>
@@ -56,8 +56,8 @@
 import { OK } from "../../util";
 import Tag from "../component/Tag.vue";
 import Follow from "../component/profile/Follow.vue";
-import Message from "../component/profile/Message.vue";
 import ProfileTabs from "../component/profile/ProfileTabs.vue";
+import ChatAction from "../component/profile/ChatAction.vue";
 export default {
 	data() {
 		return {
@@ -69,7 +69,7 @@ export default {
 		Tag,
 		ProfileTabs,
 		Follow,
-		Message,
+		ChatAction,
 	},
 	props: {
 		id: {
@@ -93,11 +93,16 @@ export default {
 						}
 					}
 				} else {
-					this.$router.push({ name: "not-found" });
+					this.$router.push({ name: "404" });
 				}
 			} else {
 				this.$store.commit("error/setCode", response.status);
 			}
+		},
+	},
+	computed: {
+		isLoginUserId() {
+			return this.$store.getters["auth/userId"];
 		},
 	},
 	async created() {
