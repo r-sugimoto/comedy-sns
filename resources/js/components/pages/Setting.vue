@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-card class="mx-auto p-2 m-0 mt-n3" max-width="800" elevation="0" tile>
+		<v-card class="mx-auto p-3 m-0 mt-n3" max-width="800" elevation="0" tile>
 			<v-card-title class="justify-center mt-2 mb-5">
 				<h2 class="cyan--text font-weight-bold mb-0">プロフィール設定</h2>
 			</v-card-title>

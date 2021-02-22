@@ -77,6 +77,12 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'follows', 'follow_user_id', 'user_id')->withTimestamps();
     }
 
+    // チャットルーム取得
+    public function rooms()
+    {
+        return $this->belongsToMany('App\Room');
+    }
+
     public function updateUser($request)
     {
         $this->name = $request->name;
