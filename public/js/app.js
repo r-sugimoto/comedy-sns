@@ -6184,12 +6184,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dialog: true,
-      title: "",
+      user: [],
       messages: [],
       message: ""
     };
@@ -6300,7 +6305,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context3.sent;
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
-                  _this3.title = response.data.users[0].name;
+                  _this3.user = response.data.users[0];
                 }
 
               case 4:
@@ -18070,12 +18075,12 @@ var render = function() {
         [
           _c(
             "v-card-title",
-            { staticClass: "pb-0 cyan--text font-weight-bold" },
+            { staticClass: "pb-0 pl-2 pr-2 cyan--text" },
             [
               _c(
                 "v-btn",
                 {
-                  staticClass: "pl-1 mr-3",
+                  staticClass: "pl-1 mr-2",
                   attrs: { text: "", color: "cyan" },
                   on: { click: _vm.routeBack }
                 },
@@ -18086,7 +18091,17 @@ var render = function() {
                 ],
                 1
               ),
-              _vm._v("\n\t\t\t" + _vm._s(_vm.title) + "\n\t\t")
+              _vm._v(" "),
+              _c(
+                "v-avatar",
+                { attrs: { size: "40", color: "gray" } },
+                [_c("v-img", { attrs: { src: _vm.user.thumbnail_url } })],
+                1
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "ml-3" }, [
+                _vm._v("\n\t\t\t\t" + _vm._s(_vm.user.name) + "\n\t\t\t")
+              ])
             ],
             1
           ),
@@ -18110,7 +18125,7 @@ var render = function() {
                         {
                           ref: "scrollTarget",
                           staticClass: "overflow-y-auto",
-                          staticStyle: { height: "calc(100vh - 205px)" }
+                          staticStyle: { height: "calc(100vh - 210px)" }
                         },
                         _vm._l(_vm.messages, function(msg, i) {
                           return _c(
