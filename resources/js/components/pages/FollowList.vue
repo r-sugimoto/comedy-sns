@@ -1,6 +1,6 @@
 <template>
 	<div class="profile-tabs">
-		<v-btn text color="cyan" :to="`/profile/${this.id}`" class="pl-1 mb-2">
+		<v-btn text color="cyan" @click="routeBack" class="pl-1 mb-2">
 			<v-icon>mdi-chevron-left</v-icon>
 			<span>戻る</span>
 		</v-btn>
@@ -55,6 +55,12 @@ export default {
 		Follow,
 	},
 	methods: {
+		routeBack() {
+			this.$router.push({
+				name: "profile",
+				params: { id: this.id },
+			});
+		},
 		async showFollowUsers() {
 			if (this.$route.name === "following") {
 				this.$store.commit("loading/setLoading", true);
