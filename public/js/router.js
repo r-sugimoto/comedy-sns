@@ -906,43 +906,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      path: ""
-    };
-  },
-  props: {
-    pathName: {
-      type: String,
-      "default": "/"
-    }
-  },
   methods: {
     routeBack: function routeBack() {
-      this.path = this.pathName;
-
-      if (this.path === "/") {
-        if (this.prevRoute.name !== undefined) {
-          this.path = this.prevRoute.name;
-        }
-      }
-
-      if (this.prevRoute.query !== undefined) {
-        this.$router.push({
-          name: this.path,
-          query: this.prevRoute.query
-        });
-      } else {
-        this.$router.push({
-          name: this.path
-        });
-      }
-    }
-  },
-  computed: {
-    // 前のページの情報取得
-    prevRoute: function prevRoute() {
-      return this.$store.getters["route/getPrevRoute"];
+      this.$router.back();
     }
   }
 });
@@ -1018,6 +984,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -2162,6 +2132,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2350,11 +2325,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2444,6 +2414,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -3813,7 +3787,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
                   _this.chats = response.data;
-                  console.log(_this.chats);
                 }
 
               case 4:
@@ -6275,7 +6248,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* タグカスタム */\n.ti-input {\n\tbackground: #f4f8fa;\n\tborder-radius: 4px;\n\tborder-color: rgb(244, 248, 250);\n\tmargin-bottom: 10px;\n}\n.vue-tags-input .ti-tag {\n\tposition: relative;\n\tbackground: #ebde6e;\n\tcolor: #283944;\n}\n.ti-new-tag-input-wrapper {\n\tfont-size: 16px !important;\n}\n.ti-tag {\n\tbackground: #00bcd4 !important;\n\tcolor: #fff;\n}\n.ti-deletion-mark {\n\tbackground: red !important;\n}\n.tag-error-text {\n\tfont-size: 12px;\n\theight: 14px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* タグカスタム */\n.ti-input {\n\tbackground: #f4f8fa;\n\tborder-radius: 4px;\n\tborder-color: rgb(244, 248, 250);\n\tmargin-bottom: 10px;\n}\n.vue-tags-input .ti-tag {\n\tposition: relative;\n\tbackground: #ebde6e;\n\tcolor: #283944;\n}\n.ti-new-tag-input-wrapper {\n\tfont-size: 16px !important;\n}\n.ti-tag {\n\tbackground: #00bcd4 !important;\n\tcolor: #fff;\n}\n.ti-deletion-mark {\n\tbackground: red !important;\n}\n.tag-error-text {\n\tfont-size: 12px;\n\theight: 14px;\n}\n", ""]);
 
 // exports
 
@@ -9531,7 +9504,13 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-tabs",
-                    { attrs: { "background-color": "cyan", dark: "" } },
+                    {
+                      attrs: {
+                        "background-color": "cyan",
+                        dark: "",
+                        "show-arrows": _vm.$vuetify.breakpoint.xsOnly
+                      }
+                    },
                     [
                       _c(
                         "v-tab",
@@ -9971,7 +9950,7 @@ var render = function() {
                   },
                   on: { click: _vm.newPost }
                 },
-                [_vm._v("送信する\n\t\t\t")]
+                [_vm._v("投稿する\n\t\t\t")]
               )
             ],
             1
@@ -10286,7 +10265,11 @@ var render = function() {
       _c(
         "v-tabs",
         {
-          attrs: { "background-color": "cyan", dark: "" },
+          attrs: {
+            "background-color": "cyan",
+            dark: "",
+            "show-arrows": _vm.$vuetify.breakpoint.xsOnly
+          },
           model: {
             value: _vm.tabs,
             callback: function($$v) {
@@ -10420,133 +10403,146 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      [
-        _c(
-          "v-btn",
-          {
-            staticClass: "p-0",
-            attrs: { large: "", icon: "", disabled: _vm.userIdCheck },
-            on: { click: _vm.clickDialog }
-          },
-          [_c("v-icon", [_vm._v("mdi-hand-right")])],
-          1
-        )
-      ],
-      _vm._v(" "),
-      _c(
-        "v-dialog",
-        {
-          attrs: { width: "600", persistent: "", "no-click-animation": "" },
-          model: {
-            value: _vm.dialog,
-            callback: function($$v) {
-              _vm.dialog = $$v
-            },
-            expression: "dialog"
-          }
-        },
+  return !_vm.userIdCheck
+    ? _c(
+        "div",
         [
+          [
+            _c(
+              "v-btn",
+              {
+                staticClass: "p-0 ml-1 mr-1",
+                attrs: { color: "cyan", dark: "" },
+                on: { click: _vm.clickDialog }
+              },
+              [
+                _c("v-icon", [_vm._v("mdi-hand-right")]),
+                _vm._v(" "),
+                _c("span", [_vm._v("相方申請する")])
+              ],
+              1
+            )
+          ],
+          _vm._v(" "),
           _c(
-            "v-card",
-            { staticClass: "p-3" },
+            "v-dialog",
+            {
+              attrs: { width: "600", persistent: "", "no-click-animation": "" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
             [
               _c(
-                "v-card-title",
-                { staticClass: "pt-0 pl-0 pr-0 justify-space-between" },
+                "v-card",
+                { staticClass: "p-3" },
                 [
                   _c(
-                    "h2",
-                    { staticClass: "cyan--text font-weight-bold mb-0" },
-                    [_vm._v("相方申請")]
+                    "v-card-title",
+                    { staticClass: "pt-0 pl-0 pr-0 justify-space-between" },
+                    [
+                      _c(
+                        "h2",
+                        { staticClass: "cyan--text font-weight-bold mb-0" },
+                        [_vm._v("相方申請")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "mb-3",
+                          attrs: { icon: "" },
+                          on: { click: _vm.reset }
+                        },
+                        [
+                          _c("v-icon", { attrs: { color: "red" } }, [
+                            _vm._v("mdi-close")
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
                   ),
                   _vm._v(" "),
                   _c(
-                    "v-btn",
-                    {
-                      staticClass: "mb-3",
-                      attrs: { icon: "" },
-                      on: { click: _vm.reset }
-                    },
+                    "validation-observer",
+                    { ref: "observer" },
                     [
-                      _c("v-icon", { attrs: { color: "red" } }, [
-                        _vm._v("mdi-close")
-                      ])
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "validation-observer",
-                { ref: "observer" },
-                [
-                  _c(
-                    "v-form",
-                    [
-                      _c("validation-provider", {
-                        attrs: {
-                          name: "メッセージ",
-                          rules: "required|max:280"
-                        },
-                        scopedSlots: _vm._u([
-                          {
-                            key: "default",
-                            fn: function(ref) {
-                              var errors = ref.errors
-                              return [
-                                _c("v-textarea", {
-                                  attrs: {
-                                    "error-messages": errors,
-                                    "background-color": "#f4f8fa",
-                                    placeholder:
-                                      "申請メッセージを入力してください",
-                                    type: "text",
-                                    name: "message",
-                                    required: "",
-                                    outlined: ""
-                                  },
-                                  model: {
-                                    value: _vm.message,
-                                    callback: function($$v) {
-                                      _vm.message = $$v
-                                    },
-                                    expression: "message"
+                      _c(
+                        "v-form",
+                        [
+                          _c("validation-provider", {
+                            attrs: {
+                              name: "メッセージ",
+                              rules: "required|max:280"
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "default",
+                                  fn: function(ref) {
+                                    var errors = ref.errors
+                                    return [
+                                      _c("v-textarea", {
+                                        attrs: {
+                                          "error-messages": errors,
+                                          "background-color": "#f4f8fa",
+                                          placeholder:
+                                            "申請メッセージを入力してください",
+                                          type: "text",
+                                          name: "message",
+                                          required: "",
+                                          outlined: ""
+                                        },
+                                        model: {
+                                          value: _vm.message,
+                                          callback: function($$v) {
+                                            _vm.message = $$v
+                                          },
+                                          expression: "message"
+                                        }
+                                      })
+                                    ]
                                   }
-                                })
-                              ]
-                            }
-                          }
-                        ])
-                      })
+                                }
+                              ],
+                              null,
+                              false,
+                              905826729
+                            )
+                          })
+                        ],
+                        1
+                      )
                     ],
                     1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "ta-r" },
-                [
+                  ),
+                  _vm._v(" "),
                   _c(
-                    "v-btn",
-                    {
-                      staticClass: "justify-right",
-                      attrs: {
-                        color: "cyan",
-                        elevation: "0",
-                        rounded: "",
-                        dark: ""
-                      },
-                      on: { click: _vm.postApply }
-                    },
-                    [_vm._v("\n\t\t\t\t\t申請する\n\t\t\t\t")]
+                    "div",
+                    { staticClass: "ta-r" },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "justify-right",
+                          attrs: {
+                            color: "cyan",
+                            elevation: "0",
+                            rounded: "",
+                            dark: ""
+                          },
+                          on: { click: _vm.postApply }
+                        },
+                        [_vm._v("\n\t\t\t\t\t申請する\n\t\t\t\t")]
+                      )
+                    ],
+                    1
                   )
                 ],
                 1
@@ -10555,11 +10551,9 @@ var render = function() {
             1
           )
         ],
-        1
+        2
       )
-    ],
-    2
-  )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -10923,7 +10917,13 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-tabs",
-                    { attrs: { "background-color": "cyan", dark: "" } },
+                    {
+                      attrs: {
+                        "background-color": "cyan",
+                        dark: "",
+                        "show-arrows": _vm.$vuetify.breakpoint.xsOnly
+                      }
+                    },
                     [
                       _c(
                         "v-tab",
@@ -11363,7 +11363,7 @@ var render = function() {
                   },
                   on: { click: _vm.newPost }
                 },
-                [_vm._v("送信する\n\t\t\t")]
+                [_vm._v("投稿する\n\t\t\t")]
               )
             ],
             1
@@ -12613,12 +12613,7 @@ var render = function() {
             "v-col",
             { staticClass: "pb-0 pt-0" },
             [
-              _c(
-                "div",
-                { staticClass: "pl-0 mb-2" },
-                [_c("RouteBack", { attrs: { "path-name": "post" } })],
-                1
-              ),
+              _c("div", { staticClass: "pl-0 mb-2" }, [_c("RouteBack")], 1),
               _vm._v(" "),
               _vm._l(_vm.posts, function(post) {
                 return _c(
@@ -13202,12 +13197,7 @@ var render = function() {
             "v-col",
             { staticClass: "pb-0 pt-0" },
             [
-              _c(
-                "div",
-                { staticClass: "pl-0 mb-2" },
-                [_c("RouteBack", { attrs: { "path-name": "recruit" } })],
-                1
-              ),
+              _c("div", { staticClass: "pl-0 mb-2" }, [_c("RouteBack")], 1),
               _vm._v(" "),
               _vm._l(_vm.posts, function(post) {
                 return _c(

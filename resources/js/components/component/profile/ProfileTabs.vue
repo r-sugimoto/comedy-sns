@@ -1,6 +1,11 @@
 <template>
 	<div class="profile-tabs">
-		<v-tabs background-color="cyan" v-model="tabs" dark>
+		<v-tabs
+			background-color="cyan"
+			v-model="tabs"
+			dark
+			:show-arrows="$vuetify.breakpoint.xsOnly"
+		>
 			<v-tab @click="profileTabs(0)">投稿</v-tab>
 			<v-tab @click="profileTabs(1)">コメントした投稿</v-tab>
 			<v-tab @click="profileTabs(2)">いいね</v-tab>
