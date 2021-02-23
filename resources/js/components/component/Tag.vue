@@ -25,6 +25,17 @@ export default {
 						},
 					})
 					.catch((err) => {});
+			} else if (this.pushName === "profile") {
+				this.$router
+					.push({
+						name: "search",
+						query: {
+							freeword: "",
+							tag: tagId,
+							profile: true,
+						},
+					})
+					.catch((err) => {});
 			} else if (this.pushName === "recruit") {
 				this.$router
 					.push({

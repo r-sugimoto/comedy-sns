@@ -38,13 +38,14 @@
 					<v-card-text class="font-weight-bold p-0 pl-2 pr-2 mb-1">
 						{{ profiles.introduction }}
 					</v-card-text>
-					<Tag
-						v-for="tag in profiles.tags"
-						:key="`profile-tags-${tag.id}`"
-						:tag-item="tag"
-						:push-name="''"
-						class="pl-2"
-					></Tag>
+					<div class="pl-2">
+						<Tag
+							v-for="tag in profiles.tags"
+							:key="`profile-tags-${tag.id}`"
+							:tag-item="tag"
+							:push-name="'profile'"
+						></Tag>
+					</div>
 				</v-col>
 			</v-row>
 		</v-card>

@@ -1,12 +1,17 @@
 <template>
 	<v-dialog fullscreen v-model="dialog">
 		<v-card class="mx-auto" elevation="0" tile>
-			<v-card-title class="pb-0 cyan--text font-weight-bold">
-				<v-btn text color="cyan" @click="routeBack" class="pl-1 mr-3">
+			<v-card-title class="pb-0 pl-2 pr-2 cyan--text">
+				<v-btn text color="cyan" @click="routeBack" class="pl-1 mr-2">
 					<v-icon>mdi-chevron-left</v-icon>
 					<span>戻る</span>
 				</v-btn>
-				{{ title }}
+				<v-avatar size="40" color="gray">
+					<v-img :src="user.thumbnail_url"></v-img>
+				</v-avatar>
+				<span class="ml-3">
+					{{ user.name }}
+				</span>
 			</v-card-title>
 			<v-divider></v-divider>
 			<v-card-text class="p-0"
@@ -14,7 +19,7 @@
 					<v-col cols="12" class="p-0">
 						<v-container
 							ref="scrollTarget"
-							style="height: calc(100vh - 205px)"
+							style="height: calc(100vh - 210px)"
 							class="overflow-y-auto"
 						>
 							<v-row v-for="(msg, i) in messages" :key="i" dense>
@@ -76,7 +81,7 @@ export default {
 	data() {
 		return {
 			dialog: true,
-			title: "",
+			user: [],
 			messages: [],
 			message: "",
 		};
@@ -118,7 +123,7 @@ export default {
 		async showInfo() {
 			const response = await axios.get(`/api/chat/info/${this.id}`);
 			if (response.status === OK) {
-				this.title = response.data.users[0].name;
+				this.user = response.data.users[0];
 			}
 		},
 		scrollEnd() {

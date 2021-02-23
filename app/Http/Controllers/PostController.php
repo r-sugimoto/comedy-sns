@@ -190,4 +190,29 @@ class PostController extends Controller
         
         return $posts;
     }
+
+    // サイト内検索　投稿取得
+    public function search_index(Request $request)
+    {
+        $type = $request->type;
+        $tag = $request->tag;
+        $freeword = $request->freeword;
+        $posts = Post::select('id', 'user_id', 'title','message', 'recruit_id', 'created_at')
+            ->where('message', 'like', "%$freeword%")
+            ->when($type === 1, function ($query){
+                return $query->whereNull('recruit_id');
+            })
+            ->when($type === 2, function ($query){
+                return $query->whereNotNull('recruit_id');
+            })
+            ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'likes', 'comments','recruit.prefecture','recruit.prefecture.region', 'recruit.generation'])
+            ->when($tag, function ($query, $tag){
+                return $query->whereHas('tags', function($query) use($tag) {
+                    return $query->where('id', $tag);
+                });
+            })
+            ->orderBy(Post::CREATED_AT, 'desc')->paginate(10);
+    
+        return $posts;
+    }
 }
