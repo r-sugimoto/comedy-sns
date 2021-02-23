@@ -16,8 +16,8 @@
 			class="mb-2"
 			tile
 			elevation="0"
-			v-for="user in users"
-			:key="`follows-${user.id}`"
+			v-for="(user, i) in users"
+			:key="`follows-${i}`"
 		>
 			<v-card-actions class="pl-3">
 				<router-link
@@ -30,7 +30,10 @@
 					<span>{{ user.name }}</span>
 				</router-link>
 				<v-spacer></v-spacer>
-				<Follow :user-id="String(user.id)"></Follow>
+				<Follow
+					v-if="isLoginUserId !== user.id"
+					:user-id="String(user.id)"
+				></Follow>
 			</v-card-actions>
 		</v-card>
 	</div>
@@ -81,6 +84,11 @@ export default {
 					this.$store.commit("error/setCode", response.status);
 				}
 			}
+		},
+	},
+	computed: {
+		isLoginUserId() {
+			return this.$store.getters["auth/userId"];
 		},
 	},
 	watch: {

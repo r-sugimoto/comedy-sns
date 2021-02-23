@@ -34,9 +34,9 @@ Route::prefix('api')->group(function () {
     // ユーザーの投稿取得
     Route::post('/profile/post', 'PostController@profile_post');
 
-    // 投稿一覧取得
+    // タイムライン投稿一覧取得
     Route::post('/post', 'PostController@index');
-    // 投稿API
+    // タイムライン投稿API
     Route::post('/post/new', 'PostController@create');
 
     // 投稿詳細
@@ -57,6 +57,12 @@ Route::prefix('api')->group(function () {
     Route::put('/post/{id}/like', 'LikeController@like');
     // いいね解除
     Route::delete('/post/{id}/like', 'LikeController@unlike');
+
+    // サイト内検索
+    // 投稿一覧取得
+    Route::post('/search/post', 'PostController@search_index');
+    // ユーザー検索
+    Route::post('/search/profile', 'UserController@search_index');
 
     // フォロー機能
     Route::put('/profile/{id}/follow', 'UserController@follow');
