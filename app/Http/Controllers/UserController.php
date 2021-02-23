@@ -33,6 +33,22 @@ class UserController extends Controller
         return $user;
     }
 
+    // プロフィールページ情報取得
+    public function search_index(Request $request){
+        $freeword = $request->freeword;
+        $tag = $request->tag;
+        $user = User::with(['tags'])
+        ->when($tag, function ($query, $tag){
+            return $query->whereHas('tags', function($query) use($tag) {
+                return $query->where('id', $tag);
+            });
+        })
+        ->where('name', 'like', "%$freeword%")
+        ->orWhere('introduction', 'like', "%$freeword%")
+        ->orderBy(User::CREATED_AT, 'desc')->paginate(10);
+        return $user;
+    }
+
     public function follow($userId)
     {
         Auth::user()->follow($userId);

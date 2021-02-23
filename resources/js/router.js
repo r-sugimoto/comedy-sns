@@ -14,6 +14,7 @@ import RecruitDetail from "./components/pages/RecruitDetail.vue";
 import FollowList from "./components/pages/FollowList.vue";
 import Chat from "./components/pages/Chat.vue";
 import ChatDetail from "./components/pages/ChatDetail.vue";
+import Search from "./components/pages/Search.vue";
 
 export default new Router({
 	mode: "history",
@@ -123,6 +124,11 @@ export default new Router({
 					next("/");
 				}
 			},
+		},
+		{
+			path: "/search",
+			name: "search",
+			component: Search,
 		},
 		{
 			path: "/500",

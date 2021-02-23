@@ -40,6 +40,12 @@
 						</v-list-item-icon>
 						<v-list-item-title>プロフィール</v-list-item-title>
 					</v-list-item>
+					<v-list-item to="/search">
+						<v-list-item-icon>
+							<v-icon>mdi-magnify</v-icon>
+						</v-list-item-icon>
+						<v-list-item-title>サイト内検索</v-list-item-title>
+					</v-list-item>
 					<v-list-item to="/setting" v-if="isLogin">
 						<v-list-item-icon>
 							<v-icon>mdi-cog-outline</v-icon>

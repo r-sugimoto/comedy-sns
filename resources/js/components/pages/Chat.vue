@@ -36,7 +36,6 @@ export default {
 			const response = await axios.get("/api/chat");
 			if (response.status === OK) {
 				this.chats = response.data;
-				console.log(this.chats);
 			}
 		},
 	},

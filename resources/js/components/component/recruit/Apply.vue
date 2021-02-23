@@ -1,14 +1,9 @@
 <template>
-	<div>
+	<div v-if="!userIdCheck">
 		<template>
-			<v-btn
-				large
-				icon
-				@click="clickDialog"
-				:disabled="userIdCheck"
-				class="p-0"
-			>
+			<v-btn color="cyan" @click="clickDialog" class="p-0 ml-1 mr-1" dark>
 				<v-icon>mdi-hand-right</v-icon>
+				<span>相方申請する</span>
 			</v-btn>
 		</template>
 		<v-dialog v-model="dialog" width="600" persistent no-click-animation>

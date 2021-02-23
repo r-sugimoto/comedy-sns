@@ -74,7 +74,11 @@
 					<div class="v-messages__message error--text tag-error-text">
 						{{ tagError }}
 					</div>
-					<v-tabs background-color="cyan" dark>
+					<v-tabs
+						background-color="cyan"
+						dark
+						:show-arrows="$vuetify.breakpoint.xsOnly"
+					>
 						<v-tab @click="productInput(0)">画像</v-tab>
 						<v-tab @click="productInput(1)">動画</v-tab>
 						<v-tab @click="productInput(2)">youtube</v-tab>
@@ -201,7 +205,7 @@
 					large
 					rounded
 					dark
-					>送信する
+					>投稿する
 				</v-btn>
 			</div>
 		</v-card>
