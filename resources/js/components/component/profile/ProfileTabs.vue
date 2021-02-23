@@ -6,9 +6,15 @@
 			dark
 			:show-arrows="$vuetify.breakpoint.xsOnly"
 		>
-			<v-tab @click="profileTabs(0)">投稿</v-tab>
-			<v-tab @click="profileTabs(1)">コメントした投稿</v-tab>
-			<v-tab @click="profileTabs(2)">いいね</v-tab>
+			<v-tab class="text-decoration-none" @click="profileTabs(0)" href="#tab-1">
+				投稿
+			</v-tab>
+			<v-tab class="text-decoration-none" @click="profileTabs(1)" href="#tab-2"
+				>コメントした投稿</v-tab
+			>
+			<v-tab class="text-decoration-none" @click="profileTabs(2)" href="#tab-3"
+				>いいね</v-tab
+			>
 		</v-tabs>
 		<v-row class="pt-1 pb-1">
 			<v-spacer></v-spacer>
@@ -27,8 +33,8 @@
 			</v-col>
 		</v-row>
 		<PostCard
-			v-for="post in posts"
-			:key="`posts-${post.id}`"
+			v-for="(post, i) in posts"
+			:key="`posts-${i}`"
 			:post="post"
 		></PostCard>
 		<infinite-loading
