@@ -45,7 +45,7 @@ export default {
 	align-items: center;
 }
 #flash-message {
-	z-index: 9;
+	z-index: 999;
 	position: fixed;
 }
 .v-enter-active,

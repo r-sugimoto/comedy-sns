@@ -18,9 +18,9 @@
 
 					<v-list-item to="/recruit">
 						<v-list-item-icon>
-							<v-icon>mdi-handshake-outline</v-icon>
+							<v-icon>mdi-account-details-outline</v-icon>
 						</v-list-item-icon>
-						<v-list-item-title>相方募集一覧</v-list-item-title>
+						<v-list-item-title>相方募集投稿</v-list-item-title>
 					</v-list-item>
 					<v-list-item to="/post">
 						<v-list-item-icon>
@@ -34,9 +34,21 @@
 						</v-list-item-icon>
 						<v-list-item-title>チャット</v-list-item-title>
 					</v-list-item>
+					<v-list-item to="/partner" v-if="isLogin">
+						<v-list-item-icon>
+							<v-icon>mdi-handshake-outline</v-icon>
+						</v-list-item-icon>
+						<v-list-item-title>相方申請</v-list-item-title>
+					</v-list-item>
+					<v-list-item to="/comedy" v-if="isLogin">
+						<v-list-item-icon>
+							<v-icon>mdi-account-supervisor-circle-outline</v-icon>
+						</v-list-item-icon>
+						<v-list-item-title>結成したコンビ</v-list-item-title>
+					</v-list-item>
 					<v-list-item :to="`/profile/${this.isLoginUserId}`" v-if="isLogin">
 						<v-list-item-icon>
-							<v-icon>mdi-account-circle</v-icon>
+							<v-icon>mdi-account-circle-outline</v-icon>
 						</v-list-item-icon>
 						<v-list-item-title>プロフィール</v-list-item-title>
 					</v-list-item>

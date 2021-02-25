@@ -23,8 +23,8 @@
 							class="overflow-y-auto"
 						>
 							<v-row v-for="(msg, i) in messages" :key="i" dense>
-								<v-col v-if="msg.user.id != isLoginUserId">
-									<div class="msg_left">
+								<v-col v-if="msg.user.id !== isLoginUserId">
+									<div class="msg_left" v-if="msg.partner_id === null">
 										<div class="icon">
 											<v-avatar size="50" color="gray">
 												<v-img :src="msg.user.thumbnail_url"></v-img>
@@ -34,11 +34,36 @@
 											{{ msg.message }}
 										</p>
 									</div>
+									<div
+										class="msg_left"
+										v-if="
+											msg.partner_id !== null &&
+											msg.partner.user_id !== isLoginUserId
+										"
+									>
+										<div class="icon">
+											<v-avatar size="50" color="gray">
+												<v-img :src="msg.user.thumbnail_url"></v-img>
+											</v-avatar>
+										</div>
+										<ApplyChat
+											@emitShowMessages="showMessages"
+											:msg="msg"
+										></ApplyChat>
+									</div>
 								</v-col>
 								<v-col v-else>
 									<div class="msg_right">
-										<p class="msg">
+										<p class="msg" v-if="msg.partner_id === null">
 											{{ msg.message }}
+										</p>
+										<p class="msg" v-else>
+											【送信した相方申請メッセージ】
+											<br />
+											{{ msg.message }}
+											<router-link to="/partner">
+												<br />【詳しく見る】
+											</router-link>
 										</p>
 									</div>
 								</v-col>
@@ -77,6 +102,7 @@
 
 <script>
 import { OK, CREATED } from "../../util";
+import ApplyChat from "../component/chat/ApplyChat.vue";
 export default {
 	data() {
 		return {
@@ -85,6 +111,9 @@ export default {
 			messages: [],
 			message: "",
 		};
+	},
+	components: {
+		ApplyChat,
 	},
 	props: {
 		id: {
@@ -111,6 +140,8 @@ export default {
 					this.message = "";
 					this.$refs.observer.reset();
 					await this.showMessages();
+				} else {
+					this.$store.commit("error/setCode", response.status);
 				}
 			}
 		},
@@ -118,12 +149,16 @@ export default {
 			const response = await axios.get(`/api/chat/${this.id}`);
 			if (response.status === OK) {
 				this.messages = response.data;
+			} else {
+				this.$store.commit("error/setCode", response.status);
 			}
 		},
 		async showInfo() {
 			const response = await axios.get(`/api/chat/info/${this.id}`);
 			if (response.status === OK) {
 				this.user = response.data.users[0];
+			} else {
+				this.$store.commit("error/setCode", response.status);
 			}
 		},
 		scrollEnd() {
@@ -149,49 +184,4 @@ export default {
 };
 </script>
 
-<style>
-.msg_left,
-.msg_right {
-	margin: 10px 0;
-	display: flex;
-	justify-content: flex-start;
-	align-items: flex-start;
-}
-.msg_right {
-	justify-content: flex-end;
-	margin-right: 25px;
-}
-.msg_left .icon {
-	margin-right: 25px;
-}
-.msg {
-	max-width: 95%;
-	position: relative;
-	padding: 10px;
-	border-radius: 12px;
-	background: #8ee7b6;
-	box-sizing: border-box;
-	margin: 0 !important;
-	line-height: 1.5;
-}
-.msg p {
-	margin: 8px 0 0 !important;
-}
-.msg p:first-child {
-	margin-top: 0 !important;
-}
-.msg:after {
-	content: "";
-	position: absolute;
-	border: 10px solid transparent;
-	margin-top: -3px;
-}
-.msg_left .msg:after {
-	left: -26px;
-	border-right: 22px solid #8ee7b6;
-}
-.msg_right .msg:after {
-	right: -26px;
-	border-left: 22px solid #8ee7b6;
-}
-</style>
+<style></style>

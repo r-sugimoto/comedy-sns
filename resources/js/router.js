@@ -15,6 +15,9 @@ import FollowList from "./components/pages/FollowList.vue";
 import Chat from "./components/pages/Chat.vue";
 import ChatDetail from "./components/pages/ChatDetail.vue";
 import Search from "./components/pages/Search.vue";
+import Partner from "./components/pages/Partner.vue";
+import Comedy from "./components/pages/Comedy.vue";
+import ComedyDetail from "./components/pages/ComedyDetail.vue";
 
 export default new Router({
 	mode: "history",
@@ -129,6 +132,29 @@ export default new Router({
 			path: "/search",
 			name: "search",
 			component: Search,
+		},
+		{
+			path: "/partner",
+			name: "partner",
+			component: Partner,
+		},
+		{
+			path: "/comedy",
+			name: "comedy",
+			component: Comedy,
+			beforeEnter(to, from, next) {
+				if (store.getters["auth/check"]) {
+					next();
+				} else {
+					next("/");
+				}
+			},
+		},
+		{
+			path: "/comedy/:id",
+			name: "comedy-detail",
+			component: ComedyDetail,
+			props: true,
 		},
 		{
 			path: "/500",

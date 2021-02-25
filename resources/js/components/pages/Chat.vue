@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="mt-n3">
 		<v-card
 			v-for="chat in chats"
 			:key="`chats-${chat.id}`"
@@ -36,6 +36,8 @@ export default {
 			const response = await axios.get("/api/chat");
 			if (response.status === OK) {
 				this.chats = response.data;
+			} else {
+				this.$store.commit("error/setCode", response.status);
 			}
 		},
 	},

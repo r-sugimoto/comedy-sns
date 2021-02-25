@@ -1,6 +1,6 @@
 <template>
-	<div class="profile-tabs">
-		<v-btn text color="cyan" @click="routeBack" class="pl-1 mb-2">
+	<div class="profile-tabs mt-n3">
+		<v-btn text color="cyan" @click="routeBack" class="pl-1">
 			<v-icon>mdi-chevron-left</v-icon>
 			<span>戻る</span>
 		</v-btn>

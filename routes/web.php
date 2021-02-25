@@ -53,6 +53,14 @@ Route::prefix('api')->group(function () {
     Route::post('/recruit', 'PostController@recruit_index');
     Route::post('/recruit/new', 'PostController@recruit_create');
 
+    // 相方申請
+    Route::post('/partner/new', 'PartnerController@create');
+    // 相方申請　可否
+    Route::post('/partner/application', 'PartnerController@application');
+
+    // 相方申請菅理
+    Route::post('/partner/{flg}', 'PartnerController@index');
+
     // いいね機能
     Route::put('/post/{id}/like', 'LikeController@like');
     // いいね解除
