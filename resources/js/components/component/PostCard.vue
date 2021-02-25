@@ -97,7 +97,7 @@
 			<v-card-actions class="pl-1 pt-0">
 				<div class="mr-2">
 					<Apply
-						:post-id="post.id"
+						:user-id="post.user.id"
 						:user-id-check="post.user.id === isLoginUserId"
 					></Apply>
 				</div>

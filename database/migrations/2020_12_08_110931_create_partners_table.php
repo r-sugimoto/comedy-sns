@@ -18,7 +18,7 @@
 						$table->increments('id');
 						$table->integer('user_id');
 						$table->integer('partner_user_id'); //申請先user_id
-						$table->integer('application_flg'); //申請フラグ　0: 拒否 1:承認　
+						$table->integer('application_flg')->nullable(); //申請フラグ　0: 拒否 1:承認　
 						$table->integer('comedy_id')->nullable();
 						$table->text('message')->nullable();
 						$table->timestamps();
