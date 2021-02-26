@@ -22,7 +22,7 @@ class PartnerController extends Controller
             $partner = Partner::where("partner_user_id", Auth::user()->id)
             ->with(['user', 'partner_user', 'comedy'])
             ->orderBy(Partner::UPDATED_AT, 'desc')->get();
-            
+
             return $partner;
         }
     }
@@ -80,7 +80,22 @@ class PartnerController extends Controller
         }else if($request->application_flg === 1){
             $request->message = "コンビ結成しました。";
         }
+
+        // 相方申請ページ承認用
+        if(!empty($request->user_id)){
+            $id = $request->user_id;
+            $room = Room::whereNull('name')->with(['users'])
+                ->whereHas('users', function($query){
+                    return $query->where('id', Auth::user()->id);
+                })
+                ->whereHas('users', function($query) use($id){
+                return $query->where('id', $id);
+                })
+                ->first();
+            $request->room_id = $room->id;
+        }
         $messages = new Message();
+        // 相方申請メッセージではない
         $request->partner_id = NULL;
         $messages->create_message($request);
 
