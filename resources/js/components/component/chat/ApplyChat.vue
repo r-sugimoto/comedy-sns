@@ -20,11 +20,11 @@
 			>
 		</span>
 		<span v-if="msg.partner.application_flg === 0">
-			<v-icon class="mb-1">mdi-close</v-icon>
+			<v-icon color="red" class="mb-1">mdi-close</v-icon>
 			<router-link to="/partner"> 申請拒否しました。 </router-link>
 		</span>
 		<span v-if="msg.partner.application_flg === 1">
-			<v-icon class="mb-1"> mdi-check </v-icon>
+			<v-icon color="blue" class="mb-1">mdi-check</v-icon>
 			<router-link :to="`/comedy/${msg.partner.comedy_id}`">
 				コンビ結成しました。
 			</router-link>
