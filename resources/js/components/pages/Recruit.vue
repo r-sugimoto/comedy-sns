@@ -35,7 +35,7 @@
 					@infinite="infiniteHandler"
 				>
 					<div slot="no-more">全件取得しました。</div>
-					<div slot="no-results">データが見つかりませんでした。</div>
+					<div slot="no-results">投稿が見つかりませんでした。</div>
 				</infinite-loading>
 			</v-col>
 		</v-row>
@@ -112,26 +112,12 @@ export default {
 				type: this.searchType,
 			});
 			if (response.status === OK) {
-				if (this.page === 1 && response.data.data.length === 0) {
-					this.searchType = null;
-					this.$store.dispatch("flash/showFlashMessage", {
-						show: true,
-						message: "投稿が見つかりませんでした。 投稿一覧TOPへ戻ります。",
-						type: 1,
-						seconds: 3000,
-					});
-					setTimeout(() => {
-						this.$router.push({ name: "recruit" }).catch((err) => {});
-						this.postReload();
-					}, 2000);
+				if (response.data.data.length !== 0) {
+					this.page++;
+					this.posts.push(...response.data.data);
+					$state.loaded();
 				} else {
-					if (response.data.data.length !== 0) {
-						this.page++;
-						this.posts.push(...response.data.data);
-						$state.loaded();
-					} else {
-						$state.complete();
-					}
+					$state.complete();
 				}
 			} else {
 				$state.complete();

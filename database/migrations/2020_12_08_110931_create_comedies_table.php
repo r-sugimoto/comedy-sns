@@ -19,7 +19,6 @@
 						$table->string('name')->nullable(); //コンビ名
 						$table->softDeletes();
 						$table->timestamps();
-
                 });
             }
 
