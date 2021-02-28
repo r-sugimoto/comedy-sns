@@ -1,7 +1,7 @@
 <template>
 	<v-card class="p-2" :class="{ 'mb-5': !isLogin }" tile elevation="0">
-		<v-card-title class="c-cyan">
-			<p class="font-weight-bold mb-0">相方募集検索</p>
+		<v-card-title>
+			<p class="font-weight-bold cyan--text mb-0">相方募集検索</p>
 		</v-card-title>
 		<validation-observer ref="observer">
 			<v-form>

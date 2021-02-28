@@ -89,17 +89,25 @@
 			>
 				<span>登録</span>
 			</v-btn>
+			<v-btn elevation="0" icon to="/search" v-if="isLogin"
+				><v-icon>mdi-magnify</v-icon></v-btn
+			>
+			<Notification v-if="isLogin" class="mr-1"></Notification>
 			<v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 		</v-app-bar>
 	</div>
 </template>
 <script>
+import Notification from "../component/Notification.vue";
 export default {
 	data() {
 		return {
 			drawer: false,
 			group: null,
 		};
+	},
+	components: {
+		Notification,
 	},
 	methods: {
 		async logout() {
