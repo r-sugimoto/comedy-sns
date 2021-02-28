@@ -1,6 +1,6 @@
 <template>
-	<div class="profile-tabs">
-		<v-btn text color="cyan" @click="routeBack" class="pl-1 mb-2">
+	<div class="profile-tabs mt-n3">
+		<v-btn text color="cyan" @click="routeBack" class="pl-1">
 			<v-icon>mdi-chevron-left</v-icon>
 			<span>戻る</span>
 		</v-btn>
@@ -70,19 +70,19 @@ export default {
 				const response = await axios.get(`/api/profile/${this.id}/following`);
 				if (response.status === OK) {
 					this.users = response.data.follow_users;
-					this.$store.commit("loading/setLoading", false);
 				} else {
 					this.$store.commit("error/setCode", response.status);
 				}
+				this.$store.commit("loading/setLoading", false);
 			} else if (this.$route.name === "followers") {
 				this.$store.commit("loading/setLoading", true);
 				const response = await axios.get(`/api/profile/${this.id}/followers`);
 				if (response.status === OK) {
-					this.$store.commit("loading/setLoading", false);
 					this.users = response.data.follower_users;
 				} else {
 					this.$store.commit("error/setCode", response.status);
 				}
+				this.$store.commit("loading/setLoading", false);
 			}
 		},
 	},

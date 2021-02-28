@@ -19,6 +19,7 @@
 						$table->text('message')->nullable();
 						$table->integer('room_id');
 						$table->integer('user_id');
+						$table->integer('partner_id')->nullable();;
 						$table->softDeletes();
 						$table->timestamps();
 

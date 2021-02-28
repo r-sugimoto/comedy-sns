@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { CREATED } from "../../../util";
+import { CREATED, OK } from "../../../util";
 export default {
 	data() {
 		return {
@@ -62,7 +62,7 @@ export default {
 		};
 	},
 	props: {
-		PostId: Number,
+		UserId: Number,
 		userIdCheck: Boolean,
 	},
 	methods: {
@@ -77,23 +77,23 @@ export default {
 		async postApply() {
 			const isValid = await this.$refs.observer.validate();
 			let self = this;
-			// if (isValid) {
-			// 	const response = await axios.post("/api/post/reply", {
-			// 		message: this.message,
-			// 		id: this.PostId,
-			// 	});
-			// 	if (response.status === CREATED) {
-			self.$store.dispatch("flash/showFlashMessage", {
-				show: true,
-				message: "申請完了しました。",
-				type: 0,
-				seconds: 3000,
-			});
-			self.reset();
-			// } else {
-			// 	this.$store.commit("error/setCode", response.status);
-			// }
-			// }
+			if (isValid) {
+				const response = await axios.post("/api/partner/new", {
+					message: this.message,
+					user_id: this.UserId,
+				});
+				if (response.status === CREATED || response.status === OK) {
+					self.$store.dispatch("flash/showFlashMessage", {
+						show: true,
+						message: "申請完了しました。",
+						type: 0,
+						seconds: 3000,
+					});
+					self.reset();
+				} else {
+					this.$store.commit("error/setCode", response.status);
+				}
+			}
 		},
 		// data初期化メソッド
 		reset() {

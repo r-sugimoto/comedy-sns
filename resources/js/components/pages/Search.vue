@@ -18,6 +18,12 @@
 						href="#tab-2"
 						>ユーザー</v-tab
 					>
+					<v-tab
+						class="text-decoration-none"
+						@click="changeTabs(2)"
+						href="#tab-3"
+						>コンビ</v-tab
+					>
 				</v-tabs>
 				<div v-if="tabType === 0">
 					<v-row class="pt-1 pb-1">
@@ -49,6 +55,13 @@
 						:user="user"
 					></ProfileCard>
 				</div>
+				<div v-if="tabType === 2">
+					<ComedyCard
+						v-for="(comedy, i) in results"
+						:key="`comedies-${i}`"
+						:comedy="comedy"
+					></ComedyCard>
+				</div>
 				<infinite-loading
 					ref="infiniteLoading"
 					spinner="spiral"
@@ -67,6 +80,7 @@ import { OK } from "../../util";
 import SiteSearch from "../component/search/SiteSearch.vue";
 import PostCard from "../component/PostCard.vue";
 import ProfileCard from "../component/search/ProfileCard.vue";
+import ComedyCard from "../component/ComedyCard.vue";
 export default {
 	data() {
 		return {
@@ -87,6 +101,7 @@ export default {
 		SiteSearch,
 		PostCard,
 		ProfileCard,
+		ComedyCard,
 	},
 	methods: {
 		postReload() {
@@ -143,6 +158,30 @@ export default {
 						tag: this.tag,
 					}
 				);
+				if (response.status === OK) {
+					if (this.page === 1 && response.data.data.length === 0) {
+						$state.complete();
+					} else {
+						if (response.data.data.length !== 0) {
+							this.page++;
+							this.results.push(...response.data.data);
+							$state.loaded();
+						} else {
+							$state.complete();
+						}
+					}
+				} else {
+					$state.complete();
+					this.$store.commit("error/setCode", response.status);
+				}
+			} else if (this.tabType === 2) {
+				const response = await axios.post(
+					`/api/search/comedy?page=${this.page}`,
+					{
+						freeword: this.freeword,
+					}
+				);
+				console.log(response);
 				if (response.status === OK) {
 					if (this.page === 1 && response.data.data.length === 0) {
 						$state.complete();
