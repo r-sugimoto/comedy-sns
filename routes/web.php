@@ -57,9 +57,17 @@ Route::prefix('api')->group(function () {
     Route::post('/partner/new', 'PartnerController@create');
     // 相方申請　可否
     Route::post('/partner/application', 'PartnerController@application');
-
     // 相方申請菅理
     Route::post('/partner/{flg}', 'PartnerController@index');
+
+    // 結成したコンビ一覧
+    Route::get('/comedy', 'ComedyController@index');
+    // 結成したコンビ一覧
+    Route::get('/comedy/{id}', 'ComedyController@comedy');
+    // コンビ解散
+    Route::delete('/comedy/{id}/delete', 'ComedyController@destroy');
+    // コンビ名変更
+    Route::post('/comedy/edit', 'ComedyController@edit');
 
     // いいね機能
     Route::put('/post/{id}/like', 'LikeController@like');
@@ -71,6 +79,8 @@ Route::prefix('api')->group(function () {
     Route::post('/search/post', 'PostController@search_index');
     // ユーザー検索
     Route::post('/search/profile', 'UserController@search_index');
+    // コンビ名検索
+    Route::post('/search/comedy', 'ComedyController@search');
 
     // フォロー機能
     Route::put('/profile/{id}/follow', 'UserController@follow');
