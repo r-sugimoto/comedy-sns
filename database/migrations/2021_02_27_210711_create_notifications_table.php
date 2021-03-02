@@ -13,12 +13,12 @@ class CreateNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('notices', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('from_user_id');
             $table->integer('to_user_id');
             $table->integer('action_type'); //1:コメント 2:DM 3:いいね 4:フォロー
-            $table->integer('check_flg'); //0:無効 1:有効
+            $table->integer('check_flg')->default(0); //0:無効 1:有効
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('notices');
     }
 }

@@ -55,7 +55,6 @@ class Post extends Model
     public function postDelete($postId){
         $this->untag();
         $this->unproduct($postId);
-        $this->uncomment();
         $this->unlike();
         $this->unrecruit();
         $this->unpost();
@@ -78,11 +77,6 @@ class Post extends Model
         $this->products()->detach();
         $directory = 'post/' . $postId . '/';
         Storage::cloud()->deleteDirectory($directory);
-        return true;
-    }
-    // コメント削除
-    public function uncomment(){
-        $this->comments()->detach();
         return true;
     }
     // いいね 削除

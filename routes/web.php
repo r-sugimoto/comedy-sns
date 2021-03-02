@@ -65,7 +65,7 @@ Route::prefix('api')->group(function () {
     // 結成したコンビ一覧
     Route::get('/comedy/{id}', 'ComedyController@comedy');
     // コンビ解散
-    Route::delete('/comedy/{id}/delete', 'ComedyController@destroy');
+    Route::delete('/comedy/{id}/delete', 'PartnerController@destroy');
     // コンビ名変更
     Route::post('/comedy/edit', 'ComedyController@edit');
 
@@ -104,9 +104,18 @@ Route::prefix('api')->group(function () {
 
     // チャットメッセージ取得
     Route::get('/chat/{id}', 'MessageController@index');
+    // チャットメッセージ取得
+    Route::get('/chat/notice/{id}', 'MessageController@notice_index');
 
     // メッセージ作成
     Route::post('/chat/message/new', 'MessageController@create');
+
+    // 通知取得
+    Route::get('/notice', 'NoticeController@index');
+    // 通知取得
+    Route::get('/notice/already', 'NoticeController@already_index');
+    // 既読
+    Route::post('/notice/{id}', 'NoticeController@update');
 
     // タグ検索
     Route::post('/tag/search', 'TagController@search');

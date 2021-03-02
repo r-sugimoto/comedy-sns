@@ -6,14 +6,7 @@
 		<validation-observer ref="observer">
 			<v-form>
 				<v-row align="center">
-					<v-col
-						class="pb-0 pt-0 xs-p-0"
-						cols="12"
-						sm="6"
-						md="6"
-						lg="12"
-						xl="12"
-					>
+					<v-col class="pb-0 pt-0" cols="12" sm="6" md="6" lg="12" xl="12">
 						<validation-provider
 							v-slot="{ errors }"
 							name="フリーワード"
