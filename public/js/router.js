@@ -1550,10 +1550,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   comedy_id = _response.data.comedy_id;
 
                   _this.$router.push({
-                    name: "comedy-detail",
-                    params: {
-                      comedy_id: comedy_id
-                    }
+                    path: "comedy/".concat(comedy_id)
                   })["catch"](function (err) {});
                 } else {
                   _this.$store.commit("error/setCode", _response.status);
@@ -2179,13 +2176,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4825,6 +4815,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4850,6 +4844,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
                   _this.chats = response.data;
+                  console.log(_this.chats);
                 } else {
                   _this.$store.commit("error/setCode", response.status);
                 }
@@ -5058,7 +5053,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 6;
                 return axios.post("/api/chat/message/new", {
                   message: _this.message,
-                  room_id: _this.id
+                  room_id: _this.id,
+                  to_user_id: _this.user.id
                 });
 
               case 6:
@@ -5120,7 +5116,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    showInfo: function showInfo() {
+    noticeMessage: function noticeMessage() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
@@ -5130,14 +5126,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios.get("/api/chat/info/".concat(_this3.id));
+                return axios.get("/api/chat/notice/".concat(_this3.id));
 
               case 2:
                 response = _context3.sent;
 
-                if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
-                  _this3.user = response.data.users[0];
-                } else {
+                if (response.status !== _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
                   _this3.$store.commit("error/setCode", response.status);
                 }
 
@@ -5149,11 +5143,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    scrollEnd: function scrollEnd() {
+    showInfo: function showInfo() {
       var _this4 = this;
 
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.get("/api/chat/info/".concat(_this4.id));
+
+              case 2:
+                response = _context4.sent;
+
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                  _this4.user = response.data.users[0];
+                } else {
+                  _this4.$store.commit("error/setCode", response.status);
+                }
+
+              case 4:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    scrollEnd: function scrollEnd() {
+      var _this5 = this;
+
       this.$nextTick(function () {
-        var Log = _this4.$refs.scrollTarget;
+        var Log = _this5.$refs.scrollTarget;
 
         if (!Log) {
           return false;
@@ -5169,26 +5192,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
-              _context4.next = 2;
-              return _this5.showMessages();
+              _context5.next = 2;
+              return _this6.showMessages();
 
             case 2:
-              _context4.next = 4;
-              return _this5.showInfo();
+              _context5.next = 4;
+              return _this6.noticeMessage();
 
             case 4:
+              _context5.next = 6;
+              return _this6.showInfo();
+
+            case 6:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
         }
-      }, _callee4);
+      }, _callee5);
     }))();
   }
 });
@@ -6929,6 +6956,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -7436,7 +7464,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.$store.commit("error/setCode", response.status);
                 }
 
-                _context.next = 22;
+                _context.next = 21;
                 break;
 
               case 9:
@@ -7474,12 +7502,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.$store.commit("error/setCode", _response.status);
                 }
 
-                _context.next = 22;
+                _context.next = 21;
                 break;
 
               case 16:
                 if (!(_this.tabType === 2)) {
-                  _context.next = 22;
+                  _context.next = 21;
                   break;
                 }
 
@@ -7490,7 +7518,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 19:
                 _response2 = _context.sent;
-                console.log(_response2);
 
                 if (_response2.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
                   if (_this.page === 1 && _response2.data.data.length === 0) {
@@ -7512,7 +7539,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.$store.commit("error/setCode", _response2.status);
                 }
 
-              case 22:
+              case 21:
               case "end":
                 return _context.stop();
             }
@@ -12450,7 +12477,7 @@ var render = function() {
                   _c(
                     "v-col",
                     {
-                      staticClass: "pb-0 pt-0 xs-p-0",
+                      staticClass: "pb-0 pt-0",
                       attrs: {
                         cols: "12",
                         sm: "6",
@@ -14557,56 +14584,74 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "mt-n3" },
-    _vm._l(_vm.chats, function(chat) {
-      return _c(
-        "v-card",
-        {
-          key: "chats-" + chat.id,
-          staticClass: "mb-3 text-decoration-none mx-auto",
-          attrs: {
-            to: "/chat/" + chat.id,
-            "max-width": "800",
-            elevation: "0",
-            tile: ""
-          }
-        },
+    [
+      _c(
+        "v-row",
         [
-          chat.name === null
-            ? _c(
-                "v-card-actions",
+          _c(
+            "v-col",
+            { staticClass: "pb-0 pt-0" },
+            _vm._l(_vm.chats, function(chat) {
+              return _c(
+                "v-card",
+                {
+                  key: "chats-" + chat.id,
+                  staticClass: "mb-3 text-decoration-none mx-auto",
+                  attrs: {
+                    to: "/chat/" + chat.id,
+                    "max-width": "800",
+                    elevation: "0",
+                    tile: ""
+                  }
+                },
                 [
-                  _c(
-                    "v-avatar",
-                    { attrs: { size: "50", color: "gray" } },
-                    [
-                      _c("v-img", {
-                        attrs: { src: chat.users[0].thumbnail_url }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "ml-3" }, [
-                    _vm._v(_vm._s(chat.users[0].name) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("v-spacer"),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    { attrs: { color: "cyan", "x-large": "", icon: "" } },
-                    [_c("v-icon", [_vm._v("mdi-chat-processing-outline")])],
-                    1
-                  )
+                  chat.name === null
+                    ? _c(
+                        "v-card-actions",
+                        [
+                          _c(
+                            "v-avatar",
+                            { attrs: { size: "50", color: "gray" } },
+                            [
+                              _c("v-img", {
+                                attrs: { src: chat.users[0].thumbnail_url }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "ml-3" }, [
+                            _vm._v(_vm._s(chat.users[0].name) + " ")
+                          ]),
+                          _vm._v(" "),
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "cyan", "x-large": "", icon: "" }
+                            },
+                            [
+                              _c("v-icon", [
+                                _vm._v("mdi-chat-processing-outline")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e()
                 ],
                 1
               )
-            : _vm._e()
+            }),
+            1
+          )
         ],
         1
       )
-    }),
+    ],
     1
   )
 }
@@ -16361,6 +16406,7 @@ var render = function() {
                             _c("Apply", {
                               attrs: {
                                 "post-id": post.id,
+                                "user-id": post.user.id,
                                 "user-id-check":
                                   post.user.id === _vm.isLoginUserId
                               }

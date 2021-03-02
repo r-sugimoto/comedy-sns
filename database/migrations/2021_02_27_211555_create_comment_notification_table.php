@@ -13,9 +13,9 @@ class CreateCommentNotificationTable extends Migration
      */
     public function up()
     {
-        Schema::create('comment_notification', function (Blueprint $table) {
+        Schema::create('comment_notice', function (Blueprint $table) {
             $table->integer('comment_id');
-			$table->integer('notification_id');
+			$table->integer('notice_id');
         });
     }
 
@@ -26,6 +26,6 @@ class CreateCommentNotificationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment_notification');
+        Schema::dropIfExists('comment_notice');
     }
 }

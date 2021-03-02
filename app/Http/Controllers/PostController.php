@@ -6,6 +6,7 @@ use App\Post;
 use App\Product;
 use App\Tag;
 use App\Recruit;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -79,6 +80,11 @@ class PostController extends Controller
         if(!$post){
             return false;
         }else{
+            // コメント、通知削除用
+            $comments = Comment::where('post_id', $post->id)->get();
+            foreach($comments as $comment){
+                $comment->commentDelete();
+            }
             $post->postDelete($postId);
         }
 

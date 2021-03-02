@@ -1,12 +1,14 @@
 <template>
 	<v-app :style="{ background: $vuetify.theme.themes.light.background }">
 		<Header></Header>
-		<v-main style="margin-top: 64px !important">
+		<v-main class="main-top-margin">
 			<FlashMessage />
 			<DefaultLoading />
-			<v-container class="mt-2">
-				<router-view />
-			</v-container>
+			<v-content>
+				<v-container>
+					<router-view />
+				</v-container>
+			</v-content>
 		</v-main>
 		<Footer />
 	</v-app>
@@ -56,7 +58,10 @@ export default {
 </script>
 
 <style>
+.main-top-margin {
+	margin-top: 64px !important;
+}
 .container {
-	max-width: 100%;
+	max-width: 1200px !important;
 }
 </style>
