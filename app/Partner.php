@@ -21,6 +21,11 @@ class Partner extends Model
         return $this->belongsTo('App\Comedy');
     }
 
+    public function notices()
+    {
+        return $this->belongsToMany('App\Notice');
+    }
+
     protected $fillable = ['user_id', 'partner_user_id', 'message', 'application_flg'];
 
     public function create_partner($request){
@@ -44,4 +49,29 @@ class Partner extends Model
         }
         $this->update();
     }
+
+    public function deletePartner(){
+        $this->uncomedy();
+        $this->unnotice();
+        $this->unpartner();
+    }
+
+    public function unpartner()
+    {
+        $this->delete();
+    }
+
+
+    public function uncomedy()
+    {
+        $this->comedy()->delete();
+    }
+
+    public function unnotice()
+    {
+        $this->notices()->delete();
+        $this->notices()->detach();
+    }
+
+    
 }

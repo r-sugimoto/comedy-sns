@@ -181,7 +181,6 @@ export default {
 						freeword: this.freeword,
 					}
 				);
-				console.log(response);
 				if (response.status === OK) {
 					if (this.page === 1 && response.data.data.length === 0) {
 						$state.complete();

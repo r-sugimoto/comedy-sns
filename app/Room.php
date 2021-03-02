@@ -11,6 +11,11 @@ class Room extends Model
         return $this->belongsToMany('App\User');
     }
 
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
+
     // 1対1のチャット作成
     public function create_person($id){
         $this->users()->attach(Auth::user()->id);
