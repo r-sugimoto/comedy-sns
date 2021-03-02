@@ -12,9 +12,11 @@ class RoomController extends Controller
     {
         $room = Room::whereNull('name')->with(['users' => function($query){
             return $query->where('users.id', '<>', Auth::user()->id);
-        }])->whereHas('users', function($query){
+        }, 'messages'])
+        ->whereHas('users', function($query){
             return $query->where('id', Auth::user()->id);
-        })->get();
+        })
+        ->get();
         return $room;
     }
 

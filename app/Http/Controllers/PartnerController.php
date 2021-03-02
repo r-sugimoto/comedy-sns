@@ -5,6 +5,7 @@ use App\Message;
 use App\Room;
 use App\Partner;
 use App\Comedy;
+use App\Notice;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,12 @@ class PartnerController extends Controller
             $partner = new Partner();
             $partner->create_partner($request);
         }
+
+        // 通知作成
+        $request->partner_id = $partner->id;
+        $request->to_user_id = $id;
+        $notice = new Notice();
+        $notice->createPartnerNotice($request);
         
         // 相方申請メッセージをチャットに送る
         $room = Room::whereNull('name')->with(['users'])
@@ -62,7 +69,6 @@ class PartnerController extends Controller
         $messages = Message::where('partner_id', $partner->id)->first();
 
         $request->room_id = $room->id;
-        $request->partner_id = $partner->id; 
         if(!empty($messages)){
             $messages->update_message($request);
         }else{         
@@ -82,8 +88,8 @@ class PartnerController extends Controller
         }
 
         // 相方申請ページ承認用
-        if(!empty($request->user_id)){
-            $id = $request->user_id;
+        $id = $request->user_id;
+        if(!empty($id)){
             $room = Room::whereNull('name')->with(['users'])
                 ->whereHas('users', function($query){
                     return $query->where('id', Auth::user()->id);
@@ -106,7 +112,21 @@ class PartnerController extends Controller
             $request->comedy_id = $comedy->id;
         }
         $partner->update_application($request);
+
+        // 通知作成
+        $request->partner_id = $partner->id;
+        $request->to_user_id = $id;
+        $notice = new Notice();
+        $notice->createPartnerNotice($request);
         
+        return $partner;
+    }
+
+    // コンビ解散
+    public function destroy(string $id)
+    {       
+        $partner = Partner::where('comedy_id', $id)->first();
+        $partner->deletePartner();
         return $partner;
     }
 }

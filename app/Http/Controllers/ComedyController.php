@@ -24,14 +24,6 @@ class ComedyController extends Controller
         return $comedy;
     }
 
-    // コンビ解散
-    public function destroy(string $id)
-    {       
-        $comedy = Comedy::where('id', $id)->first();
-        $comedy->comedyDelete();
-        return $comedy;
-    }
-
     // コンビ名変更
     public function edit(Request $request){
         $comedy = Comedy::where('id', $request->id)->first();

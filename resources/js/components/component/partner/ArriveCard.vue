@@ -106,8 +106,7 @@ export default {
 					const comedy_id = response.data.comedy_id;
 					this.$router
 						.push({
-							name: "comedy-detail",
-							params: { comedy_id },
+							path: `comedy/${comedy_id}`,
 						})
 						.catch((err) => {});
 				} else {

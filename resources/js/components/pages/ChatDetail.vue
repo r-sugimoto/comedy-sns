@@ -135,6 +135,7 @@ export default {
 				const response = await axios.post("/api/chat/message/new", {
 					message: this.message,
 					room_id: this.id,
+					to_user_id: this.user.id,
 				});
 				if (response.status === CREATED) {
 					this.message = "";
@@ -150,6 +151,12 @@ export default {
 			if (response.status === OK) {
 				this.messages = response.data;
 			} else {
+				this.$store.commit("error/setCode", response.status);
+			}
+		},
+		async noticeMessage() {
+			const response = await axios.get(`/api/chat/notice/${this.id}`);
+			if (response.status !== OK) {
 				this.$store.commit("error/setCode", response.status);
 			}
 		},
@@ -179,6 +186,7 @@ export default {
 	},
 	async created() {
 		await this.showMessages();
+		await this.noticeMessage();
 		await this.showInfo();
 	},
 };

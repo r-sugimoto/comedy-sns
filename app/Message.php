@@ -17,6 +17,11 @@ class Message extends Model
         return $this->belongsTo('App\Partner');
     }
 
+    public function notices()
+    {
+        return $this->belongsToMany('App\Notice');
+    }
+
     public function create_message($request)
     {
         $this->message = $request->message;
