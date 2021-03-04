@@ -1,6 +1,8 @@
 import Router from "vue-router";
 import store from "./store";
 import Home from "./components/pages/Home.vue";
+import RegisterMail from "./components/pages/RegisterMail.vue";
+import Dashboard from "./components/pages/Dashboard.vue";
 import Setting from "./components/pages/Setting.vue";
 import SystemError from "./components/pages/SystemError.vue";
 import NotFound from "./components/pages/NotFound.vue";
@@ -28,6 +30,30 @@ export default new Router({
 			component: Home,
 		},
 		{
+			path: "/dashboard",
+			name: "dashboard",
+			component: Dashboard,
+			beforeEnter(to, from, next) {
+				if (store.getters["auth/check"]) {
+					next();
+				} else {
+					next("/");
+				}
+			},
+		},
+		{
+			path: "/register/mail",
+			name: "register-mail",
+			component: RegisterMail,
+			beforeEnter(to, from, next) {
+				if (store.getters["auth/check"]) {
+					next("/dashboard");
+				} else {
+					next();
+				}
+			},
+		},
+		{
 			path: "/setting",
 			name: "setting",
 			component: Setting,
@@ -45,7 +71,7 @@ export default new Router({
 			component: Login,
 			beforeEnter(to, from, next) {
 				if (store.getters["auth/check"]) {
-					next("/");
+					next("/dashboard");
 				} else {
 					next();
 				}
@@ -57,7 +83,7 @@ export default new Router({
 			component: Register,
 			beforeEnter(to, from, next) {
 				if (store.getters["auth/check"]) {
-					next("/");
+					next("/dashboard");
 				} else {
 					next();
 				}

@@ -34,6 +34,20 @@ export default {
 			return this.$store.getters["error/getCode"];
 		},
 	},
+	created() {
+		// cookiesにMESSAGEがある場合
+		const message = Cookies.get("MESSAGE");
+		if (message) {
+			// cookieをクリア
+			Cookies.remove("MESSAGE");
+			console.log(message);
+			// // MESSAGEストアでメッセージを表示
+			// this.$store.commit("message/setContent", {
+			// 	content: message,
+			// 	timeout: 6000,
+			// });
+		}
+	},
 	watch: {
 		errorCode: {
 			async handler(val) {
