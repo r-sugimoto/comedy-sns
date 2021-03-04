@@ -194,6 +194,7 @@ export default {
 		async getUserSetting() {
 			const response = await axios.get("/api/user/setting");
 			if (response.status === OK) {
+				console.log(response);
 				this.preview = response.data.thumbnail_url;
 				this.userSettingForm.name = response.data.name;
 				this.userSettingForm.prefectureId = response.data.prefecture_id;

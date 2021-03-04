@@ -18,7 +18,7 @@ Route::prefix('api')->group(function () {
         return response()->json();
     });
     // 認証API
-    Route::post('register', 'Auth\RegisterController@register');
+    Route::post('/register', 'Auth\RegisterController@sendMail')->name('register');
     Route::post('login', 'Auth\LoginController@login');
     Route::post('logout', 'Auth\LoginController@logout');
     Route::get('user', fn () => Auth::user())->name('user');
@@ -129,6 +129,8 @@ Route::prefix('api')->group(function () {
     // 地域から都道府県を絞り込む
     Route::post('/prefecture/region/search', 'PrefectureController@region_search');
 });
+
+Route::get('/verification/{token}', 'Auth\VerificationController@register')->name('verification');
 
 Route::get('/{any}', function () {
     return view('index');

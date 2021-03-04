@@ -11,7 +11,8 @@ use App\Tag;
 class UserController extends Controller
 {
     public function index(){
-        $user = Auth::user()->with('tags')->first();
+        $user = Auth::user();
+        $user->with('tags')->first();
         return $user;
     }
 
