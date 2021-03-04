@@ -27,16 +27,26 @@ const mutations = {
 };
 
 const actions = {
-	async authUser(context, { data, path }) {
+	async authRegister(context, { data }) {
 		context.commit("setAuthErrorMessages", null);
 		context.commit("setAuthStatus", null);
-		const response = await axios.post(path, data);
-		if (response.status === OK) {
+		const response = await axios.post("/api/register", data);
+		if (response.status === CREATED) {
 			context.commit("setAuthStatus", true);
-			context.commit("setUser", response.data);
 			return false;
 		}
-		if (response.status === CREATED) {
+		context.commit("setAuthStatus", false);
+		if (response.status === UNPROCESSABLE_ENTITY) {
+			context.commit("setAuthErrorMessages", response.data.errors);
+		} else {
+			context.commit("error/setCode", response.status, { root: true });
+		}
+	},
+	async authLogin(context, { data }) {
+		context.commit("setAuthErrorMessages", null);
+		context.commit("setAuthStatus", null);
+		const response = await axios.post("/api/login", data);
+		if (response.status === OK) {
 			context.commit("setAuthStatus", true);
 			context.commit("setUser", response.data);
 			return false;

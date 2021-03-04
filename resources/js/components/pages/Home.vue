@@ -1,5 +1,5 @@
 <template>
-  <v-container>
-    <v-btn to="/register">いますぐはじめる</v-btn>
-  </v-container>
+	<v-row>
+		<v-col> ホーム </v-col>
+	</v-row>
 </template>

@@ -5,32 +5,43 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\RegisterUser;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Mail\VerificationMail;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+    
+    public function sendMail(Request $request)
+    {
+        // 送られてきた内容のバリデーション
+        $this->validator($request->all())->validate();
+
+        // トークンを作成
+        $token = $this->createToken();
+
+        // 同じメールアドレスが残っていればテーブルから削除
+        RegisterUser::destroy($request->email);
+
+        // 送られてきた内容をテーブルに保存
+        $passwordReset = new RegisterUser($request->all());
+        $passwordReset->token = $token;
+        $passwordReset->password = Hash::make($request->password);
+        $passwordReset->save();
+
+        // メールクラスでメールを送信
+        $this->sendVerificationMail($passwordReset->email, $token);
+
+        return $passwordReset;
+    }
 
     use RegistersUsers;
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -40,20 +51,22 @@ class RegisterController extends Controller
         ]);
     }
 
-    
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
+    private function createToken()
+    {
+        return hash_hmac('sha256', Str::random(40), config('app.key'));
+    }
+
+    private function sendVerificationMail($email, $token)
+    {
+        Mail::to($email)->send(new VerificationMail($token));
+    }
+
     protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'thumbnail' => 'profile/thumbnail/default/thumbnail.png',
             ]);
         }
         

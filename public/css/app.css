@@ -11005,6 +11005,10 @@ a.text-dark:focus {
   height: 14px;
 }
 
+.title--border {
+  border-bottom: 1px solid #e5e5e5;
+}
+
 .tc-w {
   color: #fff;
 }
