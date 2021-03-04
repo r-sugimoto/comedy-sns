@@ -1,9 +1,6 @@
 <template>
 	<v-card class="mx-auto auth-form" max-width="480" elevation="0" tile>
-		<v-card-title
-			class="justify-center mt-2 mb-5"
-			style="border-bottom: 1px solid #e5e5e5"
-		>
+		<v-card-title class="justify-center mt-2 mb-5 title--border">
 			<h1 class="cyan--text font-weight-bold mb-0">ログイン</h1>
 		</v-card-title>
 		<validation-observer ref="observer">
@@ -62,12 +59,12 @@
 					rounded
 					block
 				>
-					<span class="tc-w">ログイン</span>
+					<span class="white--text">ログイン</span>
 				</v-btn>
 			</v-form>
 		</validation-observer>
-		<div class="mt-5 ta-c">
-			<router-link to="/register" class="c-cyan td-none">
+		<div class="mt-5 text-center">
+			<router-link to="/register" class="cyan--text">
 				アカウントをお持ちではない方はこちら
 			</router-link>
 		</div>
@@ -97,12 +94,11 @@ export default {
 			this.clearError();
 			const isValid = await this.$refs.observer.validate();
 			if (isValid) {
-				await this.$store.dispatch("auth/authUser", {
+				await this.$store.dispatch("auth/authLogin", {
 					data: this.loginForm,
-					path: "/api/login",
 				});
 				if (this.status) {
-					this.$router.push("/post");
+					this.$router.push("/dashboard");
 				} else {
 					if (this.errorMessages !== null) {
 						this.emailRules = this.errorMessages.email;

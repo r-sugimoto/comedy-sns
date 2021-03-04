@@ -1,9 +1,6 @@
 <template>
 	<v-card class="mx-auto auth-form" max-width="480" elevation="0" tile>
-		<v-card-title
-			class="justify-center mt-2 mb-5"
-			style="border-bottom: 1px solid #e5e5e5"
-		>
+		<v-card-title class="justify-center mt-2 mb-5 title--border">
 			<h2 class="cyan--text font-weight-bold mb-0">新規会員登録</h2>
 		</v-card-title>
 		<validation-observer ref="observer">
@@ -90,15 +87,16 @@
 					color="cyan"
 					elevation="0"
 					large
+					:loading="loading"
 					rounded
 					block
 				>
-					<span class="tc-w">登録</span>
+					<span class="white--text">登録</span>
 				</v-btn>
 			</v-form>
 		</validation-observer>
-		<div class="mt-5 ta-c">
-			<router-link to="/login" class="c-cyan td-none">
+		<div class="mt-5 cyan--text text-center">
+			<router-link to="/login" class="cyan--text">
 				すでに登録の方はこちら
 			</router-link>
 		</div>
@@ -110,6 +108,7 @@ export default {
 	name: "register",
 	data() {
 		return {
+			loading: false,
 			showPassword1: false,
 			showPassword2: false,
 			nameRules: [],
@@ -128,14 +127,15 @@ export default {
 			this.clearError();
 			const isValid = await this.$refs.observer.validate();
 			if (isValid) {
-				await this.$store.dispatch("auth/authUser", {
+				this.loading = true;
+				await this.$store.dispatch("auth/authRegister", {
 					data: this.registerForm,
-					path: "/api/register",
 				});
 				if (this.status) {
-					this.$router.push("/post");
+					this.$router.push("/register/mail");
 				} else {
 					if (this.errorMessages !== null) {
+						this.loading = false;
 						this.nameRules = this.errorMessages.name;
 						this.emailRules = this.errorMessages.email;
 						this.passwordRules = this.errorMessages.password;
@@ -158,4 +158,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.v-progress-circular {
+	color: white;
+}
+</style>
