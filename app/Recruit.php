@@ -13,15 +13,15 @@ class Recruit extends Model
         return $this->belongsTo('App\Generation');
     }
     public function createRecruit($request){
-        if($request->prefecture_id === 'null' || $request->prefecture_id === '0'){
+        if($request->prefecture === 'null' || $request->prefecture === '0'){
             $this->prefecture_id = NULL;
         }else{
-            $this->prefecture_id = $request->prefecture_id;
+            $this->prefecture_id = $request->prefecture;
         }
-        if($request->generation_id === 'null' || $request->generation_id === '0'){
+        if($request->generation === 'null' || $request->generation === '0'){
             $this->generation_id = NULL;
         }else{
-            $this->generation_id = $request->generation_id;
+            $this->generation_id = $request->generation;
         }
         $this->save();
     }

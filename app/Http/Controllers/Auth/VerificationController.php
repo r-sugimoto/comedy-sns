@@ -63,12 +63,20 @@ class VerificationController extends Controller
     // ユーザー作成
     protected function createUser(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'email_verified_at' => now(),
-            'password' => $data['password'],
-        ]);
+        $user = User::onlyTrashed()->where("email", $data['email'])
+        ->update(['name' => $data['name'], 'password' => $data['password'], 'deleted_at' => NULL]);
+        if(!empty($user)){
+            $user = User::where("email", $data['email'])->first();
+            return $user;
+        }else{
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'email_verified_at' => now(),
+                'password' => $data['password'],
+            ]);
+
+        }
     }
 
     protected function redirectWithMessage($vueRoute, $message)

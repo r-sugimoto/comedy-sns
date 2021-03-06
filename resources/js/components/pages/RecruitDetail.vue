@@ -1,110 +1,119 @@
 <template>
-	<div>
-		<v-row>
-			<v-col class="pb-0 pt-0">
-				<div class="pl-0 mb-2">
-					<RouteBack></RouteBack>
+	<v-row>
+		<v-col cols="12" class="pb-0">
+			<RouteBack></RouteBack>
+		</v-col>
+		<v-col
+			cols="4"
+			class="pr-0"
+			v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm"
+		>
+			<ProfileCard
+				v-for="(post, i) in posts"
+				:key="`profiles-${i}`"
+				:id="post.user.id"
+			></ProfileCard>
+		</v-col>
+		<v-col cols="12" md="8" lg="8" xl="8">
+			<v-card
+				class="mb-4"
+				v-for="(post, i) in posts"
+				:key="`posts-${i}`"
+				elevation="0"
+				tile
+			>
+				<v-card-title class="font-weight-bold pl-3 pt-2">
+					{{ post.title }}
+				</v-card-title>
+				<v-card-text class="font-weight-bold pl-3 pt-0 pb-2">
+					{{ post.message }}
+				</v-card-text>
+				<div class="mb-4 pl-3">
+					<Tag
+						v-for="(tag, i) in post.tags"
+						:key="`tags-${i}`"
+						:tag-item="tag"
+						:push-name="'recruit'"
+					></Tag>
 				</div>
-				<v-card
-					class="mb-4"
-					v-for="post in posts"
-					:key="`posts-${post.id}`"
-					elevation="0"
-					tile
-				>
-					<v-card-title class="font-weight-bold pl-3 pt-2">
-						{{ post.title }}
-					</v-card-title>
-					<v-card-text class="font-weight-bold pl-3 pt-0 pb-2">
-						{{ post.message }}
-					</v-card-text>
-					<div class="mb-4 pl-3">
-						<Tag
-							v-for="tag in post.tags"
-							:key="`tags-${tag.id}`"
-							:tag-item="tag"
-							:push-name="'post'"
-						></Tag>
-					</div>
-					<Product :product-items="post.products"></Product>
-					<v-card-actions class="pl-3">
-						<v-avatar size="30" class="mr-1">
-							<v-img :src="post.user.thumbnail_url"></v-img>
-						</v-avatar>
-						<span>{{ post.user.name }}</span>
-					</v-card-actions>
-					<v-card-actions class="pl-3 pt-0">
-						<v-icon color="blue-grey lighten-3" class="mr-1">
-							mdi-clock-outline
-						</v-icon>
-						<span class="text--disabled">{{ post.created_at }}</span>
-					</v-card-actions>
-					<v-card-actions class="pl-1 pt-0">
-						<div class="mr-2">
-							<Apply
-								:post-id="post.id"
-								:user-id="post.user.id"
-								:user-id-check="post.user.id === isLoginUserId"
-							></Apply>
-						</div>
-						<div class="mr-2">
-							<Reply
-								:post-id="post.id"
-								@addShowPostDetail="showPostDetail"
-							></Reply>
-						</div>
-						<Like
-							:likes-count="post.likes_count"
-							:liked-by-user="post.liked_by_user"
+				<Product :product-items="post.products"></Product>
+				<v-card-actions class="pl-3">
+					<v-avatar size="30" class="mr-1">
+						<v-img :src="post.user.thumbnail_url"></v-img>
+					</v-avatar>
+					<span>{{ post.user.name }}</span>
+				</v-card-actions>
+				<v-card-actions class="pl-3 pt-0">
+					<v-icon color="blue-grey lighten-3" class="mr-1">
+						mdi-clock-outline
+					</v-icon>
+					<span class="text--disabled">{{ post.created_at }}</span>
+				</v-card-actions>
+				<v-card-actions class="pl-1 pt-0">
+					<div class="mr-2">
+						<Apply
 							:post-id="post.id"
-						></Like>
-						<v-spacer></v-spacer>
-						<div class="mr-2">
-							<OptionPostDetail
-								:post-id="post.id"
-								:user-id-check="post.user.id === isLoginUserId"
-								:path-name="'recruit'"
-							></OptionPostDetail>
-						</div>
-					</v-card-actions>
-				</v-card>
-				<v-card
-					tile
-					v-for="comment in comments"
-					:key="`comment-${comment.pivot.id}`"
-					color="light-green lighten-4"
-					elevation="0"
-				>
-					<div class="pl-2 pt-2">
-						<v-icon class="">mdi-reply</v-icon>
+							:user-id="post.user.id"
+							:user-id-check="post.user.id === isLoginUserId"
+						></Apply>
 					</div>
-					<v-card-text class="font-weight-bold pl-3 pt-2">
-						{{ comment.pivot.message }}
-					</v-card-text>
-					<v-card-actions class="pl-3 pt-0">
-						<v-avatar size="30" class="mr-1">
-							<v-img :src="comment.thumbnail_url"></v-img>
-						</v-avatar>
-						<span>{{ comment.name }}</span>
-					</v-card-actions>
-					<v-card-actions class="pl-3 pt-0">
-						<v-icon color="blue-grey lighten-3" class="mr-1">
-							mdi-clock-outline
-						</v-icon>
-						<span class="text--disabled">{{ comment.created_at }}</span>
-						<v-spacer></v-spacer>
-						<div class="mr-2">
-							<OptionCommentDetail
-								:comment-id="comment.pivot.id"
-								:user-id-check="comment.id === isLoginUserId"
-								@addShowPostDetail="showPostDetail"
-							></OptionCommentDetail>
-						</div>
-					</v-card-actions>
-				</v-card>
-			</v-col>
-		</v-row>
-	</div>
+					<div class="mr-2">
+						<Reply
+							:post-id="post.id"
+							@addShowPostDetail="showPostDetail"
+						></Reply>
+					</div>
+					<Like
+						:likes-count="post.likes_count"
+						:liked-by-user="post.liked_by_user"
+						:post-id="post.id"
+					></Like>
+					<v-spacer></v-spacer>
+					<div class="mr-2">
+						<OptionPostDetail
+							:post-id="post.id"
+							:user-id-check="post.user.id === isLoginUserId"
+							:path-name="'recruit'"
+						></OptionPostDetail>
+					</div>
+				</v-card-actions>
+			</v-card>
+			<v-card
+				tile
+				v-for="comment in comments"
+				:key="`comment-${comment.pivot.id}`"
+				color="light-green lighten-4"
+				elevation="0"
+			>
+				<div class="pl-2 pt-2">
+					<v-icon class="">mdi-reply</v-icon>
+				</div>
+				<v-card-text class="font-weight-bold pl-3 pt-2">
+					{{ comment.pivot.message }}
+				</v-card-text>
+				<v-card-actions class="pl-3 pt-0">
+					<v-avatar size="30" class="mr-1">
+						<v-img :src="comment.thumbnail_url"></v-img>
+					</v-avatar>
+					<span>{{ comment.name }}</span>
+				</v-card-actions>
+				<v-card-actions class="pl-3 pt-0">
+					<v-icon color="blue-grey lighten-3" class="mr-1">
+						mdi-clock-outline
+					</v-icon>
+					<span class="text--disabled">{{ comment.created_at }}</span>
+					<v-spacer></v-spacer>
+					<div class="mr-2">
+						<OptionCommentDetail
+							:comment-id="comment.pivot.id"
+							:user-id-check="comment.id === isLoginUserId"
+							@addShowPostDetail="showPostDetail"
+						></OptionCommentDetail>
+					</div>
+				</v-card-actions>
+			</v-card>
+		</v-col>
+	</v-row>
 </template>
 
 <script>
@@ -116,6 +125,7 @@ import Reply from "../component/Reply.vue";
 import OptionPostDetail from "../component/OptionPostDetail.vue";
 import OptionCommentDetail from "../component/OptionCommentDetail.vue";
 import Apply from "../component/recruit/Apply.vue";
+import ProfileCard from "../component/ProfileCard.vue";
 import RouteBack from "../component/RouteBack.vue";
 import { OK } from "../../util";
 export default {
@@ -135,6 +145,7 @@ export default {
 		OptionCommentDetail,
 		Apply,
 		RouteBack,
+		ProfileCard,
 	},
 	props: {
 		id: {

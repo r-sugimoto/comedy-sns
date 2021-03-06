@@ -8,7 +8,7 @@
 			</div>
 			<img :src="img" />
 		</v-dialog>
-		<v-row class="p-1">
+		<v-row>
 			<v-col :cols="productCols" v-for="item in ProductItems" :key="item.id">
 				<v-img
 					v-if="item.type === 0"
@@ -17,21 +17,17 @@
 					@click="previewDialog(item.product_url)"
 					class="product-image"
 				></v-img>
-				<div class="text-center">
+				<div class="text-center" v-if="item.type === 1">
 					<video
-						width="80%"
+						width="90%"
 						height="100%"
-						v-if="item.type === 1"
 						:src="item.product_url"
 						preload="none"
 						controls
 					></video>
-					<youtube
-						v-if="item.type === 2"
-						:video-id="item.name"
-						:width="youtubeWidth"
-						:height="youtubeHeight"
-					/>
+				</div>
+				<div class="frame-wrapper__video mx-auto" v-if="item.type === 2">
+					<iframe :src="`https://www.youtube.com/embed/${item.name}`" frameborder="0" allowfullscreen></iframe>
 				</div>
 			</v-col>
 		</v-row>
@@ -63,34 +59,6 @@ export default {
 				return 12;
 			}
 		},
-		youtubeHeight() {
-			switch (this.$vuetify.breakpoint.name) {
-				case "xs":
-					return "180px";
-				case "sm":
-					return "360px";
-				case "md":
-					return "360px";
-				case "lg":
-					return "360px";
-				case "xl":
-					return "360px";
-			}
-		},
-		youtubeWidth() {
-			switch (this.$vuetify.breakpoint.name) {
-				case "xs":
-					return "90%";
-				case "sm":
-					return "640px";
-				case "md":
-					return "640px";
-				case "lg":
-					return "640px";
-				case "xl":
-					return "640px";
-			}
-		},
 	},
 };
 </script>
@@ -98,5 +66,20 @@ export default {
 <style>
 .product-image {
 	object-fit: cover;
+}
+.frame-wrapper__video {
+  position: relative;
+  width: 90%;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+}
+
+.frame-wrapper__video iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>

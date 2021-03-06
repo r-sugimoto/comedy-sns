@@ -1,7 +1,7 @@
 <template>
-	<v-card class="p-2 mb-5" :class="{ 'mb-5': !isLogin }" tile elevation="0">
-		<v-card-title class="c-cyan">
-			<p class="font-weight-bold mb-0">サイト内検索</p>
+	<v-card class="p-2" :class="{ 'mb-5': !isLogin }" tile elevation="0">
+		<v-card-title>
+			<p class="font-weight-bold mb-0 cyan--text">サイト内検索</p>
 		</v-card-title>
 		<validation-observer ref="observer">
 			<v-form>
@@ -21,7 +21,6 @@
 						>
 							<p class="input-label">フリーワード</p>
 							<v-text-field
-								class="xs-f-size"
 								:error-messages="errors"
 								background-color="#f4f8fa"
 								type="text"
@@ -37,7 +36,6 @@
 							<v-col class="pb-0 pt-0" cols="10">
 								<p class="input-label">タグ</p>
 								<v-autocomplete
-									class="xs-f-size"
 									v-model="name"
 									background-color="#f4f8fa"
 									:items="items"

@@ -1,131 +1,210 @@
 <template>
-	<div>
-		<v-card class="mx-auto p-3 m-0 mt-n3" max-width="800" elevation="0" tile>
-			<v-card-title class="justify-center mt-2 mb-5">
-				<h2 class="cyan--text font-weight-bold mb-0">プロフィール設定</h2>
-			</v-card-title>
-			<validation-observer ref="observer">
-				<v-form>
-					<validation-provider
-						v-slot="{ errors }"
-						rules="size:2000|mimes:jpeg,png,jpg,gif"
-						name="プロフィール画像"
-					>
-						<p class="input-label">プロフィール画像</p>
-						<v-file-input
-							:error-messages="errors"
-							background-color="#f4f8fa"
-							placeholder="拡張子：jpeg,png,jpg,gif"
-							@change="pictureHandleFile()"
-							prepend-icon=""
-							v-model="pictureValue"
-							:rules="pictureRules"
-							outlined
+	<v-row>
+		<v-col
+			cols="12"
+			md="4"
+			lg="4"
+			xl="4"
+			class="pb-0"
+			:class="{ 'pr-0': !$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm }"
+		>
+			<v-list
+				nav
+				dense
+				v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm"
+			>
+				<v-list-item-group v-model="item">
+					<v-list-item>
+						<v-list-item-icon>
+							<v-icon>mdi-account-cog-outline</v-icon>
+						</v-list-item-icon>
+						<v-list-item-title>プロフィール設定</v-list-item-title>
+					</v-list-item>
+					<v-list-item>
+						<v-list-item-icon>
+							<v-icon>mdi-account-off-outline</v-icon>
+						</v-list-item-icon>
+						<v-list-item-title>退会</v-list-item-title>
+					</v-list-item>
+				</v-list-item-group>
+			</v-list>
+			<v-tabs
+				background-color="cyan"
+				dark
+				:show-arrows="$vuetify.breakpoint.xsOnly"
+				v-else
+			>
+				<v-tab class="text-decoration-none" @click="item = 0"
+					>プロフィール設定</v-tab
+				>
+				<v-tab class="text-decoration-none" @click="item = 1">退会</v-tab>
+			</v-tabs>
+		</v-col>
+		<v-col cols="12" md="8" lg="8" xl="8">
+			<v-card class="p-3" elevation="0" tile v-if="item === 0">
+				<v-card-title class="justify-center mt-2 mb-5">
+					<h2 class="cyan--text font-weight-bold mb-0">プロフィール設定</h2>
+				</v-card-title>
+				<validation-observer ref="observer">
+					<v-form>
+						<validation-provider
+							v-slot="{ errors }"
+							rules="size:2000|mimes:jpeg,png,jpg,gif"
+							name="プロフィール画像"
 						>
-						</v-file-input>
-					</validation-provider>
-					<div class="text-center">
-						<v-avatar size="200" color="gray">
-							<v-img :src="preview"></v-img>
-						</v-avatar>
-					</div>
-					<validation-provider
-						v-slot="{ errors }"
-						name="ユーザー名"
-						rules="required|max:20"
-					>
-						<p class="input-label">ユーザ名</p>
-						<v-text-field
-							:error-messages="errors"
-							background-color="#f4f8fa"
-							type="text"
-							name="name"
-							v-model="userSettingForm.name"
-							required
-							outlined
+							<p class="input-label">プロフィール画像</p>
+							<v-file-input
+								:error-messages="errors"
+								background-color="#f4f8fa"
+								placeholder="拡張子：jpeg,png,jpg,gif"
+								@change="handlePictureFile()"
+								prepend-icon=""
+								v-model="pictureValue"
+								:rules="pictureRules"
+								outlined
+							>
+							</v-file-input>
+						</validation-provider>
+						<div class="text-center">
+							<v-avatar size="200" color="gray">
+								<v-img :src="preview"></v-img>
+							</v-avatar>
+						</div>
+						<validation-provider
+							v-slot="{ errors }"
+							name="ユーザー名"
+							rules="required|max:20"
+						>
+							<p class="input-label">ユーザ名</p>
+							<v-text-field
+								:error-messages="errors"
+								background-color="#f4f8fa"
+								type="text"
+								name="name"
+								v-model="userSettingForm.name"
+								required
+								outlined
+							/>
+						</validation-provider>
+						<validation-provider
+							v-slot="{ errors }"
+							name="自己紹介文"
+							rules="max:280"
+						>
+							<p class="input-label">自己紹介文</p>
+							<v-textarea
+								:error-messages="errors"
+								background-color="#f4f8fa"
+								type="text"
+								name="message"
+								v-model="userSettingForm.introduction"
+								required
+								outlined
+							></v-textarea>
+						</validation-provider>
+						<p class="input-label">タグ</p>
+						<vue-tags-input
+							placeholder="タグを5個まで入力できます"
+							v-model="tag"
+							:tags="userSettingForm.tags"
+							@tags-changed="(newTags) => (userSettingForm.tags = newTags)"
+							@before-adding-tag="checkTag"
 						/>
-					</validation-provider>
-					<validation-provider
-						v-slot="{ errors }"
-						name="自己紹介文"
-						rules="max:280"
-					>
-						<p class="input-label">自己紹介文</p>
-						<v-textarea
-							:error-messages="errors"
-							background-color="#f4f8fa"
-							type="text"
-							name="message"
-							v-model="userSettingForm.introduction"
-							required
-							outlined
-						></v-textarea>
-					</validation-provider>
-					<p class="input-label">タグ</p>
-					<vue-tags-input
-						placeholder="タグを5個まで入力できます"
-						v-model="tag"
-						:tags="userSettingForm.tags"
-						@tags-changed="(newTags) => (userSettingForm.tags = newTags)"
-						@before-adding-tag="checkTag"
-					/>
-					<div class="v-messages__message error--text tag-error-text">
-						{{ tagError }}
-					</div>
-					<validation-provider v-slot="{ errors }" name="年齢" rules="max:3">
-						<p class="input-label">年齢</p>
+						<div class="v-messages__message error--text tag-error-text">
+							{{ tagError }}
+						</div>
+						<validation-provider v-slot="{ errors }" name="年齢" rules="max:3">
+							<p class="input-label">年齢</p>
+							<v-select
+								:error-messages="errors"
+								background-color="#f4f8fa"
+								type="text"
+								name="age"
+								v-model="userSettingForm.age"
+								:items="ages"
+								clearable
+								required
+								outlined
+							>
+							</v-select>
+						</validation-provider>
+						<v-checkbox
+							v-model="userSettingForm.publishedAge"
+							label="年齢を非公開にする"
+							name="remember"
+							class="m-0"
+						></v-checkbox>
+						<p class="input-label">都道府県</p>
 						<v-select
-							:error-messages="errors"
+							v-model="userSettingForm.prefectureId"
+							:items="prefectures"
+							item-text="name"
+							item-value="id"
 							background-color="#f4f8fa"
-							type="text"
-							name="age"
-							v-model="userSettingForm.age"
-							:items="ages"
-							clearable
-							required
 							outlined
+							clearable
 						>
 						</v-select>
-					</validation-provider>
-					<v-checkbox
-						v-model="userSettingForm.publishedAge"
-						label="年齢を非公開にする"
-						name="remember"
-						class="m-0"
-					></v-checkbox>
-					<p class="input-label">都道府県</p>
-					<v-select
-						v-model="userSettingForm.prefectureId"
-						:items="prefectures"
-						item-text="name"
-						item-value="id"
-						background-color="#f4f8fa"
-						outlined
-						clearable
-					>
-					</v-select>
-					<v-checkbox
-						v-model="userSettingForm.publishedPrefecture"
-						label="都道府県を非公開にする"
-						name="remember"
-						class="m-0"
-					></v-checkbox>
-					<div class="text-right">
-						<v-btn
-							@click="postUserSetting"
-							class="mt-2"
-							color="cyan"
-							elevation="0"
-							large
-							rounded
+						<v-checkbox
+							v-model="userSettingForm.publishedPrefecture"
+							label="都道府県を非公開にする"
+							name="remember"
+							class="m-0"
+						></v-checkbox>
+						<div class="text-right">
+							<v-btn
+								@click="postUserSetting"
+								class="mt-2"
+								color="cyan"
+								elevation="0"
+								large
+								rounded
+							>
+								<span class="white--text">設定</span>
+							</v-btn>
+						</div>
+					</v-form>
+				</validation-observer>
+			</v-card>
+			<v-card class="p-3" elevation="0" tile v-if="item === 1">
+				<v-card-title class="justify-center mt-2 mb-5">
+					<h2 class="cyan--text font-weight-bold mb-0">退会</h2>
+				</v-card-title>
+				<validation-observer ref="unsubscribeObserver">
+					<v-form>
+						<validation-provider
+							v-slot="{ errors }"
+							name="退会理由"
+							rules="max:280"
 						>
-							<span class="tc-w">設定</span>
-						</v-btn>
-					</div>
-				</v-form>
-			</validation-observer>
-		</v-card>
-	</div>
+							<p class="input-label">退会理由（任意）</p>
+							<v-textarea
+								:error-messages="errors"
+								background-color="#f4f8fa"
+								type="text"
+								name="cause"
+								v-model="unsubscribeForm.cause"
+								required
+								outlined
+							></v-textarea>
+						</validation-provider>
+						<div class="text-right">
+							<v-btn
+								@click="postUnsubscribe"
+								color="red"
+								elevation="0"
+								large
+								rounded
+								outlined
+							>
+								<span>退会する</span>
+							</v-btn>
+						</div>
+					</v-form>
+				</validation-observer>
+			</v-card>
+		</v-col>
+	</v-row>
 </template>
 
 <script>
@@ -134,6 +213,7 @@ const ageRange = [...Array(70)].map((v, i) => i + 16);
 export default {
 	data() {
 		return {
+			item: 0,
 			pictureRules: [],
 			ages: ageRange,
 			prefectures: [],
@@ -150,6 +230,9 @@ export default {
 				publishedAge: 0,
 				prefectureId: "",
 				publishedPrefecture: 0,
+			},
+			unsubscribeForm: {
+				cause: "",
 			},
 		};
 	},
@@ -190,11 +273,21 @@ export default {
 				}
 			}
 		},
+		//退会
+		async postUnsubscribe() {
+			const isValid = await this.$refs.unsubscribeObserver.validate();
+			if (isValid) {
+				if (confirm("本当に退会しますか？")) {
+					const response = await axios.post("/api/user/unsubscribe", {
+						cause: this.unsubscribeForm.cause,
+					});
+				}
+			}
+		},
 		// ユーザー情報取得
 		async getUserSetting() {
 			const response = await axios.get("/api/user/setting");
 			if (response.status === OK) {
-				console.log(response);
 				this.preview = response.data.thumbnail_url;
 				this.userSettingForm.name = response.data.name;
 				this.userSettingForm.prefectureId = response.data.prefecture_id;
@@ -210,7 +303,6 @@ export default {
 				} else {
 					this.userSettingForm.publishedPrefecture = true;
 				}
-
 				for (var i = 0; i < response.data.tags.length; i++) {
 					this.$set(this.userSettingForm.tags, i, {
 						text: response.data.tags[i].name,
@@ -223,13 +315,14 @@ export default {
 		async getPrefectures() {
 			const response = await axios.get("/api/prefecture");
 			if (response.status === OK) {
+				console.log(response);
 				this.prefectures = response.data;
 			} else {
 				this.$store.commit("error/setCode", response.status);
 			}
 		},
 		// 画像ファイル格納
-		pictureHandleFile() {
+		handlePictureFile() {
 			this.pictureRules.pic0 = [];
 			if (
 				event.target.files !== void 0 &&
