@@ -6,7 +6,7 @@
 		<validation-observer ref="observer">
 			<v-form>
 				<v-row>
-					<v-col cols="12" sm="6" md="6" lg="6" xl="6" class="pb-0 pt-0 xs-p-0"
+					<v-col cols="12" sm="6" md="12" lg="12" xl="12" class="pb-0 pt-0"
 						><p class="input-label">エリア</p>
 						<v-select
 							v-model="regionId"
@@ -20,7 +20,7 @@
 						>
 						</v-select
 					></v-col>
-					<v-col cols="12" sm="6" md="6" lg="6" xl="6" class="pb-0 pt-0 xs-p-0">
+					<v-col cols="12" sm="6" md="12" lg="12" xl="12" class="pb-0 pt-0">
 						<p class="input-label">都道府県</p>
 						<v-select
 							v-model="prefectureId"
@@ -34,14 +34,7 @@
 						>
 						</v-select
 					></v-col>
-					<v-col
-						class="pb-0 pt-0 xs-p-0"
-						cols="12"
-						sm="6"
-						md="6"
-						lg="12"
-						xl="12"
-					>
+					<v-col class="pb-0 pt-0" cols="12" sm="6" md="12" lg="12" xl="12">
 						<p class="input-label">年代</p>
 						<v-select
 							v-model="generationId"
@@ -57,14 +50,7 @@
 					</v-col>
 				</v-row>
 				<v-row align="center">
-					<v-col
-						class="pb-0 pt-0 xs-p-0"
-						cols="12"
-						sm="6"
-						md="6"
-						lg="12"
-						xl="12"
-					>
+					<v-col class="pb-0 pt-0" cols="12" sm="6" md="12" lg="12" xl="12">
 						<validation-provider
 							v-slot="{ errors }"
 							name="フリーワード"
@@ -72,43 +58,35 @@
 						>
 							<p class="input-label">フリーワード</p>
 							<v-text-field
-								class="xs-f-size"
 								:error-messages="errors"
 								background-color="#f4f8fa"
 								type="text"
 								placeholder="フリーワードを入力してください"
 								v-model="freeword"
+								clearable
 								outlined
 							>
 							</v-text-field>
 						</validation-provider>
 					</v-col>
-					<v-col class="pb-0 pt-0" cols="12" sm="6" md="6" lg="12" xl="12">
-						<v-row align="center">
-							<v-col class="pb-0 pt-0" cols="10">
-								<p class="input-label">タグ</p>
-								<v-autocomplete
-									class="xs-f-size"
-									v-model="name"
-									background-color="#f4f8fa"
-									:items="items"
-									:search-input.sync="search"
-									placeholder="タグ名を入力してください"
-									:cache-items="false"
-									:hide-no-data="true"
-									outlined
-									clearable
-									@click:clear="tagClear"
-								></v-autocomplete>
-							</v-col>
-							<v-col class="p-0 pb-1" cols="2">
-								<v-btn @click="searchPost" fab dark small color="cyan">
-									<v-icon dark>mdi-magnify</v-icon>
-								</v-btn>
-							</v-col>
-						</v-row>
+					<v-col class="pb-0 pt-0" cols="12" sm="6" md="12" lg="12" xl="12">
+						<p class="input-label">タグ</p>
+						<v-autocomplete
+							v-model="name"
+							background-color="#f4f8fa"
+							:items="items"
+							:search-input.sync="search"
+							placeholder="タグ名を入力してください"
+							:cache-items="false"
+							:hide-no-data="true"
+							append-icon=""
+							outlined
+							clearable
+							@click:clear="clearTag"
+							append-outer-icon="mdi-magnify"
+							@click:append-outer="searchPost"
+						></v-autocomplete>
 					</v-col>
-					<v-col class="pb-0 pt-0" style="text-right"> </v-col>
 				</v-row>
 			</v-form>
 		</validation-observer>
@@ -137,6 +115,9 @@ export default {
 	},
 	methods: {
 		async searchPost() {
+			if (this.freeword === null) {
+				this.freeword = "";
+			}
 			if (this.regionId === null) {
 				this.regionId = "";
 			}
@@ -150,7 +131,7 @@ export default {
 			if (isValid) {
 				// 選択されていない場合、リセットする
 				if (this.items.length === 0) {
-					this.tagClear;
+					this.clearTag;
 				}
 				this.$router
 					.push({
@@ -166,8 +147,8 @@ export default {
 					.catch((err) => {});
 			}
 		},
+		// タグ検索
 		async searchTag(flg) {
-			// タグ検索
 			const response = await axios.post("/api/tag/search", {
 				id: this.id,
 				name: this.value,
@@ -196,6 +177,7 @@ export default {
 				this.$store.commit("error/setCode", response.status);
 			}
 		},
+		// 都道府県取得
 		async getPrefectures() {
 			const response = await axios.get("/api/prefecture");
 			if (response.status === OK) {
@@ -204,6 +186,7 @@ export default {
 				this.$store.commit("error/setCode", response.status);
 			}
 		},
+		// 地域取得
 		async getRegions() {
 			const response = await axios.get("/api/region");
 			if (response.status === OK) {
@@ -212,6 +195,7 @@ export default {
 				this.$store.commit("error/setCode", response.status);
 			}
 		},
+		// 世代一覧取得
 		async getGenerations() {
 			const response = await axios.get("/api/generation");
 			if (response.status === OK) {
@@ -220,7 +204,8 @@ export default {
 				this.$store.commit("error/setCode", response.status);
 			}
 		},
-		async routeCheck(route) {
+		// getパラメーター取得
+		async checkRoute(route) {
 			if (route.query.freeword !== undefined) {
 				this.freeword = route.query.freeword;
 			} else {
@@ -255,7 +240,7 @@ export default {
 			this.value = "";
 			await this.searchTag(1);
 		},
-		tagClear() {
+		clearTag() {
 			this.items.splice(0, this.items.length);
 			this.name = "";
 			this.id = "";
@@ -279,7 +264,7 @@ export default {
 		},
 		// パスが変更された時
 		async $route(to, from) {
-			await this.routeCheck(to);
+			await this.checkRoute(to);
 		},
 	},
 	// 初期表示
@@ -287,7 +272,7 @@ export default {
 		await this.getRegions();
 		await this.getPrefectures();
 		await this.getGenerations();
-		await this.routeCheck(this.$route);
+		await this.checkRoute(this.$route);
 	},
 };
 </script>
@@ -296,5 +281,10 @@ export default {
 .v-card__title {
 	padding: 0;
 	padding-bottom: 10px;
+}
+
+.v-application--is-ltr .v-input__append-outer {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 </style>

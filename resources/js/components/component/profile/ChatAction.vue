@@ -9,11 +9,15 @@ import { OK, CREATED } from "../../../util";
 export default {
 	props: {
 		id: {
-			type: String,
+			type: [String, Number],
 		},
 	},
 	methods: {
 		async createChat() {
+			if (!this.isLogin) {
+				alert("チャットするにはログインしてください。");
+				return false;
+			}
 			const response = await axios.get(`/api/chat/new/${this.id}`);
 			if (response.status === OK) {
 				this.$router.push({

@@ -64,6 +64,13 @@
 	text-align: right;
 }
 
+.border-t-cyan {
+	border-top: solid 6px #6cb2eb;
+}
+.border-t-green {
+	border-top: solid 6px #38c172;
+}
+
 // チャット関連style
 .msg_left,
 .msg_right {
@@ -136,10 +143,14 @@
 	padding: 32px 56px 56px;
 	margin-top: 60px;
 }
-@media screen and (max-width: 599px) {
-	.xs-f-size {
-		font-size: 16px !important;
+
+// placeholder対策
+@media screen and (max-width: 640px) {
+	.v-text-field input {
+		font-size: 14px !important;
 	}
+}
+@media screen and (max-width: 599px) {
 	.input-label span {
 		display: inline-block;
 	}

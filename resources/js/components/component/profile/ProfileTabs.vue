@@ -6,13 +6,23 @@
 			dark
 			:show-arrows="$vuetify.breakpoint.xsOnly"
 		>
-			<v-tab class="text-decoration-none" @click="profileTabs(0)" href="#tab-1">
+			<v-tab
+				class="text-decoration-none"
+				@click="changeProfileTabs(0)"
+				href="#tab-1"
+			>
 				投稿
 			</v-tab>
-			<v-tab class="text-decoration-none" @click="profileTabs(1)" href="#tab-2"
+			<v-tab
+				class="text-decoration-none"
+				@click="changeProfileTabs(1)"
+				href="#tab-2"
 				>コメントした投稿</v-tab
 			>
-			<v-tab class="text-decoration-none" @click="profileTabs(2)" href="#tab-3"
+			<v-tab
+				class="text-decoration-none"
+				@click="changeProfileTabs(2)"
+				href="#tab-3"
 				>いいね</v-tab
 			>
 		</v-tabs>
@@ -78,7 +88,7 @@ export default {
 		},
 	},
 	methods: {
-		profileTabs(val) {
+		changeProfileTabs(val) {
 			this.selectValue = val;
 			this.page = 1;
 			this.posts.splice(0, this.posts.length);
@@ -128,7 +138,7 @@ export default {
 	watch: {
 		$route(to, from) {
 			this.tabs = "tab-1";
-			this.profileTabs(0);
+			this.changeProfileTabs(0);
 		},
 	},
 };
