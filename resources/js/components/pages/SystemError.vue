@@ -1,12 +1,12 @@
 <template>
-	<div>
-		<div class="pl-0">
+	<v-row>
+		<v-col cols="12" class="pb-0">
 			<RouteBack></RouteBack>
-		</div>
-		<div>
+		</v-col>
+		<v-col cols="12">
 			<v-alert dense type="error"> システムエラーが発生しました。 </v-alert>
-		</div>
-	</div>
+		</v-col>
+	</v-row>
 </template>
 <script>
 import RouteBack from "../component/RouteBack.vue";

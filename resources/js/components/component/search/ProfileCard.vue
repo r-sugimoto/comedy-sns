@@ -24,8 +24,8 @@
 		<v-card-text class="font-weight-bold pl-3 pr-3 pb-0 pt-0">
 			{{ user.introduction }}
 			<Tag
-				v-for="tag in user.tags"
-				:key="`profile-tags-${tag.id}`"
+				v-for="(tag, i) in user.tags"
+				:key="`profile-tags-${i}`"
 				:tag-item="tag"
 				:push-name="'profile'"
 			></Tag>

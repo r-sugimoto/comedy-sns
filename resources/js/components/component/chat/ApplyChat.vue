@@ -3,20 +3,22 @@
 		<span v-if="msg.partner.application_flg === null">
 			<p>【相方申請が届いています】<br />{{ msg.message }}</p>
 			<v-btn
+				class="mt-1"
+				elevation="0"
 				@click="submitApplication(1)"
-				color="info"
-				class="mb-1 mt-1"
+				color="success"
 				dark
 				rounded
-				><v-icon>mdi-check</v-icon><span>コンビ結成する</span></v-btn
+				><v-icon>mdi-check</v-icon><span>コンビ結成</span></v-btn
 			>
 			<v-btn
+				class="mt-1"
+				elevation="0"
 				@click="submitApplication(0)"
 				color="error"
-				class="mb-1 mt-1"
 				dark
 				rounded
-				><v-icon>mdi-close</v-icon><span>申請拒否する</span></v-btn
+				><v-icon>mdi-close</v-icon><span>申請拒否</span></v-btn
 			>
 		</span>
 		<span v-if="msg.partner.application_flg === 0">
@@ -42,7 +44,6 @@ export default {
 	},
 	methods: {
 		async submitApplication(val) {
-			console.log(this.msg);
 			if (val === 0) {
 				const response = await axios.post("/api/partner/application", {
 					room_id: this.msg.room_id,

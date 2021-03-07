@@ -11059,7 +11059,7 @@ a.text-dark:focus {
 }
 
 .msg {
-  max-width: 95%;
+  max-width: 80%;
   position: relative;
   padding: 10px;
   border-radius: 12px;
