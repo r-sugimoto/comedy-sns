@@ -10,7 +10,13 @@
 		>
 			<ProfileCard :id="id"></ProfileCard>
 		</v-col>
-		<v-col cols="12" md="8" lg="8" xl="8">
+		<v-col
+			cols="12"
+			md="8"
+			lg="8"
+			xl="8"
+			:class="{ 'pt-0': $vuetify.breakpoint.xs || $vuetify.breakpoint.sm }"
+		>
 			<ProfileTabs :user-id="id"></ProfileTabs>
 		</v-col>
 	</v-row>

@@ -115,7 +115,7 @@ class PartnerController extends Controller
 
         // 通知作成
         $request->partner_id = $partner->id;
-        $request->to_user_id = $id;
+        $request->to_user_id = $partner->user_id;
         $notice = new Notice();
         $notice->createPartnerNotice($request);
         

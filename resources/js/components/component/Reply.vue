@@ -89,15 +89,11 @@ export default {
 						seconds: 3000,
 					});
 					self.reset();
-					self.successReply();
+					self.$emit("emitShowPostDetail");
 				} else {
 					this.$store.commit("error/setCode", response.status);
 				}
 			}
-		},
-		// 親のshowPostDetailメソッド発火
-		successReply() {
-			this.$emit("addShowPostDetail");
 		},
 		// data初期化メソッド
 		reset() {

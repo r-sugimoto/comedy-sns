@@ -40,7 +40,13 @@
 				<v-tab class="text-decoration-none" @click="item = 1">退会</v-tab>
 			</v-tabs>
 		</v-col>
-		<v-col cols="12" md="8" lg="8" xl="8">
+		<v-col
+			cols="12"
+			md="8"
+			lg="8"
+			xl="8"
+			:class="{ 'pt-0': $vuetify.breakpoint.xs || $vuetify.breakpoint.sm }"
+		>
 			<v-card class="p-3" elevation="0" tile v-if="item === 0">
 				<v-card-title class="justify-center mt-2 mb-5">
 					<h2 class="cyan--text font-weight-bold mb-0">プロフィール設定</h2>
@@ -66,9 +72,11 @@
 							</v-file-input>
 						</validation-provider>
 						<div class="text-center">
-							<v-avatar size="200" color="gray">
-								<v-img :src="preview"></v-img>
-							</v-avatar>
+							<Avatar
+								:size="200"
+								:url="preview"
+								:thumbnail="thumbnail"
+							></Avatar>
 						</div>
 						<validation-provider
 							v-slot="{ errors }"
@@ -208,6 +216,7 @@
 </template>
 
 <script>
+import Avatar from "../elements/Avatar.vue";
 import { OK, CREATED } from "../../util";
 const ageRange = [...Array(70)].map((v, i) => i + 16);
 export default {
@@ -219,6 +228,7 @@ export default {
 			prefectures: [],
 			pictureValue: null,
 			preview: null,
+			thumbnail: null,
 			tag: "",
 			tagError: null,
 			userSettingForm: {
@@ -235,6 +245,9 @@ export default {
 				cause: "",
 			},
 		};
+	},
+	components: {
+		Avatar,
 	},
 	methods: {
 		// ユーザー情報設定
@@ -289,6 +302,7 @@ export default {
 			const response = await axios.get("/api/user/setting");
 			if (response.status === OK) {
 				this.preview = response.data.thumbnail_url;
+				this.thumbnail = response.data.thumbnail;
 				this.userSettingForm.name = response.data.name;
 				this.userSettingForm.prefectureId = response.data.prefecture_id;
 				this.userSettingForm.introduction = response.data.introduction;
@@ -315,7 +329,6 @@ export default {
 		async getPrefectures() {
 			const response = await axios.get("/api/prefecture");
 			if (response.status === OK) {
-				console.log(response);
 				this.prefectures = response.data;
 			} else {
 				this.$store.commit("error/setCode", response.status);

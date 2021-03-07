@@ -27,13 +27,15 @@
 					:to="`/profile/${post.user.id}`"
 					class="black--text text-decoration-none"
 				>
-					<Avater
+					<Avatar
 						:size="30"
 						:thumbnail="post.user.thumbnail"
 						:url="post.user.thumbnail_url"
 						class="mr-1"
-					></Avater>
-					{{ post.user.name }}
+					></Avatar>
+					<span class="va-m">
+						{{ post.user.name }}
+					</span>
 				</router-link>
 			</v-card-actions>
 			<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
@@ -81,13 +83,15 @@
 					:to="`/profile/${post.user.id}`"
 					class="black--text text-decoration-none"
 				>
-					<Avater
+					<Avatar
 						:size="30"
 						:thumbnail="post.user.thumbnail"
 						:url="post.user.thumbnail_url"
 						class="mr-1"
-					></Avater>
-					{{ post.user.name }}
+					></Avatar>
+					<span class="va-m">
+						{{ post.user.name }}
+					</span>
 				</router-link>
 			</v-card-actions>
 			<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
@@ -97,6 +101,7 @@
 				<Apply
 					:user-id="post.user.id"
 					:user-id-check="post.user.id === isLoginUserId"
+					class="mr-1"
 				></Apply>
 				<Comment
 					class="ml-1"
@@ -121,7 +126,7 @@ import Product from "../component/Product.vue";
 import Tag from "../component/Tag.vue";
 import Apply from "../component/recruit/Apply.vue";
 import RecruitContents from "../component/recruit/RecruitContents.vue";
-import Avater from "../elements/Avater.vue";
+import Avatar from "../elements/Avatar.vue";
 export default {
 	data() {
 		return {};
@@ -132,7 +137,7 @@ export default {
 		Product,
 		Comment,
 		Apply,
-		Avater,
+		Avatar,
 		RecruitContents,
 	},
 	props: {

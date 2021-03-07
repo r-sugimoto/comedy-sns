@@ -11009,6 +11009,10 @@ a.text-dark:focus {
   border-bottom: 1px solid #e5e5e5;
 }
 
+.va-m {
+  vertical-align: middle;
+}
+
 .tc-w {
   color: #fff;
 }
@@ -11088,11 +11092,6 @@ a.text-dark:focus {
 .msg_right .msg:after {
   right: -26px;
   border-left: 22px solid #8ee7b6;
-}
-
-.profile-tabs {
-  max-width: 800px;
-  margin: auto;
 }
 
 /* fab */
