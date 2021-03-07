@@ -48,6 +48,10 @@
 
 // 独自クラス
 // 共通
+.va-m {
+	vertical-align: middle;
+}
+
 .tc-w {
 	color: #fff;
 }
@@ -115,12 +119,6 @@
 .msg_right .msg:after {
 	right: -26px;
 	border-left: 22px solid #8ee7b6;
-}
-
-// profile
-.profile-tabs {
-	max-width: 800px;
-	margin: auto;
 }
 
 /* fab */

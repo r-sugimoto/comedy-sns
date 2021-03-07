@@ -1,5 +1,5 @@
 <template>
-	<div class="profile-tabs">
+	<div>
 		<v-tabs
 			background-color="cyan"
 			v-model="tabs"

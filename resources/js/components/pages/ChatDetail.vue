@@ -2,14 +2,17 @@
 	<v-dialog fullscreen v-model="dialog">
 		<v-card class="mx-auto" elevation="0" tile>
 			<v-card-title class="pb-0 pl-2 pr-2 cyan--text">
-				<v-btn text color="cyan" @click="routeBack" class="pl-1 mr-2">
+				<v-btn text color="cyan" @click="routeBack" class="pl-3 mr-2">
 					<v-icon>mdi-chevron-left</v-icon>
 					<span>戻る</span>
 				</v-btn>
-				<v-avatar size="40" color="gray">
-					<v-img :src="user.thumbnail_url"></v-img>
-				</v-avatar>
-				<span class="ml-3">
+				<Avatar
+					:size="50"
+					:thumbnail="user.thumbnail"
+					:url="user.thumbnail_url"
+					class="mr-3"
+				></Avatar>
+				<span class="va-m">
 					{{ user.name }}
 				</span>
 			</v-card-title>
@@ -19,16 +22,18 @@
 					<v-col cols="12" class="p-0">
 						<v-container
 							ref="scrollTarget"
-							style="height: calc(100vh - 210px)"
+							style="height: calc(100vh - 220px)"
 							class="overflow-y-auto"
 						>
 							<v-row v-for="(msg, i) in messages" :key="i" dense>
 								<v-col v-if="msg.user.id !== isLoginUserId">
 									<div class="msg_left" v-if="msg.partner_id === null">
 										<div class="icon">
-											<v-avatar size="50" color="gray">
-												<v-img :src="msg.user.thumbnail_url"></v-img>
-											</v-avatar>
+											<Avatar
+												:size="40"
+												:thumbnail="msg.user.thumbnail"
+												:url="msg.user.thumbnail_url"
+											></Avatar>
 										</div>
 										<p class="msg">
 											{{ msg.message }}
@@ -42,9 +47,11 @@
 										"
 									>
 										<div class="icon">
-											<v-avatar size="50" color="gray">
-												<v-img :src="msg.user.thumbnail_url"></v-img>
-											</v-avatar>
+											<Avatar
+												:size="40"
+												:thumbnail="msg.user.thumbnail"
+												:url="msg.user.thumbnail_url"
+											></Avatar>
 										</div>
 										<ApplyChat
 											@emitShowMessages="showMessages"
@@ -103,6 +110,7 @@
 <script>
 import { OK, CREATED } from "../../util";
 import ApplyChat from "../component/chat/ApplyChat.vue";
+import Avatar from "../elements/Avatar.vue";
 export default {
 	data() {
 		return {
@@ -114,6 +122,7 @@ export default {
 	},
 	components: {
 		ApplyChat,
+		Avatar,
 	},
 	props: {
 		id: {

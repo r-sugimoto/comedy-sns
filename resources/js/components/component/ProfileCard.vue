@@ -3,24 +3,26 @@
 		<v-card-actions class="text-center">
 			<v-row align="center" justify="center">
 				<v-col>
-					<v-avatar size="125" color="gray">
-						<v-img :src="profiles.thumbnail_url"></v-img>
-					</v-avatar>
+					<Avatar
+						:size="125"
+						:thumbnail="profiles.thumbnail"
+						:url="profiles.thumbnail_url"
+					></Avatar>
 				</v-col>
 			</v-row>
 		</v-card-actions>
-		<v-card-actions v-if="id !== isLoginUserId">
+		<v-card-actions v-if="id !== String(isLoginUserId)">
 			<v-row align="center" justify="center">
 				<ChatAction :id="id" class="ml-5"></ChatAction>
 				<Follow :user-id="id" class="ml-5"></Follow>
 			</v-row>
 		</v-card-actions>
-		<v-card-title class="font-weight-bold p-0 pl-2">
+		<v-card-title class="font-weight-bold p-0 pl-3 pr-3">
 			<router-link class="black--text" :to="`/profile/${this.id}`">{{
 				profiles.name
 			}}</router-link>
 		</v-card-title>
-		<v-card-actions class="pl-2">
+		<v-card-actions class="pt-2 pl-3 pr-3 pb-0">
 			<router-link
 				class="black--text mr-3"
 				:to="`/profile/${this.id}/following`"
@@ -30,22 +32,22 @@
 				>{{ profiles.follower_count }} フォロワー</router-link
 			>
 		</v-card-actions>
-		<v-card-actions class="pl-2">
+		<v-card-actions class="pt-2 pl-3 pr-3 pb-2">
 			<span class="mr-3">年齢：{{ profiles.age }}</span>
 			<span> 都道府県： {{ prefectureName }}</span>
 		</v-card-actions>
-		<v-card-title class="font-weight-bold p-0 pl-2"> 自己紹介 </v-card-title>
-		<v-card-text class="font-weight-bold pl-2 pr-2 pb-0 pt-0">
+		<v-card-title class="font-weight-bold p-0 pl-3 pr-3">
+			自己紹介
+		</v-card-title>
+		<v-card-text class="font-weight-bold pl-3 pr-3 pb-0 pt-0">
 			{{ profiles.introduction }}
-		</v-card-text>
-		<div class="pl-2 pr-2">
 			<Tag
 				v-for="tag in profiles.tags"
 				:key="`profile-tags-${tag.id}`"
 				:tag-item="tag"
 				:push-name="'profile'"
 			></Tag>
-		</div>
+		</v-card-text>
 	</v-card>
 </template>
 
@@ -55,6 +57,7 @@ import Tag from "../component/Tag.vue";
 import Follow from "../component/profile/Follow.vue";
 import ProfileTabs from "../component/profile/ProfileTabs.vue";
 import ChatAction from "../component/profile/ChatAction.vue";
+import Avatar from "../elements/Avatar.vue";
 export default {
 	data() {
 		return {
@@ -67,6 +70,7 @@ export default {
 		ProfileTabs,
 		Follow,
 		ChatAction,
+		Avatar,
 	},
 	props: {
 		id: {

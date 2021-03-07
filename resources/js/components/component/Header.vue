@@ -106,9 +106,11 @@
 				<v-menu offset-y>
 					<template v-slot:activator="{ on, attrs }">
 						<v-btn v-bind="attrs" icon v-on="on">
-							<v-avatar color="gray">
-								<v-icon dark> mdi-account-circle </v-icon>
-							</v-avatar>
+							<Avatar
+								:size="35"
+								:thumbnail="isUserInfo.thumbnail"
+								:url="isUserInfo.thumbnail_url"
+							></Avatar>
 						</v-btn>
 					</template>
 					<v-list class="p-0">
@@ -149,6 +151,7 @@
 </template>
 <script>
 import Notification from "../component/Notification.vue";
+import Avatar from "../elements/Avatar.vue";
 export default {
 	data() {
 		return {
@@ -159,6 +162,7 @@ export default {
 	},
 	components: {
 		Notification,
+		Avatar,
 	},
 	methods: {
 		async logout() {
@@ -184,6 +188,9 @@ export default {
 		},
 		isLoginUserId() {
 			return this.$store.getters["auth/userId"];
+		},
+		isUserInfo() {
+			return this.$store.getters["auth/userInfo"];
 		},
 		username() {
 			return this.$store.getters["auth/username"];

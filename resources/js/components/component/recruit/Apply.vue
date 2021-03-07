@@ -1,7 +1,7 @@
 <template>
 	<div v-if="!userIdCheck">
 		<template>
-			<v-btn color="cyan" @click="clickDialog" elevation="0" class="mr-1" dark>
+			<v-btn color="cyan" @click="clickDialog" elevation="0" dark>
 				<v-icon>mdi-hand-right</v-icon>
 				<span>相方申請する</span>
 			</v-btn>
