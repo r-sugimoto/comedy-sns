@@ -1244,6 +1244,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1262,21 +1264,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(_this.msg);
-
                 if (!(val === 0)) {
-                  _context.next = 8;
+                  _context.next = 7;
                   break;
                 }
 
-                _context.next = 4;
+                _context.next = 3;
                 return axios.post("/api/partner/application", {
                   room_id: _this.msg.room_id,
                   partner_id: _this.msg.partner_id,
                   application_flg: val
                 });
 
-              case 4:
+              case 3:
                 response = _context.sent;
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
@@ -1290,23 +1290,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.$store.commit("error/setCode", response.status);
                 }
 
-                _context.next = 13;
+                _context.next = 12;
                 break;
 
-              case 8:
+              case 7:
                 if (!(val === 1)) {
-                  _context.next = 13;
+                  _context.next = 12;
                   break;
                 }
 
-                _context.next = 11;
+                _context.next = 10;
                 return axios.post("/api/partner/application", {
                   room_id: _this.msg.room_id,
                   partner_id: _this.msg.partner_id,
                   application_flg: val
                 });
 
-              case 11:
+              case 10:
                 _response = _context.sent;
 
                 if (_response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
@@ -1329,10 +1329,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.$store.commit("error/setCode", _response.status);
                 }
 
-              case 13:
+              case 12:
                 _this.$emit("emitShowMessages");
 
-              case 14:
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -1572,7 +1572,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../util */ "./resources/js/util.js");
+/* harmony import */ var _elements_Avatar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../elements/Avatar.vue */ "./resources/js/components/elements/Avatar.vue");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../util */ "./resources/js/util.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1644,12 +1645,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     partner: {
       type: Object
     }
+  },
+  components: {
+    Avatar: _elements_Avatar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   methods: {
     submitApplication: function submitApplication(val) {
@@ -1677,7 +1684,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context.sent;
 
-                if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
                   _this.$store.dispatch("flash/showFlashMessage", {
                     show: true,
                     message: "申請拒否しました。",
@@ -1709,7 +1716,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 10:
                 _response = _context.sent;
 
-                if (_response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                if (_response.status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
                   _this.$store.dispatch("flash/showFlashMessage", {
                     show: true,
                     message: "コンビ結成しました。",
@@ -1748,6 +1755,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _elements_Avatar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../elements/Avatar.vue */ "./resources/js/components/elements/Avatar.vue");
 //
 //
 //
@@ -1803,11 +1811,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     partner: {
       type: Object
     }
+  },
+  components: {
+    Avatar: _elements_Avatar_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -5370,7 +5385,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context4.sent;
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
-                  _this4.user = response.data.users[0];
+                  if (response.data.length !== 0) {
+                    _this4.user = response.data.users[0];
+                  } else {
+                    _this4.$router.push({
+                      name: "not-found"
+                    });
+                  }
                 } else {
                   _this4.$store.commit("error/setCode", response.status);
                 }
@@ -6201,13 +6222,56 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tabValue: 1,
+      tab: 1,
+      item: 0,
       partners: []
     };
   },
@@ -6226,11 +6290,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this.partners.splice(0, _this.partners.length);
 
-                _this.tabValue = val;
-                _context.next = 4;
+                _this.tab = val;
+                _this.item = val - 1;
+                _context.next = 5;
                 return _this.showPartners(val);
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -11688,8 +11753,13 @@ var render = function() {
             _c(
               "v-btn",
               {
-                staticClass: "mb-1 mt-1",
-                attrs: { color: "info", dark: "", rounded: "" },
+                staticClass: "mt-1",
+                attrs: {
+                  elevation: "0",
+                  color: "success",
+                  dark: "",
+                  rounded: ""
+                },
                 on: {
                   click: function($event) {
                     return _vm.submitApplication(1)
@@ -11698,7 +11768,7 @@ var render = function() {
               },
               [
                 _c("v-icon", [_vm._v("mdi-check")]),
-                _c("span", [_vm._v("コンビ結成する")])
+                _c("span", [_vm._v("コンビ結成")])
               ],
               1
             ),
@@ -11706,8 +11776,13 @@ var render = function() {
             _c(
               "v-btn",
               {
-                staticClass: "mb-1 mt-1",
-                attrs: { color: "error", dark: "", rounded: "" },
+                staticClass: "mt-1",
+                attrs: {
+                  elevation: "0",
+                  color: "error",
+                  dark: "",
+                  rounded: ""
+                },
                 on: {
                   click: function($event) {
                     return _vm.submitApplication(0)
@@ -11716,7 +11791,7 @@ var render = function() {
               },
               [
                 _c("v-icon", [_vm._v("mdi-close")]),
-                _c("span", [_vm._v("申請拒否する")])
+                _c("span", [_vm._v("申請拒否")])
               ],
               1
             )
@@ -11960,11 +12035,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-card",
-    { staticClass: "mb-3", attrs: { elevation: "0", tile: "" } },
+    { staticClass: "mb-4", attrs: { elevation: "0", tile: "" } },
     [
       _c(
         "v-card-actions",
-        { staticClass: "pl-3" },
+        { staticClass: "pl-3 pr-3 pb-2 pt-2" },
         [
           _c(
             "router-link",
@@ -11973,18 +12048,18 @@ var render = function() {
               attrs: { to: "/profile/" + _vm.partner.user.id }
             },
             [
-              _c(
-                "v-avatar",
-                { staticClass: "mr-1", attrs: { size: "30" } },
-                [
-                  _c("v-img", {
-                    attrs: { src: _vm.partner.user.thumbnail_url }
-                  })
-                ],
-                1
-              ),
+              _c("Avatar", {
+                staticClass: "mr-1",
+                attrs: {
+                  size: 30,
+                  thumbnail: _vm.partner.user.thumbnail,
+                  url: _vm.partner.user.thumbnail_url
+                }
+              }),
               _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.partner.user.name))])
+              _c("span", { staticClass: "va-m" }, [
+                _vm._v(_vm._s(_vm.partner.user.name))
+              ])
             ],
             1
           )
@@ -11992,27 +12067,31 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-card-title", { staticClass: "pl-3 pb-2 subtitle-1" }, [
+      _c("v-card-title", { staticClass: "pl-3 pr-3 pb-0 pt-2 subtitle-1" }, [
         _vm._v("届いた申請メッセージ")
       ]),
       _vm._v(" "),
-      _c("v-card-text", { staticClass: "pl-3 pb-2" }, [
+      _c("v-card-text", { staticClass: "pl-3 pr-3 pb-2 pt-0" }, [
         _vm._v(_vm._s(_vm.partner.message))
       ]),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "pl-3 pr-3 mb-0" },
+        { staticClass: "pl-3 pr-3 pt-2" },
         [
           _vm.partner.application_flg === null
             ? _c(
-                "v-card-actions",
+                "div",
                 [
                   _c(
                     "v-btn",
                     {
-                      staticClass: "mb-1 mt-1",
-                      attrs: { color: "info", dark: "", rounded: "" },
+                      attrs: {
+                        elevation: "0",
+                        color: "success",
+                        dark: "",
+                        rounded: ""
+                      },
                       on: {
                         click: function($event) {
                           return _vm.submitApplication(1)
@@ -12021,7 +12100,7 @@ var render = function() {
                     },
                     [
                       _c("v-icon", [_vm._v("mdi-check")]),
-                      _c("span", [_vm._v("コンビ結成する")])
+                      _c("span", [_vm._v("コンビ結成")])
                     ],
                     1
                   ),
@@ -12029,8 +12108,12 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      staticClass: "mb-1 mt-1",
-                      attrs: { color: "error", dark: "", rounded: "" },
+                      attrs: {
+                        elevation: "0",
+                        color: "error",
+                        dark: "",
+                        rounded: ""
+                      },
                       on: {
                         click: function($event) {
                           return _vm.submitApplication(0)
@@ -12039,7 +12122,7 @@ var render = function() {
                     },
                     [
                       _c("v-icon", [_vm._v("mdi-close")]),
-                      _c("span", [_vm._v("申請拒否する")])
+                      _c("span", [_vm._v("申請拒否")])
                     ],
                     1
                   )
@@ -12051,7 +12134,10 @@ var render = function() {
           _vm.partner.application_flg === 0
             ? _c(
                 "v-alert",
-                { staticClass: "mb-0", attrs: { dense: "", type: "error" } },
+                {
+                  staticClass: "mb-0",
+                  attrs: { elevation: "0", dense: "", type: "error" }
+                },
                 [_vm._v("\n\t\t\t申請拒否しました。\n\t\t")]
               )
             : _vm._e(),
@@ -12059,7 +12145,10 @@ var render = function() {
           _vm.partner.application_flg === 1
             ? _c(
                 "v-alert",
-                { staticClass: "mb-0", attrs: { dense: "", type: "success" } },
+                {
+                  staticClass: "mb-0",
+                  attrs: { elevation: "0", dense: "", type: "success" }
+                },
                 [
                   _vm._v("\n\t\t\tコンビ結成しました。\n\t\t\t"),
                   _c(
@@ -12078,22 +12167,11 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-card-actions",
-        { staticClass: "pl-3" },
-        [
-          _c(
-            "v-icon",
-            { staticClass: "mr-1", attrs: { color: "blue-grey lighten-3" } },
-            [_vm._v("\n\t\t\tmdi-clock-outline\n\t\t")]
-          ),
-          _vm._v(" "),
-          _c("span", { staticClass: "text--disabled" }, [
-            _vm._v(_vm._s(_vm.partner.updated_at))
-          ])
-        ],
-        1
-      )
+      _c("v-card-actions", { staticClass: "pl-3 pr-3 pt-2 pb-2" }, [
+        _c("span", { staticClass: "text--disabled" }, [
+          _vm._v(_vm._s(_vm.partner.updated_at))
+        ])
+      ])
     ],
     1
   )
@@ -12122,11 +12200,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-card",
-    { staticClass: "mb-3", attrs: { elevation: "0", tile: "" } },
+    { staticClass: "mb-4", attrs: { elevation: "0", tile: "" } },
     [
       _c(
         "v-card-actions",
-        { staticClass: "pl-3" },
+        { staticClass: "pl-3 pr-3 pb-2 pt-2" },
         [
           _c(
             "router-link",
@@ -12135,18 +12213,18 @@ var render = function() {
               attrs: { to: "/profile/" + _vm.partner.partner_user.id }
             },
             [
-              _c(
-                "v-avatar",
-                { staticClass: "mr-1", attrs: { size: "30" } },
-                [
-                  _c("v-img", {
-                    attrs: { src: _vm.partner.partner_user.thumbnail_url }
-                  })
-                ],
-                1
-              ),
+              _c("Avatar", {
+                staticClass: "mr-1",
+                attrs: {
+                  size: 30,
+                  thumbnail: _vm.partner.partner_user.thumbnail,
+                  url: _vm.partner.partner_user.thumbnail_url
+                }
+              }),
               _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.partner.partner_user.name))])
+              _c("span", { staticClass: "va-m" }, [
+                _vm._v(_vm._s(_vm.partner.partner_user.name))
+              ])
             ],
             1
           )
@@ -12154,22 +12232,25 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-card-title", { staticClass: "pl-3 pb-2 subtitle-1" }, [
+      _c("v-card-title", { staticClass: "pl-3 pr-3 pb-0 pt-2 subtitle-1" }, [
         _vm._v("送った申請メッセージ")
       ]),
       _vm._v(" "),
-      _c("v-card-text", { staticClass: "pl-3 pb-2" }, [
+      _c("v-card-text", { staticClass: "pl-3 pr-3 pb-2 pt-0" }, [
         _vm._v(_vm._s(_vm.partner.message))
       ]),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "pl-3 pr-3 mb-0" },
+        { staticClass: "pl-3 pr-3 pt-2" },
         [
           _vm.partner.application_flg === null
             ? _c(
                 "v-alert",
-                { staticClass: "mb-0", attrs: { dense: "", type: "info" } },
+                {
+                  staticClass: "mb-0",
+                  attrs: { elevation: "0", dense: "", type: "info" }
+                },
                 [_vm._v("\n\t\t\t申請中です。\n\t\t")]
               )
             : _vm._e(),
@@ -12177,7 +12258,10 @@ var render = function() {
           _vm.partner.application_flg === 0
             ? _c(
                 "v-alert",
-                { staticClass: "mb-0", attrs: { dense: "", type: "error" } },
+                {
+                  staticClass: "mb-0",
+                  attrs: { elevation: "0", dense: "", type: "error" }
+                },
                 [_vm._v("\n\t\t\t申請拒否されました。\n\t\t")]
               )
             : _vm._e(),
@@ -12185,7 +12269,10 @@ var render = function() {
           _vm.partner.application_flg === 1
             ? _c(
                 "v-alert",
-                { staticClass: "mb-0", attrs: { dense: "", type: "success" } },
+                {
+                  staticClass: "mb-0",
+                  attrs: { elevation: "0", dense: "", type: "success" }
+                },
                 [
                   _vm._v("\n\t\t\tコンビ結成しました。\n\t\t\t"),
                   _c(
@@ -12204,22 +12291,11 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-card-actions",
-        { staticClass: "pl-3" },
-        [
-          _c(
-            "v-icon",
-            { staticClass: "mr-1", attrs: { color: "blue-grey lighten-3" } },
-            [_vm._v("\n\t\t\tmdi-clock-outline\n\t\t")]
-          ),
-          _vm._v(" "),
-          _c("span", { staticClass: "text--disabled" }, [
-            _vm._v(_vm._s(_vm.partner.updated_at))
-          ])
-        ],
-        1
-      )
+      _c("v-card-actions", { staticClass: "pl-3 pr-3 pt-2 pb-2" }, [
+        _c("span", { staticClass: "text--disabled" }, [
+          _vm._v(_vm._s(_vm.partner.updated_at))
+        ])
+      ])
     ],
     1
   )
@@ -14707,9 +14783,9 @@ var render = function() {
         { staticClass: "font-weight-bold pl-3 pr-3 pb-0 pt-0" },
         [
           _vm._v("\n\t\t" + _vm._s(_vm.user.introduction) + "\n\t\t"),
-          _vm._l(_vm.user.tags, function(tag) {
+          _vm._l(_vm.user.tags, function(tag, i) {
             return _c("Tag", {
-              key: "profile-tags-" + tag.id,
+              key: "profile-tags-" + i,
               attrs: { "tag-item": tag, "push-name": "profile" }
             })
           })
@@ -15950,19 +16026,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "pl-0" }, [_c("RouteBack")], 1),
-    _vm._v(" "),
-    _c(
-      "div",
-      [
-        _c("v-alert", { attrs: { dense: "", type: "info" } }, [
-          _vm._v("\n\t\t\tお探しのページは見つかりませんでした。\n\t\t")
-        ])
-      ],
-      1
-    )
-  ])
+  return _c(
+    "v-row",
+    [
+      _c(
+        "v-col",
+        { staticClass: "pb-0", attrs: { cols: "12" } },
+        [_c("RouteBack")],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-col",
+        { attrs: { cols: "12" } },
+        [
+          _c("v-alert", { attrs: { dense: "", type: "info" } }, [
+            _vm._v("\n\t\t\tお探しのページは見つかりませんでした。\n\t\t")
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -15987,68 +16073,165 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    { staticClass: "profile-tabs" },
+    "v-row",
     [
       _c(
-        "v-tabs",
+        "v-col",
         {
-          staticClass: "mt-n3",
-          attrs: { "background-color": "cyan", dark: "" }
+          staticClass: "pb-0",
+          class: {
+            "pr-0": !_vm.$vuetify.breakpoint.xs && !_vm.$vuetify.breakpoint.sm
+          },
+          attrs: { cols: "12", md: "4", lg: "4", xl: "4" }
         },
         [
-          _c(
-            "v-tab",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.changeTab(1)
-                }
-              }
-            },
-            [_vm._v("送った申請")]
-          ),
-          _vm._v(" "),
-          _c(
-            "v-tab",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.changeTab(2)
-                }
-              }
-            },
-            [_vm._v("届いた申請")]
-          )
+          !_vm.$vuetify.breakpoint.xs && !_vm.$vuetify.breakpoint.sm
+            ? _c(
+                "v-list",
+                { attrs: { nav: "", dense: "" } },
+                [
+                  _c(
+                    "v-list-item-group",
+                    {
+                      model: {
+                        value: _vm.item,
+                        callback: function($$v) {
+                          _vm.item = $$v
+                        },
+                        expression: "item"
+                      }
+                    },
+                    [
+                      _c(
+                        "v-list-item",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.changeTab(1)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "v-list-item-icon",
+                            [
+                              _c("v-icon", [
+                                _vm._v("mdi-clipboard-arrow-right-outline")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-list-item-title", [_vm._v("送った申請")])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.changeTab(2)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "v-list-item-icon",
+                            [
+                              _c("v-icon", [
+                                _vm._v("mdi-clipboard-arrow-left-outline")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-list-item-title", [_vm._v("届いた申請")])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            : _c(
+                "v-tabs",
+                {
+                  attrs: {
+                    "background-color": "cyan",
+                    "show-arrows": _vm.$vuetify.breakpoint.xsOnly,
+                    dark: ""
+                  }
+                },
+                [
+                  _c(
+                    "v-tab",
+                    {
+                      on: {
+                        click: function($event) {
+                          return _vm.changeTab(1)
+                        }
+                      }
+                    },
+                    [_vm._v("送った申請")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-tab",
+                    {
+                      on: {
+                        click: function($event) {
+                          return _vm.changeTab(2)
+                        }
+                      }
+                    },
+                    [_vm._v("届いた申請")]
+                  )
+                ],
+                1
+              )
         ],
         1
       ),
       _vm._v(" "),
-      _vm._l(_vm.partners, function(partner, i) {
-        return _c(
-          "div",
-          { key: i },
-          [
-            _vm.tabValue === 1
-              ? _c("SendCard", { attrs: { partner: partner } })
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.tabValue === 2
-              ? _c("ArriveCard", {
-                  attrs: { partner: partner },
-                  on: {
-                    emitChangeTab: function($event) {
-                      return _vm.changeTab(2)
+      _c(
+        "v-col",
+        {
+          class: {
+            "pt-0": _vm.$vuetify.breakpoint.xs || _vm.$vuetify.breakpoint.sm
+          },
+          attrs: { cols: "12", md: "8", lg: "8", xl: "8" }
+        },
+        _vm._l(_vm.partners, function(partner, i) {
+          return _c(
+            "div",
+            { key: i },
+            [
+              _vm.tab === 1
+                ? _c("SendCard", { attrs: { partner: partner } })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.tab === 2
+                ? _c("ArriveCard", {
+                    attrs: { partner: partner },
+                    on: {
+                      emitChangeTab: function($event) {
+                        return _vm.changeTab(2)
+                      }
                     }
-                  }
-                })
-              : _vm._e()
-          ],
-          1
-        )
-      })
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        }),
+        0
+      )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -17183,7 +17366,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-row", [_c("v-col", [_vm._v("メール確認してね！")])], 1)
+  return _c(
+    "v-row",
+    { attrs: { align: "center", justify: "center" } },
+    [
+      _c(
+        "v-col",
+        {
+          staticClass: "pb-0",
+          attrs: { cols: "12", md: "8", lg: "8", xl: "8" }
+        },
+        [
+          _c(
+            "v-card",
+            { staticClass: "p-3", attrs: { elevation: "0" } },
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "cyan--text font-weight-bold justify-center" },
+                [_vm._v("\n\t\t\t\t会員登録メールを送信しました。\n\t\t\t")]
+              ),
+              _vm._v(" "),
+              _c("v-card-text", { staticClass: "justify-center" }, [
+                _vm._v(
+                  "\n\t\t\t\tメールを確認し、登録を完了させてください。\n\t\t\t"
+                )
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -18023,19 +18240,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "pl-0" }, [_c("RouteBack")], 1),
-    _vm._v(" "),
-    _c(
-      "div",
-      [
-        _c("v-alert", { attrs: { dense: "", type: "error" } }, [
-          _vm._v(" システムエラーが発生しました。 ")
-        ])
-      ],
-      1
-    )
-  ])
+  return _c(
+    "v-row",
+    [
+      _c(
+        "v-col",
+        { staticClass: "pb-0", attrs: { cols: "12" } },
+        [_c("RouteBack")],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-col",
+        { attrs: { cols: "12" } },
+        [
+          _c("v-alert", { attrs: { dense: "", type: "error" } }, [
+            _vm._v(" システムエラーが発生しました。 ")
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

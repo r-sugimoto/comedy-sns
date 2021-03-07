@@ -172,7 +172,11 @@ export default {
 		async showInfo() {
 			const response = await axios.get(`/api/chat/info/${this.id}`);
 			if (response.status === OK) {
-				this.user = response.data.users[0];
+				if (response.data.length !== 0) {
+					this.user = response.data.users[0];
+				} else {
+					this.$router.push({ name: "not-found" });
+				}
 			} else {
 				this.$store.commit("error/setCode", response.status);
 			}

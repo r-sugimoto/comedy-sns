@@ -1,40 +1,44 @@
 <template>
-	<v-card class="mb-3" elevation="0" tile>
-		<v-card-actions class="pl-3">
+	<v-card class="mb-4" elevation="0" tile>
+		<v-card-actions class="pl-3 pr-3 pb-2 pt-2">
 			<router-link
 				:to="`/profile/${partner.user.id}`"
 				class="black--text text-decoration-none"
 			>
-				<v-avatar size="30" class="mr-1">
-					<v-img :src="partner.user.thumbnail_url"></v-img>
-				</v-avatar>
-				<span>{{ partner.user.name }}</span>
+				<Avatar
+					:size="30"
+					:thumbnail="partner.user.thumbnail"
+					:url="partner.user.thumbnail_url"
+					class="mr-1"
+				></Avatar>
+				<span class="va-m">{{ partner.user.name }}</span>
 			</router-link>
 		</v-card-actions>
-		<v-card-title class="pl-3 pb-2 subtitle-1"
+		<v-card-title class="pl-3 pr-3 pb-0 pt-2 subtitle-1"
 			>届いた申請メッセージ</v-card-title
 		>
-		<v-card-text class="pl-3 pb-2">{{ partner.message }}</v-card-text>
-		<div class="pl-3 pr-3 mb-0">
-			<v-card-actions v-if="partner.application_flg === null">
+		<v-card-text class="pl-3 pr-3 pb-2 pt-0">{{ partner.message }}</v-card-text>
+		<div class="pl-3 pr-3 pt-2">
+			<div v-if="partner.application_flg === null">
 				<v-btn
+					elevation="0"
 					@click="submitApplication(1)"
-					color="info"
-					class="mb-1 mt-1"
+					color="success"
 					dark
 					rounded
-					><v-icon>mdi-check</v-icon><span>コンビ結成する</span></v-btn
+					><v-icon>mdi-check</v-icon><span>コンビ結成</span></v-btn
 				>
 				<v-btn
+					elevation="0"
 					@click="submitApplication(0)"
 					color="error"
-					class="mb-1 mt-1"
 					dark
 					rounded
-					><v-icon>mdi-close</v-icon><span>申請拒否する</span></v-btn
+					><v-icon>mdi-close</v-icon><span>申請拒否</span></v-btn
 				>
-			</v-card-actions>
+			</div>
 			<v-alert
+				elevation="0"
 				class="mb-0"
 				dense
 				type="error"
@@ -43,6 +47,7 @@
 				申請拒否しました。
 			</v-alert>
 			<v-alert
+				elevation="0"
 				class="mb-0"
 				dense
 				type="success"
@@ -54,22 +59,23 @@
 				</router-link>
 			</v-alert>
 		</div>
-		<v-card-actions class="pl-3">
-			<v-icon color="blue-grey lighten-3" class="mr-1">
-				mdi-clock-outline
-			</v-icon>
+		<v-card-actions class="pl-3 pr-3 pt-2 pb-2">
 			<span class="text--disabled">{{ partner.updated_at }}</span>
 		</v-card-actions>
 	</v-card>
 </template>
 
 <script>
+import Avatar from "../../elements/Avatar.vue";
 import { OK } from "../../../util";
 export default {
 	props: {
 		partner: {
 			type: Object,
 		},
+	},
+	components: {
+		Avatar,
 	},
 	methods: {
 		async submitApplication(val) {
