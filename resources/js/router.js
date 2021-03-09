@@ -28,6 +28,13 @@ export default new Router({
 			path: "/",
 			name: "home",
 			component: Home,
+			beforeEnter(to, from, next) {
+				if (store.getters["auth/check"]) {
+					next("/dashboard");
+				} else {
+					next();
+				}
+			},
 		},
 		{
 			path: "/dashboard",

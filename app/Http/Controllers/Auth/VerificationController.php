@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\RegisterUser;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -63,12 +64,21 @@ class VerificationController extends Controller
     // ユーザー作成
     protected function createUser(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'email_verified_at' => now(),
-            'password' => $data['password'],
-        ]);
+        $user = User::where("email", $data['email'])->first();
+        if(!empty($user)){
+            $user = User::onlyTrashed()->where("email", $data['email'])
+            ->update(['name' => $data['name'], 'password' => $data['password'], 'deleted_at' => NULL]);
+            return $user;
+        }else{
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'email_verified_at' => Carbon::now(),
+                'password' => $data['password'],
+            ]);
+            return $user;
+
+        }
     }
 
     protected function redirectWithMessage($vueRoute, $message)

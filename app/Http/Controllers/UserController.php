@@ -10,9 +10,10 @@ use App\Tag;
 
 class UserController extends Controller
 {
+    // プロフィール設定ページ
     public function index(){
-        $user = Auth::user();
-        $user->with('tags')->first();
+        $user = User::select('id', 'name', 'age', 'published_age_flg', 'prefecture_id', 'published_prefecture_flg', 'introduction', 'thumbnail')
+        ->where('id', Auth::user()->id)->with(['tags'])->first();
         return $user;
     }
 
@@ -47,6 +48,12 @@ class UserController extends Controller
         ->where('name', 'like', "%$freeword%")
         ->orWhere('introduction', 'like', "%$freeword%")
         ->orderBy(User::CREATED_AT, 'desc')->paginate(10);
+        return $user;
+    }
+
+    public function destroy(Request $request){
+        $user = User::find(Auth::user()->id);
+        $user->delete();
         return $user;
     }
 

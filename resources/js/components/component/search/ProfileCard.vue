@@ -1,39 +1,41 @@
 <template>
-	<div>
-		<v-card
-			tile
-			elevation="0"
-			class="mb-4"
-			:class="{ 'pb-2': user.tags.length !== 0 || user.introduction !== null }"
-		>
+	<v-card
+		tile
+		elevation="0"
+		class="mb-4"
+		:class="{ 'pb-2': user.tags.length !== 0 || user.introduction !== null }"
+	>
+		<v-card-actions class="pl-3 pr-3 pb-2 pt-2">
 			<router-link
 				:to="`profile/${user.id}`"
 				class="black--text text-decoration-none"
 			>
-				<v-card-actions>
-					<v-avatar size="30" color="gray" class="mr-1">
-						<v-img :src="user.thumbnail_url"></v-img>
-					</v-avatar>
+				<Avatar
+					:size="30"
+					:thumbnail="user.thumbnail"
+					:url="user.thumbnail_url"
+					class="mr-1"
+				></Avatar>
+				<span class="va-m">
 					{{ user.name }}
-				</v-card-actions>
+				</span>
 			</router-link>
-			<v-card-text class="font-weight-bold p-0 pl-2 pr-2 mb-1">
-				{{ user.introduction }}
-			</v-card-text>
-			<div class="pl-2">
-				<Tag
-					v-for="tag in user.tags"
-					:key="`profile-tags-${tag.id}`"
-					:tag-item="tag"
-					:push-name="'profile'"
-				></Tag>
-			</div>
-		</v-card>
-	</div>
+		</v-card-actions>
+		<v-card-text class="font-weight-bold pl-3 pr-3 pb-0 pt-0">
+			{{ user.introduction }}
+			<Tag
+				v-for="(tag, i) in user.tags"
+				:key="`profile-tags-${i}`"
+				:tag-item="tag"
+				:push-name="'profile'"
+			></Tag>
+		</v-card-text>
+	</v-card>
 </template>
 
 <script>
 import Tag from "../Tag.vue";
+import Avatar from "../../elements/Avatar.vue";
 export default {
 	props: {
 		user: {
@@ -42,6 +44,7 @@ export default {
 	},
 	components: {
 		Tag,
+		Avatar,
 	},
 };
 </script>

@@ -8,7 +8,7 @@
 		<v-dialog v-model="dialog" width="600" persistent no-click-animation>
 			<v-card class="p-3">
 				<v-card-title class="pt-0 pl-0 pr-0 justify-space-between">
-					<h2 class="cyan--text font-weight-bold mb-0">コンビ設定</h2>
+					<h2 class="cyan--text font-weight-bold mb-0">コンビ名設定</h2>
 					<v-btn class="mb-3" icon @click="reset">
 						<v-icon color="red">mdi-close</v-icon>
 					</v-btn>
@@ -92,15 +92,17 @@ export default {
 			Object.assign(this.$data, this.$options.data.call(this));
 		},
 		async deleteComedy() {
-			const response = await axios.delete(`/api/comedy/${this.id}/delete`);
-			if (response.status === OK) {
-				await this.$store.dispatch("flash/showFlashMessage", {
-					show: true,
-					message: "コンビ解散しました。",
-					type: 1,
-					seconds: 3000,
-				});
-				this.$router.push({ name: "comedy" }).catch((err) => {});
+			if (confirm("本当に解散しますか？")) {
+				const response = await axios.delete(`/api/comedy/${this.id}/delete`);
+				if (response.status === OK) {
+					await this.$store.dispatch("flash/showFlashMessage", {
+						show: true,
+						message: "コンビ解散しました。",
+						type: 1,
+						seconds: 3000,
+					});
+					this.$router.push({ name: "comedy" }).catch((err) => {});
+				}
 			}
 		},
 		async editComedy() {

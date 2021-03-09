@@ -11009,6 +11009,10 @@ a.text-dark:focus {
   border-bottom: 1px solid #e5e5e5;
 }
 
+.va-m {
+  vertical-align: middle;
+}
+
 .tc-w {
   color: #fff;
 }
@@ -11029,6 +11033,14 @@ a.text-dark:focus {
   text-align: right;
 }
 
+.border-t-cyan {
+  border-top: solid 6px #6cb2eb;
+}
+
+.border-t-green {
+  border-top: solid 6px #38c172;
+}
+
 .msg_left,
 .msg_right {
   margin: 10px 0;
@@ -11047,7 +11059,7 @@ a.text-dark:focus {
 }
 
 .msg {
-  max-width: 95%;
+  max-width: 80%;
   position: relative;
   padding: 10px;
   border-radius: 12px;
@@ -11082,11 +11094,6 @@ a.text-dark:focus {
   border-left: 22px solid #8ee7b6;
 }
 
-.profile-tabs {
-  max-width: 800px;
-  margin: auto;
-}
-
 /* fab */
 
 .fab-container {
@@ -11109,11 +11116,13 @@ a.text-dark:focus {
   margin-top: 60px;
 }
 
-@media screen and (max-width: 599px) {
-  .xs-f-size {
-    font-size: 16px !important;
+@media screen and (max-width: 640px) {
+  .v-text-field input {
+    font-size: 14px !important;
   }
+}
 
+@media screen and (max-width: 599px) {
   .input-label span {
     display: inline-block;
   }

@@ -20,7 +20,9 @@ export default {
 		};
 	},
 	props: {
-		UserId: String,
+		UserId: {
+			type: [String, Number],
+		},
 	},
 	methods: {
 		async isFollow() {

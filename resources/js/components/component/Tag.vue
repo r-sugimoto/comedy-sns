@@ -1,5 +1,5 @@
 <template>
-	<a class="font-weight-bold cyan-text tag mr-1" @click="SearchTag(TagItem.id)">
+	<a class="font-weight-bold cyan--text tag mr-1" @click="SearchTag(TagItem.id)">
 		#{{ TagItem.name }}
 	</a>
 </template>
@@ -56,7 +56,4 @@ export default {
 </script>
 
 <style>
-.tag {
-	text-decoration: none !important;
-}
 </style>

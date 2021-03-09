@@ -2,53 +2,52 @@
 	<div>
 		<v-card
 			class="mb-4"
-			color="cyan lighten-4"
 			tile
 			elevation="0"
+			style="border-top: solid 6px #80cbc4"
 			v-if="post.recruit_id === null"
 		>
-			<v-card-title class="font-weight-bold pl-3 pt-2">
+			<v-card-title class="font-weight-bold pl-3 pr-3 pt-2 pb-2">
 				<router-link :to="`/post/${post.id}`" class="black--text">
 					{{ post.title }}
 				</router-link>
 			</v-card-title>
-			<v-card-text class="font-weight-bold pl-3 pt-0 pb-2">
+			<v-card-text class="font-weight-bold pl-3 pr-3">
 				{{ post.message }}
-			</v-card-text>
-			<div class="mb-4 pl-3">
 				<Tag
 					v-for="tag in post.tags"
 					:key="`tags-${tag.id}`"
 					:tag-item="tag"
 					:push-name="'post'"
 				></Tag>
-			</div>
-			<Product :product-items="post.products"></Product>
-			<v-card-actions class="pl-3">
+			</v-card-text>
+			<Product :product-items="post.products" class="pl-3 pr-3"></Product>
+			<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
 				<router-link
 					:to="`/profile/${post.user.id}`"
 					class="black--text text-decoration-none"
 				>
-					<v-avatar size="30" class="mr-1">
-						<v-img :src="post.user.thumbnail_url"></v-img>
-					</v-avatar>
-					<span>{{ post.user.name }}</span>
+					<Avatar
+						:size="30"
+						:thumbnail="post.user.thumbnail"
+						:url="post.user.thumbnail_url"
+						class="mr-1"
+					></Avatar>
+					<span class="va-m">
+						{{ post.user.name }}
+					</span>
 				</router-link>
 			</v-card-actions>
-			<v-card-actions class="pl-3 pt-0">
-				<v-icon color="blue-grey lighten-3" class="mr-1">
-					mdi-clock-outline
-				</v-icon>
+			<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
 				<span class="text--disabled">{{ post.created_at }}</span>
 			</v-card-actions>
-			<v-card-actions class="pl-3 pt-0">
-				<div class="ml-1 mr-2">
-					<Comment
-						:comments-count="post.comments_count"
-						:post-id="post.id"
-						:url="`/post/${post.id}`"
-					></Comment>
-				</div>
+			<v-card-actions class="pl-3 pr-3 pt-2 pb-2">
+				<Comment
+					class="ml-1"
+					:comments-count="post.comments_count"
+					:post-id="post.id"
+					:url="`/post/${post.id}`"
+				></Comment>
 				<Like
 					:likes-count="post.likes_count"
 					:liked-by-user="post.liked_by_user"
@@ -56,58 +55,60 @@
 				></Like>
 			</v-card-actions>
 		</v-card>
-		<v-card v-if="post.recruit_id !== null" class="mb-4" elevation="0" tile>
-			<v-card-title class="font-weight-bold pl-3 pt-2">
+		<v-card
+			v-if="post.recruit_id !== null"
+			class="mb-4"
+			elevation="0"
+			tile
+			style="border-top: solid 6px #80deea"
+		>
+			<v-card-title class="font-weight-bold pl-3 pr-3 pt-2 pb-2">
 				<router-link :to="`/recruit/${post.id}`" class="black--text">
 					{{ post.title }}
 				</router-link>
 			</v-card-title>
-			<v-card-text class="font-weight-bold pl-3 pt-0 pb-2">
+			<v-card-text class="font-weight-bold pl-3 pr-3">
 				{{ post.message }}
-			</v-card-text>
-			<div class="mb-4 pl-3">
 				<Tag
 					v-for="tag in post.tags"
 					:key="`tags-${tag.id}`"
 					:tag-item="tag"
 					:push-name="'recruit'"
 				></Tag>
-			</div>
-			<div class="pl-3 mb-2">
 				<RecruitContents :recruit-content="post.recruit"></RecruitContents>
-			</div>
+			</v-card-text>
 			<Product :product-items="post.products"></Product>
-			<v-card-actions class="pl-3">
+			<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
 				<router-link
 					:to="`/profile/${post.user.id}`"
 					class="black--text text-decoration-none"
 				>
-					<v-avatar size="30" class="mr-1">
-						<v-img :src="post.user.thumbnail_url"></v-img>
-					</v-avatar>
-					<span>{{ post.user.name }}</span>
+					<Avatar
+						:size="30"
+						:thumbnail="post.user.thumbnail"
+						:url="post.user.thumbnail_url"
+						class="mr-1"
+					></Avatar>
+					<span class="va-m">
+						{{ post.user.name }}
+					</span>
 				</router-link>
 			</v-card-actions>
-			<v-card-actions class="pl-3 pt-0">
-				<v-icon color="blue-grey lighten-3" class="mr-1">
-					mdi-clock-outline
-				</v-icon>
+			<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
 				<span class="text--disabled">{{ post.created_at }}</span>
 			</v-card-actions>
-			<v-card-actions class="pl-1 pt-0">
-				<div class="mr-2">
-					<Apply
-						:user-id="post.user.id"
-						:user-id-check="post.user.id === isLoginUserId"
-					></Apply>
-				</div>
-				<div class="mr-2">
-					<Comment
-						:comments-count="post.comments_count"
-						:post-id="post.id"
-						:url="`/recruit/${post.id}`"
-					></Comment>
-				</div>
+			<v-card-actions class="pl-3 pr-3 pt-2 pb-2">
+				<Apply
+					:user-id="post.user.id"
+					:user-id-check="post.user.id === isLoginUserId"
+					class="mr-1"
+				></Apply>
+				<Comment
+					class="ml-1"
+					:comments-count="post.comments_count"
+					:post-id="post.id"
+					:url="`/recruit/${post.id}`"
+				></Comment>
 				<Like
 					:likes-count="post.likes_count"
 					:liked-by-user="post.liked_by_user"
@@ -125,6 +126,7 @@ import Product from "../component/Product.vue";
 import Tag from "../component/Tag.vue";
 import Apply from "../component/recruit/Apply.vue";
 import RecruitContents from "../component/recruit/RecruitContents.vue";
+import Avatar from "../elements/Avatar.vue";
 export default {
 	data() {
 		return {};
@@ -135,6 +137,7 @@ export default {
 		Product,
 		Comment,
 		Apply,
+		Avatar,
 		RecruitContents,
 	},
 	props: {

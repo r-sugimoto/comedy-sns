@@ -28,11 +28,22 @@ Route::prefix('api')->group(function () {
     // 設定用ユーザー情報更新
     Route::post('/user/setting', 'UserController@update');
 
+    // 退会
+    Route::post('/user/unsubscribe', 'UserController@destroy');
+
     // プロフィール情報取得
     Route::get('/profile/{id}', 'UserController@profile_index');
 
     // ユーザーの投稿取得
     Route::post('/profile/post', 'PostController@profile_post');
+
+    // TOP取得用
+    Route::get('/top/post', 'PostController@topIndex');
+    Route::get('/top/recruit', 'PostController@topRecruitIndex');
+    Route::get('/top/comedy', 'ComedyController@topIndex');
+
+    // タイムライン投稿取得
+    Route::post('/post', 'PostController@index');
 
     // タイムライン投稿一覧取得
     Route::post('/post', 'PostController@index');
@@ -62,7 +73,7 @@ Route::prefix('api')->group(function () {
 
     // 結成したコンビ一覧
     Route::get('/comedy', 'ComedyController@index');
-    // 結成したコンビ一覧
+    // 結成したコンビ
     Route::get('/comedy/{id}', 'ComedyController@comedy');
     // コンビ解散
     Route::delete('/comedy/{id}/delete', 'PartnerController@destroy');

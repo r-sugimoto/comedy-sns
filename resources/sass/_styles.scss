@@ -48,6 +48,10 @@
 
 // 独自クラス
 // 共通
+.va-m {
+	vertical-align: middle;
+}
+
 .tc-w {
 	color: #fff;
 }
@@ -62,6 +66,13 @@
 }
 .ta-r {
 	text-align: right;
+}
+
+.border-t-cyan {
+	border-top: solid 6px #6cb2eb;
+}
+.border-t-green {
+	border-top: solid 6px #38c172;
 }
 
 // チャット関連style
@@ -80,7 +91,7 @@
 	margin-right: 25px;
 }
 .msg {
-	max-width: 95%;
+	max-width: 80%;
 	position: relative;
 	padding: 10px;
 	border-radius: 12px;
@@ -110,12 +121,6 @@
 	border-left: 22px solid #8ee7b6;
 }
 
-// profile
-.profile-tabs {
-	max-width: 800px;
-	margin: auto;
-}
-
 /* fab */
 .fab-container {
 	position: fixed;
@@ -136,10 +141,14 @@
 	padding: 32px 56px 56px;
 	margin-top: 60px;
 }
-@media screen and (max-width: 599px) {
-	.xs-f-size {
-		font-size: 16px !important;
+
+// placeholder対策
+@media screen and (max-width: 640px) {
+	.v-text-field input {
+		font-size: 14px !important;
 	}
+}
+@media screen and (max-width: 599px) {
 	.input-label span {
 		display: inline-block;
 	}
