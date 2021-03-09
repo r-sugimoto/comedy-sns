@@ -1,7 +1,7 @@
 <template>
 	<v-row align="center" justify="center">
 		<v-col class="pb-0" cols="12" md="8" lg="8" xl="8">
-			<v-card elevation="0" class="p-3">
+			<v-card elevation="0" tile class="p-3">
 				<v-card-title class="justify-center mb-5">
 					<h2 class="cyan--text font-weight-bold mb-0">チャット一覧</h2>
 				</v-card-title>

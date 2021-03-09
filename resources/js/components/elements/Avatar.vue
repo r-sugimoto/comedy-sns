@@ -1,6 +1,6 @@
 <template>
 	<v-avatar :size="size" color="white">
-		<v-img v-if="thumbnail !== ''" :src="url"></v-img>
+		<v-img v-if="thumbnail !== null" :src="url"></v-img>
 		<v-img v-else src="/images/penguin.png"></v-img>
 	</v-avatar>
 </template>

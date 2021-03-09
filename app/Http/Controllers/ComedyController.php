@@ -13,7 +13,6 @@ class ComedyController extends Controller
             return $query->where('id', Auth::user()->id);
         })
         ->get();
-
         return $comedy;
     }
 
@@ -35,6 +34,12 @@ class ComedyController extends Controller
     public function search(Request $request){
         $comedy = Comedy::where('name', 'like', "%$request->freeword%")->with(['users'])
         ->orderBy(Comedy::UPDATED_AT, 'desc')->paginate(10);
+        return $comedy;
+    }
+
+    public function topIndex(){
+        $comedy = Comedy::with(['users'])
+        ->orderBy(Comedy::UPDATED_AT, 'desc')->take(6)->get();
         return $comedy;
     }
 }
