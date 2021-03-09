@@ -18,7 +18,10 @@
 						@click="alreadyNotification(n.id)"
 					>
 						<v-list-item-avatar>
-							<v-img :src="n.comments[0].user.thumbnail_url"></v-img>
+							<ListAvatar
+								:thumbnail="n.comments[0].user.thumbnail"
+								:url="n.comments[0].user.thumbnail_url"
+							></ListAvatar>
 						</v-list-item-avatar>
 						<v-list-item-content>
 							<v-list-item-title class="list-title"
@@ -40,7 +43,10 @@
 						@click="alreadyNotification(n.id)"
 					>
 						<v-list-item-avatar>
-							<v-img :src="n.messages[0].user.thumbnail_url"></v-img>
+							<ListAvatar
+								:thumbnail="n.messages[0].user.thumbnail"
+								:url="n.messages[0].user.thumbnail_url"
+							></ListAvatar>
 						</v-list-item-avatar>
 						<v-list-item-content>
 							<v-list-item-title class="list-title"
@@ -62,7 +68,10 @@
 						@click="alreadyNotification(n.id)"
 					>
 						<v-list-item-avatar>
-							<v-img :src="n.partners[0].user.thumbnail_url"></v-img>
+							<ListAvatar
+								:thumbnail="n.partners[0].user.thumbnail"
+								:url="n.partners[0].user.thumbnail_url"
+							></ListAvatar>
 						</v-list-item-avatar>
 						<v-list-item-content v-if="n.partners[0].application_flg === null">
 							<v-list-item-title class="list-title"
@@ -99,6 +108,7 @@
 </template>
 
 <script>
+import ListAvatar from "../elements/ListAvatar.vue";
 import { OK } from "../../util";
 export default {
 	data() {
@@ -106,6 +116,9 @@ export default {
 			count: null,
 			notifications: [],
 		};
+	},
+	components: {
+		ListAvatar,
 	},
 	methods: {
 		async showNotification() {

@@ -1,14 +1,21 @@
 <template>
 	<div>
 		<v-fab-transition>
-			<NewRecruit v-if="isLogin" @addPostReload="postReload"></NewRecruit>
+			<NewRecruit v-if="isLogin" @addPostReload="reloadPost"></NewRecruit>
 		</v-fab-transition>
 		<v-row>
-			<v-col class="pb-0 pt-0" cols="12" lg="4" xl="4">
+			<v-col
+				cols="12"
+				md="4"
+				lg="4"
+				xl="4"
+				class="pb-0"
+				:class="{ 'pr-0': !$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm }"
+			>
 				<SearchRecruit></SearchRecruit>
 			</v-col>
-			<v-col class="pb-0 pt-0" lg="8" xl="8">
-				<v-row v-if="isLogin" class="pt-1 pb-1">
+			<v-col cols="12" md="8" lg="8" xl="8">
+				<v-row v-if="isLogin">
 					<v-spacer></v-spacer>
 					<v-col cols="12" sm="6" md="6" lg="6" xl="6">
 						<v-select
@@ -19,14 +26,14 @@
 							hide-details
 							outlined
 							clearable
-							@change="postReload"
+							@change="reloadPost"
 						>
 						</v-select>
 					</v-col>
 				</v-row>
 				<PostCard
-					v-for="post in posts"
-					:key="`posts-${post.id}`"
+					v-for="(post, i) in posts"
+					:key="`posts-${i}`"
 					:post="post"
 				></PostCard>
 				<infinite-loading
@@ -66,12 +73,13 @@ export default {
 		SearchRecruit,
 	},
 	methods: {
-		postReload() {
+		reloadPost() {
 			this.page = 1;
 			this.posts.splice(0, this.posts.length);
 			this.$refs.infiniteLoading.stateChanger.reset();
 		},
 		async infiniteHandler($state) {
+			// getパラメーターチェックする
 			if (this.$route.query.freeword !== undefined) {
 				this.freeword = this.$route.query.freeword;
 			} else {
@@ -130,13 +138,14 @@ export default {
 		isLogin() {
 			return this.$store.getters["auth/check"];
 		},
+		// ログインID取得
 		isLoginUserId() {
 			return this.$store.getters["auth/userId"];
 		},
 	},
 	watch: {
 		$route(to, from) {
-			this.postReload();
+			this.reloadPost();
 		},
 	},
 };

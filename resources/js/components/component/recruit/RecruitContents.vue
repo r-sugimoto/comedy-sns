@@ -4,31 +4,19 @@
 			RecruitContent.prefecture !== null || RecruitContent.generation !== null
 		"
 	>
-		<p class="m-0 font-weight-bold">募集条件</p>
-		<v-btn
-			text
-			class="p-0 mr-2"
-			v-if="RecruitContent.prefecture !== null"
-			@click="searchRegion(RecruitContent.prefecture.region.id)"
-		>
-			<span> エリア：{{ RecruitContent.prefecture.region.name }} </span>
-		</v-btn>
-		<v-btn
-			text
-			class="p-0 mr-2"
-			v-if="RecruitContent.prefecture !== null"
-			@click="searchPrefecture(RecruitContent.prefecture.id)"
-		>
-			<span> 都道府県：{{ RecruitContent.prefecture.name }} </span>
-		</v-btn>
-		<v-btn
-			text
-			class="p-0 mr-2"
-			v-if="RecruitContent.generation !== null"
-			@click="searchGeneration(RecruitContent.generation.id)"
-		>
-			<span> 募集年代：{{ RecruitContent.generation.name }} </span>
-		</v-btn>
+		<p class="m-0 font-weight-bold black--text">募集条件</p>
+		<span v-if="RecruitContent.prefecture !== null" class="mr-1">
+		エリア：
+		<a class="recruit-content green--text" @click="searchRegion(RecruitContent.prefecture.region.id)">{{ RecruitContent.prefecture.region.name }} </a>
+		</span>
+		<span v-if="RecruitContent.prefecture !== null" class="mr-1">
+		都道府県：
+		<a class="recruit-content green--text" @click="searchPrefecture(RecruitContent.prefecture.id)">{{ RecruitContent.prefecture.name }}</a>
+		</span>
+		<span v-if="RecruitContent.generation !== null" class="mr-1">
+		募集年代：
+		<a class="recruit-content green--text" @click="searchGeneration(RecruitContent.generation.id)">{{ RecruitContent.generation.name }}</a>
+		</span>
 	</div>
 </template>
 
@@ -87,4 +75,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.recruit-content:hover{
+	text-decoration: underline;
+}
+</style>

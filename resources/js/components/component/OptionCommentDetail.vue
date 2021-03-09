@@ -41,8 +41,8 @@ export default {
 			}
 		},
 		// 親コンポーネントshowPostDetail発火
-		addShowPostDetail() {
-			this.$emit("addShowPostDetail");
+		emitShowPostDetail() {
+			this.$emit("emitShowPostDetail");
 		},
 	},
 };

@@ -10,6 +10,7 @@ const getters = {
 	check: (state) => !!state.user,
 	username: (state) => (state.user ? state.user.name : ""),
 	userId: (state) => (state.user ? state.user.id : ""),
+	userInfo: (state) => (state.user ? state.user : ""),
 	getAuthErrorMessages: (state) => state.authErrorMessages,
 	getAuthStatus: (state) => state.authStatus,
 };
