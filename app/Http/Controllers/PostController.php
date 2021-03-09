@@ -221,4 +221,23 @@ class PostController extends Controller
     
         return $posts;
     }
+
+    // TOPページ投稿取得
+    public function topIndex()
+    {
+        $posts = Post::select('id', 'user_id', 'recruit_id','title','message', 'created_at')
+        ->whereNull('recruit_id')
+        ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'user.follow_users'])
+        ->orderBy(Post::CREATED_AT, 'desc')->take(6)->get();
+        return $posts;
+    }
+    // TOPページ取得
+    public function topRecruitIndex()
+    {
+        $posts = Post::select('id', 'user_id', 'recruit_id','title','message', 'created_at')
+        ->whereNotNull('recruit_id')
+        ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'user.follow_users', 'recruit.prefecture.region', 'recruit.generation'])
+        ->orderBy(Post::CREATED_AT, 'desc')->take(6)->get();
+        return $posts;
+    }
 }

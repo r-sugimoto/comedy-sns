@@ -46,12 +46,6 @@
 								outlined
 							/>
 						</validation-provider>
-						<!-- <v-checkbox
-					v-model="loginForm.remember"
-					label="ログインしたままにする"
-					name="remember"
-					class="mb-0"
-				></v-checkbox> -->
 						<v-btn
 							@click="login"
 							class="mt-2"
@@ -125,6 +119,19 @@ export default {
 	},
 	created() {
 		this.clearError();
+
+		// 登録用フラッシュメッセージ（エラー）
+		const message = this.$cookies.get("MESSAGE");
+		if (message) {
+			this.$store.dispatch("flash/showFlashMessage", {
+				show: true,
+				message: message,
+				type: 1,
+				seconds: 3000,
+			});
+			// cookieをクリア
+			this.$cookies.remove("MESSAGE");
+		}
 	},
 };
 </script>

@@ -12,6 +12,7 @@ import VueTagsInput from "@johmun/vue-tags-input";
 import VueYoutube from "vue-youtube";
 import InfiniteLoading from "vue-infinite-loading";
 import SocialSharing from "vue-social-sharing";
+import VueCookies from "vue-cookies";
 
 window.Vue = Vue;
 Vue.use(VueRouter);
@@ -20,6 +21,7 @@ Vue.use(VueTagsInput);
 Vue.use(VueYoutube);
 Vue.use(InfiniteLoading);
 Vue.use(SocialSharing);
+Vue.use(VueCookies);
 
 export default new Vuetify({
 	theme: {
