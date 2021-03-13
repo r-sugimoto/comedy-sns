@@ -179,10 +179,6 @@ export default {
 		isLoginUserId() {
 			return this.$store.getters["auth/userId"];
 		},
-		// 前のページの情報取得
-		prevRoute() {
-			return this.$store.getters["route/getPrevRoute"];
-		},
 	},
 	created() {
 		this.showPostDetail();

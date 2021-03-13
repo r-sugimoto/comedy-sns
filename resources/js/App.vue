@@ -1,5 +1,5 @@
 <template>
-	<v-app :style="{ background: $vuetify.theme.themes.light.background }">
+	<v-app style="background: #f4f8fa">
 		<Header></Header>
 		<v-main class="main-top-margin">
 			<FlashMessage />
@@ -47,7 +47,6 @@ export default {
 					this.$router.push("/404");
 				}
 			},
-			immediate: true,
 		},
 		$route(to, from) {
 			this.$store.commit("route/setPrevRoute", from);
@@ -58,6 +57,9 @@ export default {
 </script>
 
 <style>
+.app-bc {
+	background: "#f4f8fa";
+}
 .main-top-margin {
 	margin-top: 64px !important;
 }

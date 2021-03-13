@@ -11,7 +11,6 @@ import App from "./App.vue";
 import VueTagsInput from "@johmun/vue-tags-input";
 import VueYoutube from "vue-youtube";
 import InfiniteLoading from "vue-infinite-loading";
-import SocialSharing from "vue-social-sharing";
 import VueCookies from "vue-cookies";
 
 window.Vue = Vue;
@@ -20,19 +19,8 @@ Vue.use(Vuetify);
 Vue.use(VueTagsInput);
 Vue.use(VueYoutube);
 Vue.use(InfiniteLoading);
-Vue.use(SocialSharing);
 Vue.use(VueCookies);
 
-export default new Vuetify({
-	theme: {
-		themes: {
-			light: {
-				// 背景色設定
-				background: "#f4f8fa",
-			},
-		},
-	},
-});
 // vee-validate
 import {
 	ValidationProvider,
