@@ -20,8 +20,8 @@ Route::prefix('api')->group(function () {
     // 会員登録メール作成
     Route::post('/register', 'Auth\RegisterController@sendMail')->name('register');
     // ログイン
-    Route::post('login', 'Auth\LoginController@login')->name('login');
-    Route::post('logout', 'Auth\LoginController@logout');
+    Route::post('/login', 'Auth\LoginController@login')->name('login');
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('user', fn () => Auth::user())->name('user');
 
     // 設定用ユーザー情報取得

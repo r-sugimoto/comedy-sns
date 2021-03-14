@@ -64,9 +64,9 @@ class VerificationController extends Controller
     // ユーザー作成
     protected function createUser(array $data)
     {
-        $user = User::where("email", $data['email'])->first();
-        if(!empty($user)){
-            $user = User::onlyTrashed()->where("email", $data['email'])
+        $user = User::where('email', $data['email'])->first();
+        if(!empty($user)){
+            $user = User::onlyTrashed()->where('email', $data['email'])
             ->update(['name' => $data['name'], 'password' => $data['password'], 'deleted_at' => NULL]);
             return $user;
         }else{

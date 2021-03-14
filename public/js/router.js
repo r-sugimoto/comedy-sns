@@ -7946,6 +7946,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "register",
   data: function data() {
@@ -18088,6 +18089,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("validation-provider", {
                         attrs: {
+                          vid: "password_confirmation",
                           name: "確認用パスワード",
                           rules: "required|min:8"
                         },
