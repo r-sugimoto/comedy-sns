@@ -5,13 +5,13 @@ namespace Tests\Feature\Api;
 use App\RegisterUser;
 use App\User;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function setUp(): void
     {
@@ -22,14 +22,16 @@ class RegisterTest extends TestCase
             'email' => 'samantha.doyle@example.net',
             'token' => '130c9275efd05b4d0bed20ded58d16cc46fcb9e237d5bb9c970fff02365187f6'
         ]);
-
+        
+        // バリデーション用ユーザー登録
         factory(User::class)->create([
             'email' => 'foo@email.com',
         ]);
     }
-    public function test_仮会員登録_メールアドレスバリデーションエラー_失敗()
+    public function test_仮会員登録_バリデーションエラー_メールアドレス重複_失敗()
     {
         // フォームから送信するデータ
+        // すでに登録されているメールアドレス
         $data = [
             'name' => 'test',
             'email' => 'foo@email.com',
@@ -51,7 +53,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password',
         ];
 
-        $response = $this->post('/api/register', $data);
+        $response = $this->postJson('/api/register', $data);
         $response->assertStatus(201)
         ->assertJsonFragment([
                 'email' => 'test@email.com',
