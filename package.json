@@ -39,6 +39,7 @@
 		"vuex": "^3.6.0"
 	},
 	"dependencies": {
+		"flush-promises": "^1.0.2",
 		"vee-validate": "^3.4.5",
 		"vue-cookies": "^1.7.4",
 		"vue-infinite-loading": "^2.4.5",
