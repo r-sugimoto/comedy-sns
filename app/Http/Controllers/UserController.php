@@ -25,7 +25,6 @@ class UserController extends Controller
             $tag = Tag::firstOrCreate(['name' => $tagName]);
             $user->tags()->attach($tag);
         });
-
         return response($user, 201);
     }
 

@@ -7,5 +7,6 @@ module.exports = {
 	moduleFileExtensions: ["js", "vue"],
 	transformIgnorePatterns: [
 		"<rootDir>/node_modules/(?!(vuetify|vee-validate))",
+		"<rootDir>/node_modules/(?!vee-validate/dist/rules)",
 	],
 };
