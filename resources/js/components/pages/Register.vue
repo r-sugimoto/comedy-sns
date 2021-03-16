@@ -12,7 +12,7 @@
 							name="ユーザー名"
 							rules="required|max:20"
 						>
-							<p class="input-label">ユーザ名</p>
+							<p class="input-label">ユーザー名</p>
 							<v-text-field
 								:error-messages="errors"
 								background-color="#f4f8fa"
@@ -46,7 +46,7 @@
 						<validation-provider
 							v-slot="{ errors }"
 							name="パスワード"
-							rules="required|min:8|confirmed:password_confirmation"
+							rules="required|min:8|max:20|confirmed:password_confirmation"
 						>
 							<p class="input-label">パスワード</p>
 							<v-text-field
@@ -67,7 +67,7 @@
 							v-slot="{ errors }"
 							vid="password_confirmation"
 							name="確認用パスワード"
-							rules="required|min:8"
+							rules="required|min:8|max:20"
 						>
 							<p class="input-label">確認用パスワード</p>
 							<v-text-field
