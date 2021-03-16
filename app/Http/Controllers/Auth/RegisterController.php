@@ -51,7 +51,7 @@ class RegisterController extends Controller
             	'required', 'string', 'email', 'max:255', 
             	Rule::unique('users', 'email')->whereNull('deleted_at'),
             ],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'max:20', 'confirmed'],
         ]);
     }
 

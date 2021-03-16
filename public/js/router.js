@@ -17964,7 +17964,7 @@ var render = function() {
                               var errors = ref.errors
                               return [
                                 _c("p", { staticClass: "input-label" }, [
-                                  _vm._v("ユーザ名")
+                                  _vm._v("ユーザー名")
                                 ]),
                                 _vm._v(" "),
                                 _c("v-text-field", {
@@ -18036,7 +18036,7 @@ var render = function() {
                         attrs: {
                           name: "パスワード",
                           rules:
-                            "required|min:8|confirmed:password_confirmation"
+                            "required|min:8|max:20|confirmed:password_confirmation"
                         },
                         scopedSlots: _vm._u([
                           {
@@ -18091,7 +18091,7 @@ var render = function() {
                         attrs: {
                           vid: "password_confirmation",
                           name: "確認用パスワード",
-                          rules: "required|min:8"
+                          rules: "required|min:8|max:20"
                         },
                         scopedSlots: _vm._u([
                           {
