@@ -25,7 +25,7 @@ Route::prefix('api')->group(function () {
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('user', fn () => Auth::user())->name('user');
 
-    // 設定用ユーザー情報取得
+    // ユーザー情報設定ページ
     Route::get('/user/setting', 'UserController@index');
     // 設定用ユーザー情報更新
     Route::post('/user/setting', 'UserController@update');

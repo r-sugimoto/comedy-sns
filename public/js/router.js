@@ -8640,7 +8640,7 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
                 isValid = _context.sent;
 
                 if (!isValid) {
-                  _context.next = 17;
+                  _context.next = 18;
                   break;
                 }
 
@@ -8673,8 +8673,9 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
 
               case 15:
                 response = _context.sent;
+                console.log(response);
 
-                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["CREATED"]) {
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
                   _this.$store.dispatch("flash/showFlashMessage", {
                     show: true,
                     message: "プロフィール更新完了しました。",
@@ -8685,7 +8686,7 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
                   _this.$store.commit("error/setCode", response.status);
                 }
 
-              case 17:
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -8824,9 +8825,11 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
       if (event.target.files !== void 0 && event.target.files !== undefined && event.target.files.length !== 0) {
         var file = event.target.files[0];
         this.userSettingForm.pictureFile[0] = file;
+        this.thumbnail = file.name;
         this.preview = URL.createObjectURL(file);
       } else {
         this.userSettingForm.pictureFile[0] = [];
+        this.thumbnail = null;
         this.preview = null;
       }
     },
