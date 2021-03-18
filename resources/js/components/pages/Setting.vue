@@ -217,7 +217,7 @@
 
 <script>
 import Avatar from "../elements/Avatar.vue";
-import { OK, CREATED } from "../../util";
+import { OK } from "../../util";
 const ageRange = [...Array(70)].map((v, i) => i + 16);
 export default {
 	data() {
@@ -274,7 +274,8 @@ export default {
 					formData.append("thumbnail", this.userSettingForm.pictureFile[0]);
 				}
 				const response = await axios.post("/api/user/setting", formData);
-				if (response.status === CREATED) {
+				console.log(response);
+				if (response.status === OK) {
 					this.$store.dispatch("flash/showFlashMessage", {
 						show: true,
 						message: "プロフィール更新完了しました。",
@@ -344,9 +345,11 @@ export default {
 			) {
 				const file = event.target.files[0];
 				this.userSettingForm.pictureFile[0] = file;
+				this.thumbnail = file.name;
 				this.preview = URL.createObjectURL(file);
 			} else {
 				this.userSettingForm.pictureFile[0] = [];
+				this.thumbnail = null;
 				this.preview = null;
 			}
 		},
