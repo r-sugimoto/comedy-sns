@@ -10,10 +10,10 @@ use App\Tag;
 
 class UserController extends Controller
 {
-    // プロフィール設定ページ
+    // ユーザー情報設定ページ
     public function index(){
         $user = User::select('id', 'name', 'age', 'published_age_flg', 'prefecture_id', 'published_prefecture_flg', 'introduction', 'thumbnail')
-        ->where('id', Auth::user()->id)->with(['tags'])->first();
+        ->where('id', Auth::user()->id)->with(['tags:id,name'])->first();
         return $user;
     }
 
@@ -21,12 +21,12 @@ class UserController extends Controller
     public function update(UpdateUserSettingRequest $request){
         $user = Auth::user();
         $user->updateUser($request);
+        $user->untag();
         $request->tags->each(function ($tagName) use ($user) {
             $tag = Tag::firstOrCreate(['name' => $tagName]);
             $user->tags()->attach($tag);
         });
-
-        return response($user, 201);
+        return $user;
     }
 
     // プロフィールページ情報取得

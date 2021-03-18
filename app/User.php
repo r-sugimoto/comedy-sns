@@ -107,7 +107,6 @@ class User extends Authenticatable
             $this->updateUserThumbnail($request->thumbnail);
         }
         $this->save();
-        $this->untag();
     }
 
     // タグの紐付け解除

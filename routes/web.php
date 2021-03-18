@@ -17,13 +17,15 @@ Route::prefix('api')->group(function () {
         $request->session()->regenerateToken();
         return response()->json();
     });
-    // 認証API
+    // 会員登録メール作成
     Route::post('/register', 'Auth\RegisterController@sendMail')->name('register');
-    Route::post('login', 'Auth\LoginController@login');
-    Route::post('logout', 'Auth\LoginController@logout');
+    // ログイン
+    Route::post('/login', 'Auth\LoginController@login')->name('login');
+    // ログアウト
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('user', fn () => Auth::user())->name('user');
 
-    // 設定用ユーザー情報取得
+    // ユーザー情報設定ページ
     Route::get('/user/setting', 'UserController@index');
     // 設定用ユーザー情報更新
     Route::post('/user/setting', 'UserController@update');
@@ -141,6 +143,7 @@ Route::prefix('api')->group(function () {
     Route::post('/prefecture/region/search', 'PrefectureController@region_search');
 });
 
+// 会員登録トークン取得
 Route::get('/verification/{token}', 'Auth\VerificationController@register')->name('verification');
 
 Route::get('/{any}', function () {
