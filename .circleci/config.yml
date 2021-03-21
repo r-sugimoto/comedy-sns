@@ -37,6 +37,11 @@ jobs:
             - ./vendor
 
       - run: echo "APP_KEY=" > .env.testing
+      - run: echo "AWS_ACCESS_KEY_ID=" > .env.testing
+      - run: echo "AWS_SECRET_ACCESS_KEY=" > .env.testing
+      - run: echo "AWS_DEFAULT_REGION=" > .env.testing
+      - run: echo "AWS_BUCKET=" > .env.testing
+      - run: echo "AWS_URL=" > .env.testing
       - run: php artisan key:generate
       - run: php artisan migrate
 
