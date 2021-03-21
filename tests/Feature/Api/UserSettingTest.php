@@ -25,7 +25,6 @@ class UserSettingTest extends TestCase
             'prefecture_id' => 1,
             'published_age_flg' => 1,
             'introduction' => 'これはテストですテストです',
-            'thumbnail' => 'test.jpg'
         ]);
     }
 
@@ -64,7 +63,7 @@ class UserSettingTest extends TestCase
         $response->assertStatus(422);
     }
 
-    public function test_ユーザー設定情報更新_成功()
+    public function test_ユーザー設定情報更新_正常()
     {
         // ダーミーデーターを認証させる
         $this->actingAs($this->user);
