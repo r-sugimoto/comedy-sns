@@ -37,7 +37,7 @@ jobs:
             - ./vendor
 
       - run: echo .env.testing
-      - run: php artisan key:generate--testing
+      - run: php artisan key:generate
       - run: php artisan migrate
 
       - run: ./vendor/bin/phpunit
