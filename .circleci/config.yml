@@ -40,6 +40,6 @@ jobs:
       - run: php artisan key:generate
       - run: php artisan migrate
 
-      - run: ./vendor/bin/phpunit -d memory_limit=512M
+      - run: ./vendor/bin/phpunit
       - store_artifacts:
-        path: ./storage/logs
+          path: ./storage/logs
