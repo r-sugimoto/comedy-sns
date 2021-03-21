@@ -42,4 +42,4 @@ jobs:
 
       - run: ./vendor/bin/phpunit -d memory_limit=512M
       - store_artifacts:
-+          path: ./storage/logs
+        path: ./storage/logs
