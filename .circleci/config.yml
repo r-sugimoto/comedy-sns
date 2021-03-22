@@ -3,18 +3,12 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.4-node-browsers
+      - image: circleci/mysql:5.7
         environment:
           - APP_DEBUG: true
           - APP_ENV: testing
-          - DB_CONNECTION: mysql
-          - DB_DATABASE: cs_testing
-          - DB_USERNAME: root
-
-      - image: circleci/mysql:5.7-ram
-        environment:
+          - DB_CONNECTION: circle_test
           - MYSQL_ALLOW_EMPTY_PASSWORD: true
-          - MYSQL_DATABASE: cs_testing
-
     steps:
       - checkout
 
@@ -35,11 +29,9 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
-
-      - run: echo "APP_KEY=" > .env.testing
-      - run: php artisan key:generate
+      - run: echo $ENV_FILE | base64 -di > .env.testing
+      - run: php artisan key:generate --env=testing
       - run: php artisan migrate
-
-      - run: ./vendor/bin/phpunit
+      - run: ./vendor/bin/phpunit --testdox
       - store_artifacts:
           path: ./storage/logs
