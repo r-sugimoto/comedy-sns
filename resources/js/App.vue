@@ -1,6 +1,6 @@
 <template>
 	<v-app style="background: #f4f8fa">
-		<Header></Header>
+		<Header />
 		<v-main class="main-top-margin">
 			<FlashMessage />
 			<DefaultLoading />
