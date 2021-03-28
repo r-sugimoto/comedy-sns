@@ -19,7 +19,7 @@
 					:thumbnail="user.thumbnail"
 					:url="user.thumbnail_url"
 					class="mr-1"
-				></Avatar>
+				/>
 				<span class="va-m">
 					{{ user.name }}
 				</span>
