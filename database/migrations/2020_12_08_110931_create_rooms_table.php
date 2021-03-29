@@ -17,7 +17,6 @@
 
 						$table->increments('id');
 						$table->string('name')->nullable(); //チャットルーム名
-						$table->softDeletes();
 						$table->timestamps();
 
                 });

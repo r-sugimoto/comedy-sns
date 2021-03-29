@@ -274,7 +274,6 @@ export default {
 					formData.append("thumbnail", this.userSettingForm.pictureFile[0]);
 				}
 				const response = await axios.post("/api/user/setting", formData);
-				console.log(response);
 				if (response.status === OK) {
 					this.$store.dispatch("flash/showFlashMessage", {
 						show: true,

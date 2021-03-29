@@ -127,7 +127,6 @@ export default {
 				if (response.data.length !== 0) {
 					this.count = response.data.length;
 					this.notifications = response.data;
-					console.log(this.notifications);
 				} else {
 					const response = await axios.get("/api/notice/already");
 					if (response.status === OK) {

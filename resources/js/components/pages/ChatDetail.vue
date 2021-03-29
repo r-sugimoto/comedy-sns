@@ -11,7 +11,7 @@
 					:thumbnail="user.thumbnail"
 					:url="user.thumbnail_url"
 					class="mr-3"
-				></Avatar>
+				/>
 				<span class="va-m">
 					{{ user.name }}
 				</span>
@@ -33,7 +33,7 @@
 												:size="40"
 												:thumbnail="msg.user.thumbnail"
 												:url="msg.user.thumbnail_url"
-											></Avatar>
+											/>
 										</div>
 										<p class="msg">
 											{{ msg.message }}
@@ -51,12 +51,9 @@
 												:size="40"
 												:thumbnail="msg.user.thumbnail"
 												:url="msg.user.thumbnail_url"
-											></Avatar>
+											/>
 										</div>
-										<ApplyChat
-											@emitShowMessages="showMessages"
-											:msg="msg"
-										></ApplyChat>
+										<ApplyChat @emitShowMessages="showMessages" :msg="msg" />
 									</div>
 								</v-col>
 								<v-col v-else>
@@ -163,12 +160,6 @@ export default {
 				this.$store.commit("error/setCode", response.status);
 			}
 		},
-		async noticeMessage() {
-			const response = await axios.get(`/api/chat/notice/${this.id}`);
-			if (response.status !== OK) {
-				this.$store.commit("error/setCode", response.status);
-			}
-		},
 		async showInfo() {
 			const response = await axios.get(`/api/chat/info/${this.id}`);
 			if (response.status === OK) {
@@ -197,10 +188,9 @@ export default {
 			return this.$store.getters["auth/userId"];
 		},
 	},
-	async created() {
-		await this.showMessages();
-		await this.noticeMessage();
-		await this.showInfo();
+	created() {
+		this.showMessages();
+		this.showInfo();
 	},
 };
 </script>
