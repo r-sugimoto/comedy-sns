@@ -108,7 +108,7 @@ class PartnerController extends Controller
         // 申請許可の場合
         if($request->application_flg === 1){
             $comedy = new Comedy();
-            $comedy->create_comedy($partner);
+            $comedy->createComedy($partner);
             $request->comedy_id = $comedy->id;
         }
         $partner->update_application($request);

@@ -34,7 +34,7 @@ Route::prefix('api')->group(function () {
     Route::post('/user/unsubscribe', 'UserController@destroy');
 
     // プロフィール情報取得
-    Route::get('/profile/{id}', 'UserController@profile_index');
+    Route::get('/profile/{id}', 'UserController@profileIndex');
 
     // ユーザーの投稿取得
     Route::post('/profile/post', 'PostController@profile_post');
@@ -91,7 +91,7 @@ Route::prefix('api')->group(function () {
     // 投稿一覧取得
     Route::post('/search/post', 'PostController@search_index');
     // ユーザー検索
-    Route::post('/search/profile', 'UserController@search_index');
+    Route::post('/search/profile', 'UserController@searchIndex');
     // コンビ名検索
     Route::post('/search/comedy', 'ComedyController@search');
 
@@ -117,15 +117,13 @@ Route::prefix('api')->group(function () {
 
     // チャットメッセージ取得
     Route::get('/chat/{id}', 'MessageController@index');
-    // チャットメッセージ取得
-    Route::get('/chat/notice/{id}', 'MessageController@notice_index');
 
     // メッセージ作成
     Route::post('/chat/message/new', 'MessageController@create');
 
     // 通知取得
     Route::get('/notice', 'NoticeController@index');
-    // 通知取得
+    // 通知取得(既読済)
     Route::get('/notice/already', 'NoticeController@already_index');
     // 既読
     Route::post('/notice/{id}', 'NoticeController@update');

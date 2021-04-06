@@ -83,9 +83,9 @@ class PostController extends Controller
             // コメント、通知削除用
             $comments = Comment::where('post_id', $post->id)->get();
             foreach($comments as $comment){
-                $comment->commentDelete();
+                $comment->deleteComment();
             }
-            $post->postDelete($postId);
+            $post->deletePost($postId);
         }
 
         return $post;

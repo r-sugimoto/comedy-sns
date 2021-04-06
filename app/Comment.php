@@ -21,7 +21,7 @@ class Comment extends Model
         return $this->belongsToMany('App\Notice');
     }
 
-    public function commentDelete(){
+    public function deleteComment(){
         $this->uncomment();
         $this->unnotice();
     }

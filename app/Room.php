@@ -21,4 +21,10 @@ class Room extends Model
         $this->users()->attach(Auth::user()->id);
         $this->users()->attach($id);
     }
+
+    public function deleteRoom(){
+        $this->users()->detach();
+        $this->messages()->delete();
+        $this->delete();
+    }
 }
