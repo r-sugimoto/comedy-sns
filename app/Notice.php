@@ -51,4 +51,14 @@ class Notice extends Model
         $this->save();
         $this->partners()->attach($request->partner_id);
     }
+
+    public function deleteNotice(){
+        $this->comments()->detach();
+        $this->comments()->delete();
+        $this->messages()->detach();
+        $this->messages()->delete();
+        $this->partners()->detach();
+        $this->partners()->delete();
+        $this->delete();
+    }
 }

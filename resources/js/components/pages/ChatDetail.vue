@@ -1,7 +1,7 @@
 <template>
 	<v-dialog fullscreen v-model="dialog">
 		<v-card class="mx-auto" elevation="0" tile>
-			<v-card-title class="pb-0 pl-2 pr-2 cyan--text">
+			<v-card-title class="pb-0 pl-2 pr-2 cyan--text title">
 				<v-btn text color="cyan" @click="routeBack" class="pl-3 mr-2">
 					<v-icon>mdi-chevron-left</v-icon>
 					<span>戻る</span>
@@ -12,7 +12,7 @@
 					:url="user.thumbnail_url"
 					class="mr-3"
 				/>
-				<span class="va-m">
+				<span class="va-m chat-title">
 					{{ user.name }}
 				</span>
 			</v-card-title>

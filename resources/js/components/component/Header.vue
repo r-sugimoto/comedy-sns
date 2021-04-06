@@ -61,7 +61,9 @@
 			</v-list>
 		</v-navigation-drawer>
 		<v-app-bar color="cyan" dark tile fixed elevation="0" height="64">
-			<router-link to="/" class="title"><span>Comedy SNS</span></router-link>
+			<router-link to="/" class="header-title font-weight-bold">
+				<span>Comenion</span>
+			</router-link>
 			<v-btn
 				class="ml-3"
 				elevation="0"
@@ -202,20 +204,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.title {
-	text-decoration: none;
-	color: #fff;
-}
-.header-btn {
-	height: 36px;
-	min-width: 64px;
-	text-align: center;
-}
-.header-btn a {
-	display: block;
-	line-height: 36px;
-	text-decoration: none;
-	color: #fff;
-}
-</style>
+<style></style>

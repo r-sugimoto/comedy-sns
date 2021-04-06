@@ -72,11 +72,7 @@
 							</v-file-input>
 						</validation-provider>
 						<div class="text-center">
-							<Avatar
-								:size="200"
-								:url="preview"
-								:thumbnail="thumbnail"
-							></Avatar>
+							<Avatar :size="200" :url="preview" :thumbnail="thumbnail" />
 						</div>
 						<validation-provider
 							v-slot="{ errors }"
@@ -190,8 +186,8 @@
 								:error-messages="errors"
 								background-color="#f4f8fa"
 								type="text"
-								name="cause"
-								v-model="unsubscribeForm.cause"
+								name="reason"
+								v-model="unsubscribeForm.reason"
 								required
 								outlined
 							></v-textarea>
@@ -199,11 +195,12 @@
 						<div class="text-right">
 							<v-btn
 								@click="postUnsubscribe"
+								:loading="btnLoading"
 								color="red"
 								elevation="0"
 								large
 								rounded
-								outlined
+								dark
 							>
 								<span>退会する</span>
 							</v-btn>
@@ -231,6 +228,7 @@ export default {
 			thumbnail: null,
 			tag: "",
 			tagError: null,
+			btnLoading: false,
 			userSettingForm: {
 				pictureFile: [],
 				name: "",
@@ -242,7 +240,7 @@ export default {
 				publishedPrefecture: 0,
 			},
 			unsubscribeForm: {
-				cause: "",
+				reason: "",
 			},
 		};
 	},
@@ -273,16 +271,20 @@ export default {
 				if (this.userSettingForm.pictureFile.length) {
 					formData.append("thumbnail", this.userSettingForm.pictureFile[0]);
 				}
-				const response = await axios.post("/api/user/setting", formData);
-				if (response.status === OK) {
+				const { status } = await axios.post("/api/user/setting", formData);
+				if (status === OK) {
 					this.$store.dispatch("flash/showFlashMessage", {
 						show: true,
 						message: "プロフィール更新完了しました。",
 						type: 0,
 						seconds: 3000,
 					});
+					this.$router.go({
+						path: this.$router.currentRoute.path,
+						force: true,
+					});
 				} else {
-					this.$store.commit("error/setCode", response.status);
+					this.$store.commit("error/setCode", status);
 				}
 			}
 		},
@@ -291,9 +293,25 @@ export default {
 			const isValid = await this.$refs.unsubscribeObserver.validate();
 			if (isValid) {
 				if (confirm("本当に退会しますか？")) {
-					const response = await axios.post("/api/user/unsubscribe", {
-						cause: this.unsubscribeForm.cause,
+					this.btnLoading = true;
+					const { status } = await axios.post("/api/user/unsubscribe", {
+						reason: this.unsubscribeForm.reason,
 					});
+					if (status === OK) {
+						this.$store.dispatch("flash/showFlashMessage", {
+							show: true,
+							message: "退会完了しました。",
+							type: 0,
+							seconds: 5000,
+						});
+						this.$router.go({
+							path: "/",
+							force: true,
+						});
+					} else {
+						this.$store.commit("error/setCode", status);
+					}
+					this.btnLoading = false;
 				}
 			}
 		},
@@ -365,9 +383,9 @@ export default {
 			}
 		},
 	},
-	async created() {
-		await this.getUserSetting();
-		await this.getPrefectures();
+	created() {
+		this.getUserSetting();
+		this.getPrefectures();
 	},
 };
 </script>
