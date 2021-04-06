@@ -204,4 +204,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.header-btn {
+	height: 36px;
+	min-width: 64px;
+	text-align: center;
+}
+.header-btn a {
+	display: block;
+	line-height: 36px;
+	text-decoration: none;
+	color: #fff;
+}
+</style>
