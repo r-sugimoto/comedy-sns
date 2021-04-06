@@ -37,7 +37,7 @@ class CommentController extends Controller
         if(!$comment){
             return false;
         }else{
-            $comment->commentDelete();
+            $comment->deleteComment();
         }
 
         return $comment;

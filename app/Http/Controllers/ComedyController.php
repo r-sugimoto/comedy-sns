@@ -26,7 +26,7 @@ class ComedyController extends Controller
     // コンビ名変更
     public function edit(Request $request){
         $comedy = Comedy::where('id', $request->id)->first();
-        $comedy->comedyEdit($request);
+        $comedy->updateComedy($request);
         return $comedy;
     }
 

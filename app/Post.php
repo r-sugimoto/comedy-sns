@@ -52,7 +52,7 @@ class Post extends Model
     }
 
     // 削除機能
-    public function postDelete($postId){
+    public function deletePost($postId){
         $this->untag();
         $this->unproduct($postId);
         $this->unlike();
