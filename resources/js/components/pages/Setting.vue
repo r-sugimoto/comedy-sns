@@ -58,7 +58,7 @@
 							rules="size:2000|mimes:jpeg,png,jpg,gif"
 							name="プロフィール画像"
 						>
-							<p class="input-label">プロフィール画像</p>
+							<p class="input-label">プロフィール画像（サイズ：2MB以内）</p>
 							<v-file-input
 								:error-messages="errors"
 								background-color="#f4f8fa"
@@ -72,7 +72,9 @@
 							</v-file-input>
 						</validation-provider>
 						<div class="text-center">
-							<Avatar :size="200" :url="preview" :thumbnail="thumbnail" />
+							<v-avatar size="200" color="gray">
+								<v-img :src="preview"></v-img>
+							</v-avatar>
 						</div>
 						<validation-provider
 							v-slot="{ errors }"
@@ -319,8 +321,12 @@ export default {
 		async getUserSetting() {
 			const response = await axios.get("/api/user/setting");
 			if (response.status === OK) {
-				this.preview = response.data.thumbnail_url;
 				this.thumbnail = response.data.thumbnail;
+				if (this.thumbnail === null) {
+					this.preview = "/images/penguin.png";
+				} else {
+					this.preview = response.data.thumbnail_url;
+				}
 				this.userSettingForm.name = response.data.name;
 				this.userSettingForm.prefectureId = response.data.prefecture_id;
 				this.userSettingForm.introduction = response.data.introduction;
