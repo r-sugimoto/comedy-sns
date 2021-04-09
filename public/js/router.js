@@ -2091,7 +2091,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         type: 0
       },
       products: {
-        label: "画像（サイズ：2MB以内)",
+        label: "画像（サイズ：2MB以内）",
         pictureValues: [],
         pictureUrls: [],
         movieValue: null,
@@ -3599,7 +3599,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         type: 0
       },
       products: {
-        label: "画像（サイズ：2MB以内)",
+        label: "画像（サイズ：2MB以内）",
         pictureValues: [],
         pictureUrls: [],
         movieValue: null,
@@ -5223,9 +5223,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 
 
 
@@ -5342,7 +5339,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    noticeMessage: function noticeMessage() {
+    showInfo: function showInfo() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
@@ -5352,12 +5349,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios.get("/api/chat/notice/".concat(_this3.id));
+                return axios.get("/api/chat/info/".concat(_this3.id));
 
               case 2:
                 response = _context3.sent;
 
-                if (response.status !== _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                  if (response.data.length !== 0) {
+                    _this3.user = response.data.users[0];
+                  } else {
+                    _this3.$router.push({
+                      name: "not-found"
+                    });
+                  }
+                } else {
                   _this3.$store.commit("error/setCode", response.status);
                 }
 
@@ -5369,46 +5374,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    showInfo: function showInfo() {
+    scrollEnd: function scrollEnd() {
       var _this4 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return axios.get("/api/chat/info/".concat(_this4.id));
-
-              case 2:
-                response = _context4.sent;
-
-                if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
-                  if (response.data.length !== 0) {
-                    _this4.user = response.data.users[0];
-                  } else {
-                    _this4.$router.push({
-                      name: "not-found"
-                    });
-                  }
-                } else {
-                  _this4.$store.commit("error/setCode", response.status);
-                }
-
-              case 4:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
-      }))();
-    },
-    scrollEnd: function scrollEnd() {
-      var _this5 = this;
-
       this.$nextTick(function () {
-        var Log = _this5.$refs.scrollTarget;
+        var Log = _this4.$refs.scrollTarget;
 
         if (!Log) {
           return false;
@@ -5424,31 +5394,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    var _this6 = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              _context5.next = 2;
-              return _this6.showMessages();
-
-            case 2:
-              _context5.next = 4;
-              return _this6.noticeMessage();
-
-            case 4:
-              _context5.next = 6;
-              return _this6.showInfo();
-
-            case 6:
-            case "end":
-              return _context5.stop();
-          }
-        }
-      }, _callee5);
-    }))();
+    this.showMessages();
+    this.showInfo();
   }
 });
 
@@ -6562,6 +6509,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6623,6 +6581,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee);
+      }))();
+    },
+    twitterLogin: function twitterLogin() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _yield$axios$get, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get("/api/socialite/twitter");
+
+              case 2:
+                _yield$axios$get = _context2.sent;
+                data = _yield$axios$get.data;
+                window.location.href = data;
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     },
     clearError: function clearError() {
@@ -7947,6 +7929,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "register",
   data: function data() {
@@ -8012,6 +8005,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee);
+      }))();
+    },
+    twitterRegister: function twitterRegister() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _yield$axios$get, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get("/api/socialite/twitter");
+
+              case 2:
+                _yield$axios$get = _context2.sent;
+                data = _yield$axios$get.data;
+                window.location.href = data;
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     },
     clearError: function clearError() {
@@ -8584,7 +8601,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
 
 
 
@@ -8604,6 +8620,7 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
       thumbnail: null,
       tag: "",
       tagError: null,
+      btnLoading: false,
       userSettingForm: {
         pictureFile: [],
         name: "",
@@ -8615,7 +8632,7 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
         publishedPrefecture: 0
       },
       unsubscribeForm: {
-        cause: ""
+        reason: ""
       }
     };
   },
@@ -8628,7 +8645,8 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var isValid, formData, response;
+        var isValid, formData, _yield$axios$post, status;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -8672,18 +8690,23 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
                 return axios.post("/api/user/setting", formData);
 
               case 15:
-                response = _context.sent;
-                console.log(response);
+                _yield$axios$post = _context.sent;
+                status = _yield$axios$post.status;
 
-                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
+                if (status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
                   _this.$store.dispatch("flash/showFlashMessage", {
                     show: true,
                     message: "プロフィール更新完了しました。",
                     type: 0,
                     seconds: 3000
                   });
+
+                  _this.$router.go({
+                    path: _this.$router.currentRoute.path,
+                    force: true
+                  });
                 } else {
-                  _this.$store.commit("error/setCode", response.status);
+                  _this.$store.commit("error/setCode", status);
                 }
 
               case 18:
@@ -8699,7 +8722,8 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var isValid, response;
+        var isValid, _yield$axios$post2, status;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -8711,24 +8735,44 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
                 isValid = _context2.sent;
 
                 if (!isValid) {
-                  _context2.next = 8;
+                  _context2.next = 12;
                   break;
                 }
 
                 if (!confirm("本当に退会しますか？")) {
-                  _context2.next = 8;
+                  _context2.next = 12;
                   break;
                 }
 
-                _context2.next = 7;
+                _this2.btnLoading = true;
+                _context2.next = 8;
                 return axios.post("/api/user/unsubscribe", {
-                  cause: _this2.unsubscribeForm.cause
+                  reason: _this2.unsubscribeForm.reason
                 });
 
-              case 7:
-                response = _context2.sent;
-
               case 8:
+                _yield$axios$post2 = _context2.sent;
+                status = _yield$axios$post2.status;
+
+                if (status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
+                  _this2.$store.dispatch("flash/showFlashMessage", {
+                    show: true,
+                    message: "退会完了しました。",
+                    type: 0,
+                    seconds: 5000
+                  });
+
+                  _this2.$router.go({
+                    path: "/",
+                    force: true
+                  });
+                } else {
+                  _this2.$store.commit("error/setCode", status);
+                }
+
+                _this2.btnLoading = false;
+
+              case 12:
               case "end":
                 return _context2.stop();
             }
@@ -8753,8 +8797,14 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
                 response = _context3.sent;
 
                 if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
-                  _this3.preview = response.data.thumbnail_url;
                   _this3.thumbnail = response.data.thumbnail;
+
+                  if (_this3.thumbnail === null) {
+                    _this3.preview = "/images/penguin.png";
+                  } else {
+                    _this3.preview = response.data.thumbnail_url;
+                  }
+
                   _this3.userSettingForm.name = response.data.name;
                   _this3.userSettingForm.prefectureId = response.data.prefecture_id;
                   _this3.userSettingForm.introduction = response.data.introduction;
@@ -8848,27 +8898,8 @@ var ageRange = _toConsumableArray(Array(70)).map(function (v, i) {
     }
   },
   created: function created() {
-    var _this5 = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              _context5.next = 2;
-              return _this5.getUserSetting();
-
-            case 2:
-              _context5.next = 4;
-              return _this5.getPrefectures();
-
-            case 4:
-            case "end":
-              return _context5.stop();
-          }
-        }
-      }, _callee5);
-    }))();
+    this.getUserSetting();
+    this.getPrefectures();
   }
 });
 
@@ -15648,7 +15679,7 @@ var render = function() {
         [
           _c(
             "v-card-title",
-            { staticClass: "pb-0 pl-2 pr-2 cyan--text" },
+            { staticClass: "pb-0 pl-2 pr-2 cyan--text title" },
             [
               _c(
                 "v-btn",
@@ -15674,7 +15705,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("span", { staticClass: "va-m" }, [
+              _c("span", { staticClass: "va-m chat-title" }, [
                 _vm._v("\n\t\t\t\t" + _vm._s(_vm.user.name) + "\n\t\t\t")
               ])
             ],
@@ -16826,6 +16857,25 @@ var render = function() {
                     ],
                     1
                   )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  staticClass: "mt-10 twitter-auth-btn",
+                  attrs: { elevation: "0", large: "", rounded: "", block: "" },
+                  on: { click: _vm.twitterLogin }
+                },
+                [
+                  _c("v-icon", { attrs: { color: "white" } }, [
+                    _vm._v("mdi-twitter")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "white--text" }, [
+                    _vm._v("Twitterアカウントでログインする")
+                  ])
                 ],
                 1
               ),
@@ -18175,6 +18225,25 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
+                "v-btn",
+                {
+                  staticClass: "mt-10 twitter-auth-btn",
+                  attrs: { elevation: "0", large: "", rounded: "", block: "" },
+                  on: { click: _vm.twitterRegister }
+                },
+                [
+                  _c("v-icon", { attrs: { color: "white" } }, [
+                    _vm._v("mdi-twitter")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "white--text" }, [
+                    _vm._v("Twitterアカウントで登録する")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
                 "div",
                 { staticClass: "mt-5 cyan--text text-center" },
                 [
@@ -18635,7 +18704,9 @@ var render = function() {
                                     var errors = ref.errors
                                     return [
                                       _c("p", { staticClass: "input-label" }, [
-                                        _vm._v("プロフィール画像")
+                                        _vm._v(
+                                          "プロフィール画像（サイズ：2MB以内）"
+                                        )
                                       ]),
                                       _vm._v(" "),
                                       _c("v-file-input", {
@@ -18667,7 +18738,7 @@ var render = function() {
                               ],
                               null,
                               false,
-                              1955482414
+                              1828680451
                             )
                           }),
                           _vm._v(" "),
@@ -18675,13 +18746,12 @@ var render = function() {
                             "div",
                             { staticClass: "text-center" },
                             [
-                              _c("Avatar", {
-                                attrs: {
-                                  size: 200,
-                                  url: _vm.preview,
-                                  thumbnail: _vm.thumbnail
-                                }
-                              })
+                              _c(
+                                "v-avatar",
+                                { attrs: { size: "200", color: "gray" } },
+                                [_c("v-img", { attrs: { src: _vm.preview } })],
+                                1
+                              )
                             ],
                             1
                           ),
@@ -19006,20 +19076,20 @@ var render = function() {
                                           "error-messages": errors,
                                           "background-color": "#f4f8fa",
                                           type: "text",
-                                          name: "cause",
+                                          name: "reason",
                                           required: "",
                                           outlined: ""
                                         },
                                         model: {
-                                          value: _vm.unsubscribeForm.cause,
+                                          value: _vm.unsubscribeForm.reason,
                                           callback: function($$v) {
                                             _vm.$set(
                                               _vm.unsubscribeForm,
-                                              "cause",
+                                              "reason",
                                               $$v
                                             )
                                           },
-                                          expression: "unsubscribeForm.cause"
+                                          expression: "unsubscribeForm.reason"
                                         }
                                       })
                                     ]
@@ -19028,7 +19098,7 @@ var render = function() {
                               ],
                               null,
                               false,
-                              313920033
+                              2736430465
                             )
                           }),
                           _vm._v(" "),
@@ -19040,11 +19110,12 @@ var render = function() {
                                 "v-btn",
                                 {
                                   attrs: {
+                                    loading: _vm.btnLoading,
                                     color: "red",
                                     elevation: "0",
                                     large: "",
                                     rounded: "",
-                                    outlined: ""
+                                    dark: ""
                                   },
                                   on: { click: _vm.postUnsubscribe }
                                 },

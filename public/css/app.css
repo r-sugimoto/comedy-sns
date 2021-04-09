@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Lato:wght@400;
+@import url(https://fonts.googleapis.com/css?family=Corben:700);@import url(https://fonts.googleapis.com/css2?family=Lato:wght@400;
 
 700&family=Noto+Sans+JP:wght@400;700&display=swap);@charset "UTF-8";
 #app {
@@ -10972,6 +10972,18 @@ a.text-dark:focus {
   border-color: currentColor !important;
 }
 
+.header-title {
+  font-family: "Corben", cursive;
+  font-size: 20px !important;
+  text-decoration: none !important;
+  color: #fff !important;
+}
+
+.twitter-auth-btn {
+  text-transform: none !important;
+  background-color: #1da1f2 !important;
+}
+
 /* タグカスタム */
 
 .ti-input {
@@ -11039,6 +11051,17 @@ a.text-dark:focus {
 
 .border-t-green {
   border-top: solid 6px #38c172;
+}
+
+.chat-title {
+  font-size: 20px;
+}
+
+@media screen and (max-width: 599px) {
+  .chat-title {
+    font-size: 16px;
+    display: inline-block;
+  }
 }
 
 .msg_left,
