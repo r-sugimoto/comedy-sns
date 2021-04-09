@@ -14,7 +14,7 @@ export default {
 	},
 	computed: {
 		thumbnailUrl() {
-			if (this.thumbnail !== "") {
+			if (this.thumbnail !== null) {
 				return this.url;
 			} else {
 				return "/images/penguin.png";
