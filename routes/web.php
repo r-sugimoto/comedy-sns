@@ -139,10 +139,18 @@ Route::prefix('api')->group(function () {
     Route::get('/generation', 'GenerationController@index');
     // 地域から都道府県を絞り込む
     Route::post('/prefecture/region/search', 'PrefectureController@region_search');
+
+    // SNSログイン
+    // Twitter
+    Route::get('/socialite/twitter', 'SocialiteController@redirectToTwitterProvider');
 });
 
 // 会員登録トークン取得
 Route::get('/verification/{token}', 'Auth\VerificationController@register')->name('verification');
+
+// SNSログイン
+// Twitterコールバック
+Route::get('/twitter/callback', 'SocialiteController@handleTwitterProviderCallback');
 
 Route::get('/{any}', function () {
     return view('index');

@@ -59,6 +59,17 @@
 						</v-btn>
 					</v-form>
 				</validation-observer>
+				<v-btn
+					@click="twitterLogin"
+					elevation="0"
+					large
+					rounded
+					block
+					class="mt-10 twitter-auth-btn"
+				>
+					<v-icon color="white">mdi-twitter</v-icon>
+					<span class="white--text">Twitterアカウントでログインする</span>
+				</v-btn>
 				<div class="mt-5 text-center">
 					<router-link to="/register" class="cyan--text">
 						アカウントをお持ちではない方はこちら
@@ -104,6 +115,10 @@ export default {
 					}
 				}
 			}
+		},
+		async twitterLogin() {
+			const { data } = await axios.get("/api/socialite/twitter");
+			window.location.href = data;
 		},
 		clearError() {
 			this.$store.commit("auth/setAuthErrorMessages", null);

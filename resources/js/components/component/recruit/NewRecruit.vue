@@ -76,7 +76,7 @@
 					</div>
 					<v-row class="m-0 p-0">
 						<v-col cols="12" sm="6" md="6" lg="12" xl="12" class="p-0">
-						<p class="input-label">エリア</p>
+							<p class="input-label">エリア</p>
 							<v-select
 								v-model="regionId"
 								:items="regions"
@@ -87,23 +87,23 @@
 								@change="searchPrefectures"
 								outlined
 								clearable
-								>
+							>
 							</v-select>
 						</v-col>
 						<v-col cols="12" sm="6" md="6" lg="12" xl="12" class="p-0">
-									<p class="input-label">都道府県</p>
-									<v-select
-										v-model="newPostForm.prefectureId"
-										:items="prefectures"
-										item-text="name"
-										item-value="id"
-										placeholder=""
-										background-color="#f4f8fa"
-										:disabled="preDisabled"
-										outlined
-										clearable
-									>
-									</v-select>
+							<p class="input-label">都道府県</p>
+							<v-select
+								v-model="newPostForm.prefectureId"
+								:items="prefectures"
+								item-text="name"
+								item-value="id"
+								placeholder=""
+								background-color="#f4f8fa"
+								:disabled="preDisabled"
+								outlined
+								clearable
+							>
+							</v-select>
 						</v-col>
 						<v-col class="p-0" cols="12" sm="6" md="6" lg="12" xl="12">
 							<p class="input-label">年代</p>
@@ -298,7 +298,7 @@ export default {
 				type: 0,
 			},
 			products: {
-				label: "画像（サイズ：2MB以内)",
+				label: "画像（サイズ：2MB以内）",
 				pictureValues: [],
 				pictureUrls: [],
 				movieValue: null,

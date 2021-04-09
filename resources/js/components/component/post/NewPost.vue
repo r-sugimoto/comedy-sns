@@ -246,7 +246,7 @@ export default {
 				type: 0,
 			},
 			products: {
-				label: "画像（サイズ：2MB以内)",
+				label: "画像（サイズ：2MB以内）",
 				pictureValues: [],
 				pictureUrls: [],
 				movieValue: null,
