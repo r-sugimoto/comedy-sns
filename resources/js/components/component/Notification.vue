@@ -69,14 +69,14 @@
 					>
 						<v-list-item-avatar>
 							<ListAvatar
-								:thumbnail="n.partners[0].user.thumbnail"
-								:url="n.partners[0].user.thumbnail_url"
+								:thumbnail="n.partners[0].partner_user.thumbnail"
+								:url="n.partners[0].partner_user.thumbnail_url"
 							></ListAvatar>
 						</v-list-item-avatar>
 						<v-list-item-content v-if="n.partners[0].application_flg === null">
 							<v-list-item-title class="list-title"
 								>{{
-									n.partners[0].user.name
+									n.partners[0].partner_user.name
 								}}さんから相方申請が届いています。</v-list-item-title
 							>
 							<v-list-item-subtitle>{{
@@ -87,7 +87,7 @@
 						<v-list-item-content v-if="n.partners[0].application_flg === 0">
 							<v-list-item-title class="list-title"
 								>{{
-									n.partners[0].user.name
+									n.partners[0].partner_user.name
 								}}さんへの相方申請は拒否されました。</v-list-item-title
 							>
 							<v-list-item-subtitle>{{ n.created_at }}</v-list-item-subtitle>
@@ -95,7 +95,7 @@
 						<v-list-item-content v-if="n.partners[0].application_flg === 1">
 							<v-list-item-title class="list-title"
 								>{{
-									n.partners[0].user.name
+									n.partners[0].partner_user.name
 								}}さんとコンビ結成しました。</v-list-item-title
 							>
 							<v-list-item-subtitle>{{ n.created_at }}</v-list-item-subtitle>

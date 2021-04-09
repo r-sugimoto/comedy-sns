@@ -10,16 +10,14 @@ class NoticeController extends Controller
 {
     public function index(){
         $notice = Notice::where('to_user_id', Auth::user()->id)
-        ->where('check_flg', 0)->with(['comments.user', 'messages.user', 'partners.user'])
+        ->where('check_flg', 0)->with(['comments.user', 'messages.user', 'partners.partner_user'])
         ->orderBy(Notice::CREATED_AT, 'desc')->get();
         return $notice;
     }
 
     public function alreadyIndex(){
         $notice = Notice::where('to_user_id', Auth::user()->id)
-        ->where('check_flg', 1)->with(['comments.user', 'messages.user', 'partners.user' => function($query){
-            return $query->where('id', '<>', Auth::user()->id);
-        }])
+        ->where('check_flg', 1)->with(['comments.user', 'messages.user', 'partners.partner_user'])
         ->orderBy(Notice::CREATED_AT, 'desc')->take(10)->get();
         return $notice;
     }
