@@ -124,7 +124,7 @@ Route::prefix('api')->group(function () {
     // 通知取得
     Route::get('/notice', 'NoticeController@index');
     // 通知取得(既読済)
-    Route::get('/notice/already', 'NoticeController@already_index');
+    Route::get('/notice/already', 'NoticeController@alreadyIndex');
     // 既読
     Route::post('/notice/{id}', 'NoticeController@update');
 
