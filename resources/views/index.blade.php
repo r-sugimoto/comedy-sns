@@ -7,7 +7,7 @@
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Comenion</title>
+<title>Comenion - お笑い特化型SNSで相方を見つけよう - </title>
 <link rel="apple-touch-icon" href="{{ asset('images/apple-touch-icon.png') }}">
 <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 @if(env('GA_ENABLE'))

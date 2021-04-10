@@ -176,11 +176,11 @@
 				<p>
 					本ポリシーに関するお問い合わせは，下記の窓口までお願いいたします。
 				</p>
-				<p class="mb-0">Eメールアドレス：info.comenion☆gmail.com</p>
-				<p>
-					※迷惑メール対策のため、「☆」で表記しております。お問合わせの際は「☆」を半角の「@」に変更してご利用ください。
+				<p class="mb-0">
+					<a href="https://ryu-nosu.com/contact/" target="_blank" rel="noopener"
+						>お問い合わせ</a
+					>
 				</p>
-
 				<p class="text-right">以上</p>
 			</v-card>
 		</v-col>
