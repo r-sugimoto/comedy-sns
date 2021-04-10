@@ -83,6 +83,16 @@
 								outlined
 							/>
 						</validation-provider>
+						<div class="mb-5">
+							<router-link to="/kiyaku" class="cyan--text">
+								利用規約
+							</router-link>
+							と
+							<router-link to="/privacy" class="cyan--text">
+								プライバシーポリシー
+							</router-link>
+							をご覧ください。
+						</div>
 						<v-btn
 							@click="register"
 							class="mt-2"
