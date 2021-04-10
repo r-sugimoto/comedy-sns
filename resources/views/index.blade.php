@@ -10,6 +10,17 @@
 <title>Comenion</title>
 <link rel="apple-touch-icon" href="{{ asset('images/apple-touch-icon.png') }}">
 <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+@if(env('GA_ENABLE'))
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139969751-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-139969751-4');
+</script>
+
+@endif
 </head>
 <body>
 <div id="app">
