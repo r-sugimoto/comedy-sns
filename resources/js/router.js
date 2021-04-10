@@ -20,6 +20,8 @@ import Search from "./components/pages/Search.vue";
 import Partner from "./components/pages/Partner.vue";
 import Comedy from "./components/pages/Comedy.vue";
 import ComedyDetail from "./components/pages/ComedyDetail.vue";
+import Kiyaku from "./components/pages/Kiyaku.vue";
+import Privacy from "./components/pages/Privacy.vue";
 
 export default new Router({
 	mode: "history",
@@ -188,6 +190,16 @@ export default new Router({
 			name: "comedy-detail",
 			component: ComedyDetail,
 			props: true,
+		},
+		{
+			path: "/kiyaku",
+			name: "kiyaku",
+			component: Kiyaku,
+		},
+		{
+			path: "/privacy",
+			name: "privacy",
+			component: Privacy,
 		},
 		{
 			path: "/500",
