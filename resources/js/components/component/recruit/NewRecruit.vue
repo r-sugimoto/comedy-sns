@@ -212,7 +212,7 @@
 						<v-col class="p-0" cols="11" sm="11" md="4" lg="4" xl="4">
 							<validation-provider
 								v-slot="{ errors }"
-								rules="size:200000|mimes:mp4,flv,mov,wmv"
+								rules="size:200000|mimes:mp4,flv,wmv,quicktime"
 								name="動画"
 							>
 								<v-file-input
@@ -281,8 +281,11 @@ export default {
 			},
 			rules: {
 				youtubePathCheck: (value) => {
+					var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+					var match = value.match(regExp);
 					return (
-						/\?v=([^&]+)/.test(value) || "正しいYoutubeURLを入力してください。"
+						(match && match[7].length == 11) ||
+						"正しいYoutubeURLを入力してください。"
 					);
 				},
 			},
@@ -350,7 +353,7 @@ export default {
 					this.newPostForm.youtubeId !== null
 				) {
 					formData.append("type", this.newPostForm.type);
-					formData.append("youtube_path", this.newPostForm.youtubeId[1]);
+					formData.append("youtube_path", this.newPostForm.youtubeId);
 				}
 				this.btnLoading = true;
 				const response = await axios.post("/api/recruit/new", formData);
@@ -448,9 +451,10 @@ export default {
 		},
 		// youtubeID取り出す
 		youtubePathCheck() {
-			this.newPostForm.youtubeId = this.products.youtubePath.match(
-				/\?v=([^&]+)/
-			);
+			var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+			var match = this.products.youtubePath.match(regExp);
+			this.newPostForm.youtubeId =
+				match && match[7].length == 11 ? match[7] : null;
 		},
 		productInput(product_id) {
 			if (product_id !== this.newPostForm.type) {

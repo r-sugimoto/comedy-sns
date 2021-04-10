@@ -51,6 +51,9 @@ class Product extends Model
     public function createPostMovie($post, $type, $file){
         $date = Carbon::now();
         $extension = $file->extension();
+        if($extension === "qt"){
+            $extension = "mp4";
+        }
         $directory = "post/{$post->id}/";
         $this->type = $type;
         $name = Str::random(20) . '_' .$date->format('YmdHis') . '.' . $extension;

@@ -25,7 +25,7 @@ class NewPostRequest extends FormRequest
     {
         return [
             'picture_files.*' => 'max:2000|mimes:jpeg,png,jpg,gif',
-            'movie_file' => 'max:200000|mimes:mp4,flv,mov,wmv',
+            'movie_file' => 'max:200000|mimes:mp4,flv,wmv,qt',
         ];
     }
 
