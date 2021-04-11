@@ -49,7 +49,7 @@
 							>
 							<v-img height="300" contain src="/images/sns_group_top.png" />
 							<v-card-text class="justify-center p-0">
-								画像、動画、Youtube動画の投稿ができます。お笑いについて語り合うことができます。<br />
+								画像、動画、Youtube動画の投稿ができ、お笑いについて語り合うことができます。<br />
 								フォロー、いいね、コメント、DM機能を使い、お笑い好きと繋がることができます。
 							</v-card-text>
 						</v-col>
@@ -85,7 +85,7 @@
 							>
 							<v-img height="300" contain src="/images/chat_top.png"></v-img>
 							<v-card-text class="justify-center p-0">
-								外部SNSサービスや、メールアドレスを教える必要はありません。<br />
+								外部SNSサービスのIDや、メールアドレスを教える必要はありません。<br />
 								DM機能を使い、サービス上で直接やり取りする事ができます。
 							</v-card-text>
 						</v-col>
