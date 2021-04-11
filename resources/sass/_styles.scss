@@ -164,6 +164,12 @@
 	margin-top: 60px;
 }
 
+// home ボーダーライン
+.home-border-lr {
+	border-left: solid 3px #f4f8fa;
+	border-right: solid 3px #f4f8fa;
+}
+
 // placeholder対策
 @media screen and (max-width: 640px) {
 	.v-text-field input {
@@ -193,5 +199,14 @@
 
 	.dialog-custom {
 		width: 100% !important;
+	}
+
+	// home ボーダーライン
+	.home-border-lr {
+		border-left: solid 0px #f4f8fa;
+		border-right: solid 0px #f4f8fa;
+	}
+	.home-border-t {
+		border-top: solid 3px #f4f8fa;
 	}
 }

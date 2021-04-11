@@ -33,7 +33,61 @@
 							xl="3"
 							:class="{ 'pt-0': $vuetify.breakpoint.xs }"
 						>
-							<v-img src="/images/home_top.png"></v-img>
+							<v-img height="250" contain src="/images/home_top.png"></v-img>
+						</v-col>
+						<v-col
+							cols="12"
+							sm="4"
+							md="4"
+							lg="4"
+							xl="4"
+							class="mb-1 home-border-t"
+						>
+							<v-card-title
+								class="font-weight-bold subtitle-1 pb-0 justify-center"
+								>タイムラインでお笑いについて語り合おう。</v-card-title
+							>
+							<v-img height="300" contain src="/images/sns_group_top.png" />
+							<v-card-text class="justify-center p-0">
+								画像、動画、Youtube動画の投稿ができます。お笑いについて語り合うことができます。<br />
+								フォロー、いいね、コメント、DM機能を使い、お笑い好きと繋がることができます。
+							</v-card-text>
+						</v-col>
+						<v-col
+							cols="12"
+							sm="4"
+							md="4"
+							lg="4"
+							xl="4"
+							class="home-border-lr home-border-t mb-1"
+						>
+							<v-card-title
+								class="font-weight-bold subtitle-1 pb-0 justify-center"
+								>相方募集投稿でコンビ結成しよう。</v-card-title
+							>
+							<v-img height="300" contain src="/images/recruit_top.png"></v-img>
+							<v-card-text class="justify-center p-0">
+								都道府県や、世代などの条件を設定し、相方募集する事ができます。<br />
+								相方探している方、相方が見つからない方は是非ご活用ください。
+							</v-card-text>
+						</v-col>
+						<v-col
+							cols="12"
+							sm="4"
+							md="4"
+							lg="4"
+							xl="4"
+							class="mb-1 home-border-t"
+						>
+							<v-card-title
+								class="font-weight-bold subtitle-1 pb-0 justify-center"
+								>相方申請からコンビ結成までこのサービス上で完結。</v-card-title
+							>
+							<v-img height="300" contain src="/images/chat_top.png"></v-img>
+							<v-card-text class="justify-center p-0">
+								外部SNSサービスや、メールアドレスを教える必要はありません。<br />
+								DM機能を使い、サービス上で直接やり取りする事ができます。
+							</v-card-text>
 						</v-col>
 					</v-row>
 				</v-container>
