@@ -89,7 +89,7 @@
 							<validation-provider
 								v-slot="{ errors }"
 								ref="picture"
-								rules="size:2000|mimes:jpeg,png,jpg,gif"
+								rules="size:5000|mimes:jpeg,png,jpg,gif"
 								name="画像1"
 							>
 								<v-file-input
@@ -114,7 +114,7 @@
 						<v-col class="p-0" cols="11" sm="11" md="4" lg="4" xl="4">
 							<validation-provider
 								v-slot="{ errors }"
-								rules="size:2000|mimes:jpeg,png,jpg,gif"
+								rules="size:5000|mimes:jpeg,png,jpg,gif"
 								name="画像2"
 							>
 								<v-file-input
@@ -139,7 +139,7 @@
 						<v-col class="p-0" cols="11" sm="11" md="4" lg="4" xl="4">
 							<validation-provider
 								v-slot="{ errors }"
-								rules="size:2000|mimes:jpeg,png,jpg,gif"
+								rules="size:5000|mimes:jpeg,png,jpg,gif"
 								name="画像3"
 							>
 								<v-file-input

@@ -69,7 +69,7 @@ class UserSettingTest extends TestCase
         $this->actingAs($this->user);
 
         // ダミー画像作成　50MB バリデーションは2MBまで
-        $file = UploadedFile::fake()->image('avatar.jpg')->size(2000);
+        $file = UploadedFile::fake()->image('avatar.jpg')->size(5000);
 
         $data = [
             'name' => 'テストだよー',

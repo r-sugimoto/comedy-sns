@@ -3,6 +3,18 @@
 		<v-navigation-drawer v-model="drawer" fixed temporary>
 			<v-list nav dense>
 				<v-list-item-group v-model="group">
+					<v-list-item to="/" v-if="!isLogin">
+						<v-list-item-icon>
+							<v-icon>mdi-home-outline</v-icon>
+						</v-list-item-icon>
+						<v-list-item-title>ホーム</v-list-item-title>
+					</v-list-item>
+					<v-list-item to="/dashboard" v-if="isLogin">
+						<v-list-item-icon>
+							<v-icon>mdi-home-outline</v-icon>
+						</v-list-item-icon>
+						<v-list-item-title>ダッシュボード</v-list-item-title>
+					</v-list-item>
 					<v-list-item to="/login" v-if="!isLogin">
 						<v-list-item-icon>
 							<v-icon>mdi-login-variant</v-icon>
@@ -45,6 +57,12 @@
 						</v-list-item-icon>
 						<v-list-item-title>結成したコンビ</v-list-item-title>
 					</v-list-item>
+					<v-list-item :to="`/profile/${this.isLoginUserId}`" v-if="isLogin">
+						<v-list-item-icon>
+							<v-icon>mdi-account-circle-outline</v-icon>
+						</v-list-item-icon>
+						<v-list-item-title>マイページ</v-list-item-title>
+					</v-list-item>
 					<v-list-item to="/search">
 						<v-list-item-icon>
 							<v-icon>mdi-magnify</v-icon>
@@ -56,6 +74,12 @@
 							<v-icon>mdi-cog-outline</v-icon>
 						</v-list-item-icon>
 						<v-list-item-title>設定</v-list-item-title>
+					</v-list-item>
+					<v-list-item v-if="isLogin" @click="logout()">
+						<v-list-item-icon>
+							<v-icon>mdi-logout-variant</v-icon>
+						</v-list-item-icon>
+						<v-list-item-title>ログアウト</v-list-item-title>
 					</v-list-item>
 				</v-list-item-group>
 			</v-list>

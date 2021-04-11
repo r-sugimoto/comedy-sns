@@ -4,11 +4,9 @@
 		<v-main class="main-top-margin">
 			<FlashMessage />
 			<DefaultLoading />
-			<v-content>
-				<v-container>
-					<router-view />
-				</v-container>
-			</v-content>
+			<v-container>
+				<router-view />
+			</v-container>
 		</v-main>
 		<Footer />
 	</v-app>

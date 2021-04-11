@@ -24,7 +24,7 @@ class UpdateUserSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'picture_file' => 'max:2000|mimes:jpeg,png,jpg,gif',
+            'picture_file' => 'max:5000|mimes:jpeg,png,jpg,gif',
         ];
     }
 

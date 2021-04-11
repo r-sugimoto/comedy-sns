@@ -24,7 +24,7 @@ class NewPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'picture_files.*' => 'max:2000|mimes:jpeg,png,jpg,gif',
+            'picture_files.*' => 'max:5000|mimes:jpeg,png,jpg,gif',
             'movie_file' => 'max:200000|mimes:mp4,flv,wmv,qt',
         ];
     }
