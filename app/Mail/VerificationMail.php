@@ -23,7 +23,7 @@ class VerificationMail extends Mailable
         public function build()
         {
            // 件名
-           $subject = '仮登録受付完了';
+           $subject = '【重要】【Comenion】仮登録受付完了のお知らせ';
 
             // .envの「APP_URL」に設定したurlを取得
             $baseUrl = config('app.url');
