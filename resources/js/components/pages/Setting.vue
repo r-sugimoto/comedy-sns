@@ -55,7 +55,7 @@
 					<v-form>
 						<validation-provider
 							v-slot="{ errors }"
-							rules="size:2000|mimes:jpeg,png,jpg,gif"
+							rules="size:5000|mimes:jpeg,png,jpg,gif"
 							name="プロフィール画像"
 						>
 							<p class="input-label">プロフィール画像（サイズ：2MB以内）</p>

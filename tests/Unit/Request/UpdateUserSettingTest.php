@@ -40,8 +40,8 @@ class UpdateUserSettingTest extends TestCase
 
     public function dataproviderExample()
     {
-        $file_1 = UploadedFile::fake()->image('avatar.jpg')->size(2000);
-        $file_2 = UploadedFile::fake()->image('avatar.jpg')->size(2001);
+        $file_1 = UploadedFile::fake()->image('avatar.jpg')->size(5000);
+        $file_2 = UploadedFile::fake()->image('avatar.jpg')->size(5001);
         $file_2 = UploadedFile::fake()->create('document.pdf');
 
         return [
