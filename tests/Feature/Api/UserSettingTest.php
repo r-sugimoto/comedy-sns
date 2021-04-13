@@ -51,7 +51,7 @@ class UserSettingTest extends TestCase
         // ダーミーデーターを認証させる
         $this->actingAs($this->user);
         
-        // ダミー画像作成　50MB バリデーションは2MBまで
+        // ダミー画像作成　50MB バリデーションは5MBまで
         $file = UploadedFile::fake()->image('avatar.jpg')->size(50000);
 
         $data = [
@@ -68,7 +68,7 @@ class UserSettingTest extends TestCase
         // ダーミーデーターを認証させる
         $this->actingAs($this->user);
 
-        // ダミー画像作成　50MB バリデーションは2MBまで
+        // ダミー画像作成　50MB バリデーションは5MBまで
         $file = UploadedFile::fake()->image('avatar.jpg')->size(5000);
 
         $data = [

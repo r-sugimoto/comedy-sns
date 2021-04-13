@@ -58,7 +58,7 @@
 							rules="size:5000|mimes:jpeg,png,jpg,gif"
 							name="プロフィール画像"
 						>
-							<p class="input-label">プロフィール画像（サイズ：2MB以内）</p>
+							<p class="input-label">プロフィール画像（サイズ：5MB以内）</p>
 							<v-file-input
 								:error-messages="errors"
 								background-color="#f4f8fa"

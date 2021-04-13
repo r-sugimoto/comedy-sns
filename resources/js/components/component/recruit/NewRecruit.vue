@@ -301,7 +301,7 @@ export default {
 				type: 0,
 			},
 			products: {
-				label: "画像（サイズ：2MB以内）",
+				label: "画像（サイズ：5MB以内）",
 				pictureValues: [],
 				pictureUrls: [],
 				movieValue: null,
@@ -462,7 +462,7 @@ export default {
 				if (product_id === 0) {
 					this.initProducts();
 					this.products.pictureShow = true;
-					this.products.label = "画像（サイズ：2MB以内）";
+					this.products.label = "画像（サイズ：5MB以内）";
 				}
 				if (product_id === 1) {
 					this.initProducts();
