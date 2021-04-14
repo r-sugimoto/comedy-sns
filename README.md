@@ -1,6 +1,6 @@
 # アプリ概要
 
-### Comenion (コメ二オン)
+## Comenion (コメ二オン)
 
 #### URL:**[https://comenion.com/](https://comenion.com/)**  
 レスポンシブ化(iPhone5の横幅320pxまで対応)
@@ -83,6 +83,7 @@
   - Docker / docker-compose  
 
 # インフラ構成図
+<img src="https://github.com/r-sugimoto/readme-folder/blob/master/Untitled%20Diagram.png" width="750">
 
 
 
