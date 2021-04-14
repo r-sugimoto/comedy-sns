@@ -74,7 +74,7 @@
   - VeeValidate(バリデーション)
   - vue-infinite-loading(無限スクロール)
 - バックエンド
-　- PHP 7.4.13 / Laravel 6.20.22 
+  - PHP 7.4.13 / Laravel 6.20.22 
 - インフラ
   - AWS(VPC、EC2、RDS、ACM、EBS、IAM、S3)
 - その他使用ツール
