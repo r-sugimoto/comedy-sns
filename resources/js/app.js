@@ -9,7 +9,6 @@ import "@mdi/font/css/materialdesignicons.css";
 import router from "./router";
 import App from "./App.vue";
 import VueTagsInput from "@johmun/vue-tags-input";
-import VueYoutube from "vue-youtube";
 import InfiniteLoading from "vue-infinite-loading";
 import VueCookies from "vue-cookies";
 
@@ -17,7 +16,6 @@ window.Vue = Vue;
 Vue.use(VueRouter);
 Vue.use(Vuetify);
 Vue.use(VueTagsInput);
-Vue.use(VueYoutube);
 Vue.use(InfiniteLoading);
 Vue.use(VueCookies);
 
