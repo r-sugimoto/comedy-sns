@@ -8,9 +8,15 @@
 					dark
 					style="text-transform: none"
 					href="https://twitter.com/comenion_"
+					target="_blank"
 					>公式Twitter</v-btn
 				>
-				<v-btn text rounded dark href="https://ryu-nosu.com/category/comenion/"
+				<v-btn
+					text
+					rounded
+					dark
+					href="https://ryu-nosu.com/category/comenion/"
+					target="_blank"
 					>公式ブログ</v-btn
 				>
 				<v-btn text rounded dark to="/kiyaku">利用規約</v-btn>
