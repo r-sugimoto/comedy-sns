@@ -9,12 +9,9 @@ export default {
 		var a = this.text.split(
 			/(https?:\/\/[\w!?\/\+\-_~=;\.,*&@#$%\(\)\'\[\]]+)/i
 		);
-		console.log(a);
 		var elements = a.map(function (x, i) {
-			console.log(i);
-			console.log(x);
 			if (i % 2) {
-				return createElement("a", { attrs: { href: x } }, x);
+				return createElement("a", { attrs: { href: x, target: "_blank" } }, x);
 			} else {
 				return this._v(x);
 			}
