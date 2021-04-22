@@ -13,13 +13,13 @@
 				</router-link>
 			</v-card-title>
 			<v-card-text class="font-weight-bold pl-3 pr-3">
-				{{ post.message }}
+				<CreateTextUrl :text="post.message" />
 				<Tag
 					v-for="tag in post.tags"
 					:key="`tags-${tag.id}`"
 					:tag-item="tag"
 					:push-name="'post'"
-				></Tag>
+				/>
 			</v-card-text>
 			<Product :product-items="post.products" class="pl-3 pr-3"></Product>
 			<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
@@ -47,12 +47,12 @@
 					:comments-count="post.comments_count"
 					:post-id="post.id"
 					:url="`/post/${post.id}`"
-				></Comment>
+				/>
 				<Like
 					:likes-count="post.likes_count"
 					:liked-by-user="post.liked_by_user"
 					:post-id="post.id"
-				></Like>
+				/>
 			</v-card-actions>
 		</v-card>
 		<v-card
@@ -68,7 +68,7 @@
 				</router-link>
 			</v-card-title>
 			<v-card-text class="font-weight-bold pl-3 pr-3">
-				{{ post.message }}
+				<CreateTextUrl :text="post.message" />
 				<Tag
 					v-for="tag in post.tags"
 					:key="`tags-${tag.id}`"
@@ -127,6 +127,7 @@ import Tag from "../component/Tag.vue";
 import Apply from "../component/recruit/Apply.vue";
 import RecruitContents from "../component/recruit/RecruitContents.vue";
 import Avatar from "../elements/Avatar.vue";
+import CreateTextUrl from "../elements/CreateTextUrl.vue";
 export default {
 	data() {
 		return {};
@@ -139,6 +140,7 @@ export default {
 		Apply,
 		Avatar,
 		RecruitContents,
+		CreateTextUrl,
 	},
 	props: {
 		post: {
