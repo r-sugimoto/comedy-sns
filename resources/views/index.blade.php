@@ -10,7 +10,7 @@
 <title>Comenion - お笑い特化型SNSで相方を見つけよう - </title>
 <link rel="apple-touch-icon" href="{{ asset('images/apple-touch-icon.png') }}">
 <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
-@if(env('GA_ENABLE'))
+
 <meta name="google-site-verification" content="wfZmTz8u-N8atx0Fc7mkkslweqDQ-7yfFj8zLn78ahg" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139969751-4"></script>
@@ -21,7 +21,6 @@
   gtag('config', 'UA-139969751-4');
 </script>
 
-@endif
 </head>
 <body>
 <div id="app">
