@@ -33,6 +33,11 @@ Route::prefix('api')->group(function () {
     // 退会
     Route::post('/user/unsubscribe', 'UserController@destroy');
 
+    //メール通知設定取得
+    Route::get('/user/mail/notice', 'MailNoticeController@index');
+
+    Route::post('/user/mail/notice', 'MailNoticeController@update');
+
     // プロフィール情報取得
     Route::get('/profile/{id}', 'UserController@profileIndex');
 
