@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use App\Message;
 use App\Notice;
 use App\Room;
+use App\User;
+use App\MailNotice;
+use App\Mail\MessageNoticeMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -50,7 +54,25 @@ class MessageController extends Controller
             $notice = new Notice();
             $request->message_id = $message->id;
             $notice->createMessageNotice($request);
+
+            // メール通知用
+            $toUser = User::find($request->to_user_id);
+            // メールの設定があるか判定
+            if(!empty($toUser->email)){
+                $mailNotice = MailNotice::where("user_id",  $toUser->id)->first();
+                if(!empty($mailNotice)){
+                    if($mailNotice->mail_notice_flg === 1 && $mailNotice->message_flg === 1){
+                        $this->sendVerificationMail($toUser->email, Auth::user()->name);
+                    }
+                }
+            }
         }
         return $message;
+    }
+
+    // メール送信用
+    private function sendVerificationMail($email, $name)
+    {
+        Mail::to($email)->send(new MessageNoticeMail($name));
     }
 }

@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Comment;
 use App\Post;
 use App\Notice;
+use App\User;
+use App\MailNotice;
+use App\Mail\CommentNoticeMail;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -27,6 +31,18 @@ class CommentController extends Controller
             $request->to_user_id = $post->user_id;
             $request->comment_id = $comment->id;
             $notice->createCommentNotice($request);
+
+            // メール通知用
+            $toUser = User::find($request->to_user_id);
+            // メールの設定があるか判定
+            if(!empty($toUser->email)){
+                $mailNotice = MailNotice::where("user_id",  $toUser->id)->first();
+                if(!empty($mailNotice)){
+                    if($mailNotice->mail_notice_flg === 1 && $mailNotice->comment_flg === 1){
+                        $this->sendVerificationMail($toUser->email, Auth::user()->name);
+                    }
+                }
+            }
         }
 
         return $comment;
@@ -41,5 +57,11 @@ class CommentController extends Controller
         }
 
         return $comment;
+    }
+
+    // メール送信用
+    private function sendVerificationMail($email, $name)
+    {
+        Mail::to($email)->send(new CommentNoticeMail($name));
     }
 }
