@@ -86,6 +86,7 @@
 							rules="required|max:50"
 						>
 							<v-text-field
+								:loading="chatLoading"
 								@click:append="submitMessage"
 								append-icon="mdi-send"
 								:error-messages="errors"
@@ -115,6 +116,7 @@ export default {
 			user: [],
 			messages: [],
 			message: "",
+			chatLoading: false,
 		};
 	},
 	components: {
@@ -136,19 +138,23 @@ export default {
 			});
 		},
 		async submitMessage() {
-			const isValid = await this.$refs.observer.validate();
-			if (isValid) {
-				const response = await axios.post("/api/chat/message/new", {
-					message: this.message,
-					room_id: this.id,
-					to_user_id: this.user.id,
-				});
-				if (response.status === CREATED) {
-					this.message = "";
-					this.$refs.observer.reset();
-					await this.showMessages();
-				} else {
-					this.$store.commit("error/setCode", response.status);
+			if (!this.chatLoading) {
+				const isValid = await this.$refs.observer.validate();
+				if (isValid) {
+					this.chatLoading = true;
+					const response = await axios.post("/api/chat/message/new", {
+						message: this.message,
+						room_id: this.id,
+						to_user_id: this.user.id,
+					});
+					if (response.status === CREATED) {
+						this.message = "";
+						this.$refs.observer.reset();
+						await this.showMessages();
+					} else {
+						this.$store.commit("error/setCode", response.status);
+					}
+					this.chatLoading = false;
 				}
 			}
 		},

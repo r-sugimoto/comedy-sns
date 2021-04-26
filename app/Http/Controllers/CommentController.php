@@ -33,7 +33,7 @@ class CommentController extends Controller
             $notice->createCommentNotice($request);
 
             // メール通知用
-            $toUser = User::find($post->user_id);
+            $toUser = User::find($request->to_user_id);
             // メールの設定があるか判定
             if(!empty($toUser->email)){
                 $mailNotice = MailNotice::where("user_id",  $toUser->id)->first();

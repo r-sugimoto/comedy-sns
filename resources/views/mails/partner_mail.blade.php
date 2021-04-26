@@ -1,13 +1,13 @@
 @extends('layouts.mail')
 
-    @section('title', 'コメント')
+    @section('title', '相方申請')
 
     @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Comenion運営事務局でございます。<br>{{$name}}さんからコメントが届いています。<br><br></div>
+                    <div class="card-header">Comenion運営事務局でございます。<br>{{$name}}さんから相方申請が届いています。<br><br></div>
 
                     <div class="card-body">
                         <a href='{{$url}}'>今すぐ確認する</a><br><br>
