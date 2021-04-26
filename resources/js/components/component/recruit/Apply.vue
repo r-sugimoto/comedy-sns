@@ -38,6 +38,7 @@
 				<div class="ta-r">
 					<v-btn
 						@click="postApply"
+						:loading="btnLoading"
 						class="justify-right"
 						color="cyan"
 						elevation="0"
@@ -59,6 +60,7 @@ export default {
 		return {
 			dialog: false,
 			message: null,
+			btnLoading: false,
 		};
 	},
 	props: {
@@ -78,6 +80,7 @@ export default {
 			const isValid = await this.$refs.observer.validate();
 			let self = this;
 			if (isValid) {
+				this.btnLoading = true;
 				const response = await axios.post("/api/partner/new", {
 					message: this.message,
 					user_id: this.UserId,
