@@ -36,6 +36,7 @@
 <script>
 import Tag from "../Tag.vue";
 import Avatar from "../../elements/Avatar.vue";
+import CreateTextUrl from "../../elements/CreateTextUrl.vue";
 export default {
 	props: {
 		user: {
@@ -45,6 +46,7 @@ export default {
 	components: {
 		Tag,
 		Avatar,
+		CreateTextUrl,
 	},
 };
 </script>
