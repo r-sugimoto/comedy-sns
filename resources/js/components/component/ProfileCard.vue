@@ -40,7 +40,7 @@
 			自己紹介
 		</v-card-title>
 		<v-card-text class="font-weight-bold pl-3 pr-3 pb-0 pt-0">
-			{{ profiles.introduction }}
+			<CreateTextUrl :text="profiles.introduction" />
 			<Tag
 				v-for="tag in profiles.tags"
 				:key="`profile-tags-${tag.id}`"
@@ -58,6 +58,7 @@ import Follow from "../component/profile/Follow.vue";
 import ProfileTabs from "../component/profile/ProfileTabs.vue";
 import ChatAction from "../component/profile/ChatAction.vue";
 import Avatar from "../elements/Avatar.vue";
+import CreateTextUrl from "../elements/CreateTextUrl.vue";
 export default {
 	data() {
 		return {
@@ -71,6 +72,7 @@ export default {
 		Follow,
 		ChatAction,
 		Avatar,
+		CreateTextUrl,
 	},
 	props: {
 		id: {
