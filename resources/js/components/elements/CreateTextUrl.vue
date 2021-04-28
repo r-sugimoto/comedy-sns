@@ -11,7 +11,17 @@ export default {
 		);
 		var elements = a.map(function (x, i) {
 			if (i % 2) {
-				return createElement("a", { attrs: { href: x, target: "_blank" } }, x);
+				return createElement(
+					"a",
+					{
+						attrs: {
+							href: x,
+							target: "_blank",
+							rel: "noopener noreferrer nofollow",
+						},
+					},
+					x
+				);
 			} else {
 				return this._v(x);
 			}

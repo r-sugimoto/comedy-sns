@@ -27,7 +27,7 @@
 					{{ post.title }}
 				</v-card-title>
 				<v-card-text class="font-weight-bold pl-3 pr-3">
-					{{ post.message }}
+					<CreateTextUrl :text="post.message" />
 					<Tag
 						v-for="(tag, i) in post.tags"
 						:key="`tags-${i}`"
@@ -85,7 +85,7 @@
 					<v-icon>mdi-reply</v-icon>
 				</v-card-actions>
 				<v-card-text class="font-weight-bold pl-3 pr-3 pt-0 pb-0">
-					{{ comment.pivot.message }}
+					<CreateTextUrl :text="comment.pivot.message" />
 				</v-card-text>
 				<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
 					<router-link
@@ -129,6 +129,7 @@ import OptionCommentDetail from "../component/OptionCommentDetail.vue";
 import ProfileCard from "../component/ProfileCard.vue";
 import RouteBack from "../component/RouteBack.vue";
 import Avatar from "../elements/Avatar.vue";
+import CreateTextUrl from "../elements/CreateTextUrl.vue";
 export default {
 	data() {
 		return {
@@ -147,6 +148,7 @@ export default {
 		ProfileCard,
 		RouteBack,
 		Avatar,
+		CreateTextUrl,
 	},
 	props: {
 		id: {

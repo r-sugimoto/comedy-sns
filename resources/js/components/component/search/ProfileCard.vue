@@ -22,7 +22,7 @@
 			</router-link>
 		</v-card-actions>
 		<v-card-text class="font-weight-bold pl-3 pr-3 pb-0 pt-0">
-			{{ user.introduction }}
+			<CreateTextUrl :text="user.introduction" />
 			<Tag
 				v-for="(tag, i) in user.tags"
 				:key="`profile-tags-${i}`"
