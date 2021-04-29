@@ -157,6 +157,8 @@ Route::get('/verification/{token}', 'Auth\VerificationController@register')->nam
 // Twitterコールバック
 Route::get('/twitter/callback', 'SocialiteController@handleTwitterProviderCallback');
 
+Route::get('sitemap.xml', 'SitemapController@sitemap');
+
 Route::get('/{any}', function () {
     return view('index');
 })->where('any', '.*');
