@@ -3,9 +3,14 @@ export default {
 	props: {
 		text: {
 			type: String,
+			default: "",
 		},
 	},
 	render: function (createElement) {
+		// null弾く
+		if (this.text == null) {
+			return this.text;
+		}
 		var a = this.text.split(
 			/(https?:\/\/[\w!?\/\+\-_~=;\.,*&@#$%\(\)\'\[\]]+)/i
 		);
