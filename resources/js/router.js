@@ -2,6 +2,7 @@ import Router from "vue-router";
 import store from "./store";
 import Home from "./components/pages/Home.vue";
 import RegisterMail from "./components/pages/RegisterMail.vue";
+import SettingMail from "./components/pages/SettingMail.vue";
 import Dashboard from "./components/pages/Dashboard.vue";
 import Setting from "./components/pages/Setting.vue";
 import SystemError from "./components/pages/SystemError.vue";
@@ -59,6 +60,18 @@ export default new Router({
 					next("/dashboard");
 				} else {
 					next();
+				}
+			},
+		},
+		{
+			path: "/setting/mail",
+			name: "setting-mail",
+			component: SettingMail,
+			beforeEnter(to, from, next) {
+				if (store.getters["auth/check"]) {
+					next();
+				} else {
+					next("/");
 				}
 			},
 		},

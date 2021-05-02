@@ -24,6 +24,12 @@
 						<v-list-item-icon>
 							<v-icon>mdi-email-receive-outline</v-icon>
 						</v-list-item-icon>
+						<v-list-item-title>メールアドレス設定</v-list-item-title>
+					</v-list-item>
+					<v-list-item>
+						<v-list-item-icon>
+							<v-icon>mdi-email-receive-outline</v-icon>
+						</v-list-item-icon>
 						<v-list-item-title>メール通知設定</v-list-item-title>
 					</v-list-item>
 					<v-list-item>
@@ -44,9 +50,12 @@
 					>プロフィール設定</v-tab
 				>
 				<v-tab class="text-decoration-none" @click="item = 1"
+					>メールアドレス設定</v-tab
+				>
+				<v-tab class="text-decoration-none" @click="item = 2"
 					>メール通知設定</v-tab
 				>
-				<v-tab class="text-decoration-none" @click="item = 2">退会</v-tab>
+				<v-tab class="text-decoration-none" @click="item = 3">退会</v-tab>
 			</v-tabs>
 		</v-col>
 		<v-col
@@ -57,14 +66,16 @@
 			:class="{ 'pt-0': $vuetify.breakpoint.xs || $vuetify.breakpoint.sm }"
 		>
 			<ProfileSetting v-if="item === 0" />
-			<MailNotice v-if="item === 1" />
-			<WithdrawalSetting v-if="item === 2" />
+			<MailSetting v-if="item === 1" />
+			<MailNotice v-if="item === 2" />
+			<WithdrawalSetting v-if="item === 3" />
 		</v-col>
 	</v-row>
 </template>
 
 <script>
 import ProfileSetting from "../component/setting/ProfileSetting.vue";
+import MailSetting from "../component/setting/MailSetting.vue";
 import MailNotice from "../component/setting/MailNotice.vue";
 import WithdrawalSetting from "../component/setting/WithdrawalSetting.vue";
 export default {
@@ -75,6 +86,7 @@ export default {
 	},
 	components: {
 		ProfileSetting,
+		MailSetting,
 		MailNotice,
 		WithdrawalSetting,
 	},
