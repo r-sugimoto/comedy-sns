@@ -16,6 +16,7 @@ class MailSettingsTable extends Migration
         Schema::create('mail_settings', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token');
+            $table->integer('user_id')->comment('ユーザーID');
             $table->timestamp('created_at')->nullable();
         });
     }

@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use App\Mail\SettingMail;
 
 class MailSettingController extends Controller
@@ -22,6 +23,7 @@ class MailSettingController extends Controller
         $setting = new MailSetting();
         $setting->email = $request->email;
         $setting->token = $token;
+        $setting->user_id = Auth::user()->id;
         $setting->save();
         Mail::to($setting->email)->send(new SettingMail($token));
         return $setting;
@@ -40,5 +42,30 @@ class MailSettingController extends Controller
     private function createToken()
     {
         return hash_hmac('sha256', Str::random(40), config('app.key'));
+    }
+
+    // vueでアクセスするホームへのルート
+    protected $vueRouteHome = 'setting';
+    // vueでアクセスするログインへのルート
+    protected $vueRouteLogin = 'login';
+
+    public function settingEmail($token){
+        $setting = MailSetting::where('token', $token)->first();
+        if(!$setting){
+            MailSetting::destroy($setting->email);
+        }else{
+            $message = 'メールの設定に失敗しました。';
+            return $this->redirectWithMessage($this->vueRouteLogin, $message);
+        }
+
+
+    }
+
+    protected function redirectWithMessage($vueRoute, $message)
+    {
+        // ログイン後のURL
+        $route = url($vueRoute);
+
+        return redirect($route)->cookie('MESSAGE', $message, 0, '', '', false, false);
     }
 }

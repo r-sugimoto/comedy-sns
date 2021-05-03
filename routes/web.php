@@ -156,6 +156,9 @@ Route::prefix('api')->group(function () {
 // 会員登録トークン取得
 Route::get('/verification/{token}', 'Auth\VerificationController@register')->name('verification');
 
+// メール設定トークン取得
+Route::get('/email/{token}', 'MailSettingController@settingEmail');
+
 // SNSログイン
 // Twitterコールバック
 Route::get('/twitter/callback', 'SocialiteController@handleTwitterProviderCallback');
