@@ -39,6 +39,8 @@ Route::prefix('api')->group(function () {
     Route::post('/user/mail/notice', 'MailNoticeController@update');
 
     // メールアドレス設定
+    Route::get('/user/mail/setting', 'MailSettingController@index');
+
     Route::post('/user/mail/setting', 'MailSettingController@setting');
 
     // プロフィール情報取得

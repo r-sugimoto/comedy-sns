@@ -52,6 +52,17 @@ export default {
 		};
 	},
 	methods: {
+		async getEmail() {
+			const { status, data } = await axios.get("/api/user/mail/setting");
+			if (status === OK) {
+				if (data.email !== null) {
+					this.email = data.email;
+				}
+			} else {
+				this.$store.commit("error/setCode", status);
+			}
+			this.loading = false;
+		},
 		async changeEmail() {
 			const isValid = await this.$refs.observer.validate();
 			if (isValid) {
@@ -62,10 +73,14 @@ export default {
 				if (status === CREATED) {
 					this.$router.push("/setting/mail");
 				} else {
+					this.$store.commit("error/setCode", status);
 				}
 				this.loading = false;
 			}
 		},
+	},
+	created() {
+		this.getEmail();
 	},
 };
 </script>

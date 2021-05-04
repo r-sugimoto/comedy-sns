@@ -27,11 +27,14 @@ class VerificationController extends Controller
         // 取得できなかった場合
         if (!$registerUser) {
 
-            // 失敗メッセージを作成
-            $message = '登録に失敗しました。';
+            $message = [
+                'message' => '登録に失敗しました。',
+                // 成功:0 失敗:１
+                'flg' => 1,
+            ];
 
             // メッセージをつけてリダイレクト
-            return $this->redirectWithMessage($this->vueRouteLogin, $message);
+            return $this->redirectWithMessage($this->vueRouteLogin, $message, 'ERROR_MESSAGE');
         }
 
         // 仮登録のデータでユーザを作成
@@ -40,8 +43,11 @@ class VerificationController extends Controller
         // 作成したユーザをログインさせる
         Auth::login($user, true);
 
-        // 成功メッセージ
-        $message = '登録完了しました。';
+        $message = [
+            'message' => '登録完了しました。',
+            // 成功:0 失敗:１
+            'flg' => 0,
+        ];
 
         // メッセージをつけてリダイレクト
         return $this->redirectWithMessage($this->vueRouteHome, $message);
@@ -85,6 +91,8 @@ class VerificationController extends Controller
     {
         // ログイン後のURL
         $route = url($vueRoute);
+
+        $message = json_encode($message);
 
         return redirect($route)->cookie('MESSAGE', $message, 0, '', '', false, false);
     }

@@ -14,6 +14,11 @@ use App\Mail\SettingMail;
 
 class MailSettingController extends Controller
 {
+    public function index(){
+        $user = User::select("email", "thumbnail")->where("id", Auth::user()->id)->first();
+        return $user;
+    }
+
     public function setting(Request $request)
     {
         // 送られてきた内容のバリデーション
@@ -45,26 +50,40 @@ class MailSettingController extends Controller
     }
 
     // vueでアクセスするホームへのルート
-    protected $vueRouteHome = 'setting';
+    protected $vueRouteSetting = 'setting';
     // vueでアクセスするログインへのルート
-    protected $vueRouteLogin = 'login';
+    protected $vueRouteHome = 'dashboard';
 
     public function settingEmail($token){
         $setting = MailSetting::where('token', $token)->first();
         if(!$setting){
-            MailSetting::destroy($setting->email);
-        }else{
-            $message = 'メールの設定に失敗しました。';
-            return $this->redirectWithMessage($this->vueRouteLogin, $message);
+            $message = [
+                'message' => 'メールの設定に失敗しました。',
+                // 成功:0 失敗:１
+                'flg' => 1,
+            ];
+            return $this->redirectWithMessage($this->vueRouteHome, $message);
         }
 
-
+        MailSetting::destroy($setting->email);
+        $user = User::find($setting->user_id);
+        $user->email = $setting->email;
+        $user->update();
+        $message = [
+            'message' => 'メールの設定に成功しました。',
+            // 成功:0 失敗:１
+            'flg' => 0,
+        ];
+        Auth::login($user, true);
+        return $this->redirectWithMessage($this->vueRouteSetting, $message);
     }
 
     protected function redirectWithMessage($vueRoute, $message)
     {
         // ログイン後のURL
         $route = url($vueRoute);
+
+        $message = json_encode($message);
 
         return redirect($route)->cookie('MESSAGE', $message, 0, '', '', false, false);
     }

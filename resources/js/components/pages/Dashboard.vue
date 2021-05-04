@@ -114,19 +114,6 @@ export default {
 		await this.getPosts();
 		await this.getRecruits();
 		await this.getComedies();
-
-		// 登録用フラッシュメッセージ
-		const message = this.$cookies.get("MESSAGE");
-		if (message) {
-			this.$store.dispatch("flash/showFlashMessage", {
-				show: true,
-				message: message,
-				type: 0,
-				seconds: 3000,
-			});
-			// cookieをクリア
-			this.$cookies.remove("MESSAGE");
-		}
 	},
 };
 </script>
