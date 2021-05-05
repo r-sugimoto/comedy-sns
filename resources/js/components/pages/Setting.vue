@@ -22,7 +22,7 @@
 					</v-list-item>
 					<v-list-item>
 						<v-list-item-icon>
-							<v-icon>mdi-email-receive-outline</v-icon>
+							<v-icon>mdi-email-edit-outline</v-icon>
 						</v-list-item-icon>
 						<v-list-item-title>メールアドレス設定</v-list-item-title>
 					</v-list-item>

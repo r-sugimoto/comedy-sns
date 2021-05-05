@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { OK, CREATED } from "../../../util";
+import { OK, CREATED, UNPROCESSABLE_ENTITY } from "../../../util";
 export default {
 	data() {
 		return {
@@ -67,11 +67,13 @@ export default {
 			const isValid = await this.$refs.observer.validate();
 			if (isValid) {
 				this.loading = true;
-				const { status } = await axios.post("/api/user/mail/setting", {
+				const { status, data } = await axios.post("/api/user/mail/setting", {
 					email: this.email,
 				});
 				if (status === CREATED) {
 					this.$router.push("/setting/mail");
+				} else if (status === UNPROCESSABLE_ENTITY) {
+					this.emailRules = data.errors.email;
 				} else {
 					this.$store.commit("error/setCode", status);
 				}

@@ -34,7 +34,7 @@ class VerificationController extends Controller
             ];
 
             // メッセージをつけてリダイレクト
-            return $this->redirectWithMessage($this->vueRouteLogin, $message, 'ERROR_MESSAGE');
+            return $this->redirectWithMessage($this->vueRouteLogin, $message);
         }
 
         // 仮登録のデータでユーザを作成

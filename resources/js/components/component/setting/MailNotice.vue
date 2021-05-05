@@ -60,7 +60,6 @@ export default {
 			const { status, data } = await axios.get("/api/user/mail/notice");
 			if (status === OK) {
 				if (data.length !== 0) {
-					console.log(data);
 					if (data.mail_notice_flg === 0) {
 						this.mailNotice = false;
 					} else {
