@@ -51,6 +51,23 @@ export default {
 			this.$store.commit("error/setCode", null);
 		},
 	},
+	created() {
+		// 登録用フラッシュメッセージ
+		const msg = this.$cookies.get("MESSAGE");
+		if (msg) {
+			this.$store.dispatch("flash/showFlashMessage", {
+				show: true,
+				message: msg.message,
+				type: msg.flg,
+			});
+			// cookieをクリア
+			this.$cookies.remove("MESSAGE");
+
+			setTimeout(() => {
+				this.$store.commit("flash/setShowFlash", false);
+			}, 5000);
+		}
+	},
 };
 </script>
 

@@ -38,6 +38,11 @@ Route::prefix('api')->group(function () {
 
     Route::post('/user/mail/notice', 'MailNoticeController@update');
 
+    // メールアドレス設定
+    Route::get('/user/mail/setting', 'MailSettingController@index');
+
+    Route::post('/user/mail/setting', 'MailSettingController@setting');
+
     // プロフィール情報取得
     Route::get('/profile/{id}', 'UserController@profileIndex');
 
@@ -152,6 +157,9 @@ Route::prefix('api')->group(function () {
 
 // 会員登録トークン取得
 Route::get('/verification/{token}', 'Auth\VerificationController@register')->name('verification');
+
+// メール設定トークン取得
+Route::get('/email/{token}', 'MailSettingController@settingEmail');
 
 // SNSログイン
 // Twitterコールバック
