@@ -109,6 +109,42 @@
 					name="remember"
 					class="m-0"
 				></v-checkbox>
+				<validation-provider v-slot="{ errors }" name="Twitterアカウント">
+					<p class="input-label">Twitterアカウント</p>
+					<v-text-field
+						:error-messages="errors"
+						background-color="#f4f8fa"
+						type="text"
+						name="name"
+						v-model="userSettingForm.twitter"
+						required
+						outlined
+					/>
+				</validation-provider>
+				<validation-provider v-slot="{ errors }" name="instagramアカウント">
+					<p class="input-label">instagramアカウント</p>
+					<v-text-field
+						:error-messages="errors"
+						background-color="#f4f8fa"
+						type="text"
+						name="name"
+						v-model="userSettingForm.instagram"
+						required
+						outlined
+					/>
+				</validation-provider>
+				<validation-provider v-slot="{ errors }" name="LINEアカウント">
+					<p class="input-label">LINEアカウント</p>
+					<v-text-field
+						:error-messages="errors"
+						background-color="#f4f8fa"
+						type="text"
+						name="name"
+						v-model="userSettingForm.line"
+						required
+						outlined
+					/>
+				</validation-provider>
 				<div class="text-right">
 					<v-btn
 						@click="postUserSetting"
@@ -149,6 +185,9 @@ export default {
 				publishedAge: 0,
 				prefectureId: "",
 				publishedPrefecture: 0,
+				twitter: "",
+				instagram: "",
+				line: "",
 			},
 		};
 	},
