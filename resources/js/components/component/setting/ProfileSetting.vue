@@ -109,11 +109,16 @@
 					name="remember"
 					class="m-0"
 				></v-checkbox>
-				<validation-provider v-slot="{ errors }" name="Twitterアカウント">
+				<validation-provider
+					v-slot="{ errors }"
+					name="Twitterアカウント"
+					rules="max:15"
+				>
 					<p class="input-label">Twitterアカウント</p>
 					<v-text-field
 						:error-messages="errors"
 						background-color="#f4f8fa"
+						placeholder="@マーク以降のユーザー名"
 						type="text"
 						name="name"
 						v-model="userSettingForm.twitter"
@@ -121,11 +126,16 @@
 						outlined
 					/>
 				</validation-provider>
-				<validation-provider v-slot="{ errors }" name="instagramアカウント">
+				<validation-provider
+					v-slot="{ errors }"
+					name="instagramアカウント"
+					rules="max:30"
+				>
 					<p class="input-label">instagramアカウント</p>
 					<v-text-field
 						:error-messages="errors"
 						background-color="#f4f8fa"
+						placeholder="ユーザーネーム"
 						type="text"
 						name="name"
 						v-model="userSettingForm.instagram"
@@ -133,11 +143,16 @@
 						outlined
 					/>
 				</validation-provider>
-				<validation-provider v-slot="{ errors }" name="LINEアカウント">
+				<validation-provider
+					v-slot="{ errors }"
+					name="LINEアカウント"
+					rules="max:30"
+				>
 					<p class="input-label">LINEアカウント</p>
 					<v-text-field
 						:error-messages="errors"
 						background-color="#f4f8fa"
+						placeholder="LINEID"
 						type="text"
 						name="name"
 						v-model="userSettingForm.line"
@@ -212,6 +227,9 @@ export default {
 				formData.append("introduction", this.userSettingForm.introduction);
 				formData.append("prefecture_id", this.userSettingForm.prefectureId);
 				formData.append("tags", JSON.stringify(this.userSettingForm.tags));
+				formData.append("twitter", this.userSettingForm.twitter);
+				formData.append("instagram", this.userSettingForm.instagram);
+				formData.append("line", this.userSettingForm.line);
 				if (this.userSettingForm.pictureFile.length) {
 					formData.append("thumbnail", this.userSettingForm.pictureFile[0]);
 				}
@@ -234,43 +252,55 @@ export default {
 		},
 		// ユーザー情報取得
 		async getUserSetting() {
-			const response = await axios.get("/api/user/setting");
-			if (response.status === OK) {
-				this.thumbnail = response.data.thumbnail;
+			const { status, data } = await axios.get("/api/user/setting");
+			console.log(data);
+			if (status === OK) {
+				this.thumbnail = data.thumbnail;
 				if (this.thumbnail === null) {
 					this.preview = "/images/penguin.png";
 				} else {
-					this.preview = response.data.thumbnail_url;
+					this.preview = data.thumbnail_url;
 				}
-				this.userSettingForm.name = response.data.name;
-				this.userSettingForm.prefectureId = response.data.prefecture_id;
-				this.userSettingForm.introduction = response.data.introduction;
-				this.userSettingForm.age = response.data.age;
-				if (response.data.published_age_flg === 0) {
+				this.userSettingForm.name = data.name;
+				this.userSettingForm.prefectureId = data.prefecture_id;
+				this.userSettingForm.introduction = data.introduction;
+				this.userSettingForm.age = data.age;
+				if (data.published_age_flg === 0) {
 					this.userSettingForm.publishedAge = false;
 				} else {
 					this.userSettingForm.publishedAge = true;
 				}
-				if (response.data.published_prefecture_flg === 0) {
+				if (data.published_prefecture_flg === 0) {
 					this.userSettingForm.publishedPrefecture = false;
 				} else {
 					this.userSettingForm.publishedPrefecture = true;
 				}
-				for (var i = 0; i < response.data.tags.length; i++) {
+				for (var i = 0; i < data.tags.length; i++) {
 					this.$set(this.userSettingForm.tags, i, {
-						text: response.data.tags[i].name,
+						text: data.tags[i].name,
 					});
 				}
+				if (data.social !== null) {
+					if (data.social.twitter_id !== null) {
+						this.userSettingForm.twitter = data.social.twitter_id;
+					}
+					if (data.social.instagram_id !== null) {
+						this.userSettingForm.instagram = data.social.instagram_id;
+					}
+					if (data.social.line_id !== null) {
+						this.userSettingForm.line = data.social.line_id;
+					}
+				}
 			} else {
-				this.$store.commit("error/setCode", response.status);
+				this.$store.commit("error/setCode", status);
 			}
 		},
 		async getPrefectures() {
-			const response = await axios.get("/api/prefecture");
-			if (response.status === OK) {
-				this.prefectures = response.data;
+			const { status, data } = await axios.get("/api/prefecture");
+			if (status === OK) {
+				this.prefectures = data;
 			} else {
-				this.$store.commit("error/setCode", response.status);
+				this.$store.commit("error/setCode", status);
 			}
 		},
 		// 画像ファイル格納

@@ -63,6 +63,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Tag');
     }
 
+    public function social()
+    {
+        return $this->hasOne('App\Social');
+    }
+
     public function prefecture(){
         return $this->belongsTo('App\Prefecture');
     }

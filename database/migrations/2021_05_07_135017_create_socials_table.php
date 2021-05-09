@@ -15,9 +15,10 @@ class CreateSocialsTable extends Migration
     {
         Schema::create('socials', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('twitter_id')->comment('TwitterアカウントID');
-            $table->string('instagram_id')->comment('instagramアカウントID');
-            $table->string('line_id')->comment('lineアカウントID');
+            $table->integer('user_id')->comment('ユーザーID');
+            $table->string('twitter_id')->nullable()->comment('TwitterアカウントID');
+            $table->string('instagram_id')->nullable()->comment('instagramアカウントID');
+            $table->string('line_id')->nullable()->comment('lineアカウントID');
             $table->timestamps();
         });
     }
