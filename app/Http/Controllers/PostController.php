@@ -27,7 +27,7 @@ class PostController extends Controller
         $type = $request->type;
         $posts = Post::select('id', 'user_id', 'recruit_id','title','message', 'created_at')
         ->whereNull('recruit_id')->where('message', 'like', "%$request->freeword%")
-        ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'user.follow_users'])
+        ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'user.follow_users', 'user.social'])
         ->when($tag, function ($query, $tag){
             return $query->whereHas('tags', function($query) use($tag) {
                 return $query->where('id', $tag);
@@ -103,7 +103,7 @@ class PostController extends Controller
         $type = $request->type;
         $posts = Post::select('id', 'user_id', 'title','message', 'recruit_id', 'created_at')
             ->whereNotNull('recruit_id')->where('message', 'like', "%$request->freeword%")
-            ->with(['user:id,name,thumbnail', 'user.follower_users', 'products:id,name,type', 'tags', 'recruit.prefecture','recruit.prefecture.region', 'recruit.generation'])
+            ->with(['user:id,name,thumbnail', 'user.follower_users', 'user.social', 'products:id,name,type', 'tags', 'recruit.prefecture','recruit.prefecture.region', 'recruit.generation'])
             ->when($tag, function ($query, $tag){
                 return $query->whereHas('tags', function($query) use($tag) {
                     return $query->where('id', $tag);
@@ -227,7 +227,7 @@ class PostController extends Controller
     {
         $posts = Post::select('id', 'user_id', 'recruit_id','title','message', 'created_at')
         ->whereNull('recruit_id')
-        ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'user.follow_users'])
+        ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'user.follow_users', 'user.social'])
         ->orderBy(Post::CREATED_AT, 'desc')->take(6)->get();
         return $posts;
     }
@@ -236,7 +236,7 @@ class PostController extends Controller
     {
         $posts = Post::select('id', 'user_id', 'recruit_id','title','message', 'created_at')
         ->whereNotNull('recruit_id')
-        ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'user.follow_users', 'recruit.prefecture.region', 'recruit.generation'])
+        ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'user.follow_users', 'user.social', 'recruit.prefecture.region', 'recruit.generation'])
         ->orderBy(Post::CREATED_AT, 'desc')->take(6)->get();
         return $posts;
     }
