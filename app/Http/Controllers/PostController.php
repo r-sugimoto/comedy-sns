@@ -179,7 +179,7 @@ class PostController extends Controller
             ->when($post, function ($query, $post){
                 return $query->where('user_id', '=', $post);
             })
-            ->with(['user:id,name,thumbnail', 'products:id,name,type', 'tags', 'likes', 'comments','recruit.prefecture','recruit.prefecture.region', 'recruit.generation'])
+            ->with(['user:id,name,thumbnail', 'user.social', 'products:id,name,type', 'tags', 'likes', 'comments','recruit.prefecture','recruit.prefecture.region', 'recruit.generation'])
         // いいねした投稿
             ->when($like, function ($query, $like){
                 return $query->whereHas('likes', function($query) use($like) {
