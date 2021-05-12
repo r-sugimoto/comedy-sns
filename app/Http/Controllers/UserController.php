@@ -47,7 +47,7 @@ class UserController extends Controller
 
     // プロフィールページ情報取得
     public function profileIndex(string $id){
-        $user = User::where('id', $id)->with(['tags:id,name', 'prefecture:id,name'])->first();
+        $user = User::where('id', $id)->with(['tags:id,name', 'prefecture:id,name', 'social'])->first();
         return $user;
     }
 

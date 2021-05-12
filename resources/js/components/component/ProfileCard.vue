@@ -48,14 +48,18 @@
 				:push-name="'profile'"
 			></Tag>
 		</v-card-text>
+		<SocialActions
+			v-if="profiles.social !== null && profiles.social !== undefined"
+			:socials="profiles.social"
+		/>
 	</v-card>
 </template>
 
 <script>
 import { OK } from "../../util";
 import Tag from "../component/Tag.vue";
+import SocialActions from "../component/SocialActions.vue";
 import Follow from "../component/profile/Follow.vue";
-import ProfileTabs from "../component/profile/ProfileTabs.vue";
 import ChatAction from "../component/profile/ChatAction.vue";
 import Avatar from "../elements/Avatar.vue";
 import CreateTextUrl from "../elements/CreateTextUrl.vue";
@@ -68,7 +72,7 @@ export default {
 	},
 	components: {
 		Tag,
-		ProfileTabs,
+		SocialActions,
 		Follow,
 		ChatAction,
 		Avatar,
@@ -82,11 +86,11 @@ export default {
 	},
 	methods: {
 		async showProfile() {
-			const response = await axios.get(`/api/profile/${this.id}`);
-			if (response.status === OK) {
+			const { status, data } = await axios.get(`/api/profile/${this.id}`);
+			if (status === OK) {
 				this.check = false;
-				if (response.data.length !== 0) {
-					this.profiles = response.data;
+				if (data.length !== 0) {
+					this.profiles = data;
 					if (this.profiles.published_age_flg === 1) {
 						this.profiles.age = "非公開";
 					}
@@ -99,7 +103,7 @@ export default {
 					this.$router.push({ name: "404" });
 				}
 			} else {
-				this.$store.commit("error/setCode", response.status);
+				this.$store.commit("error/setCode", status);
 			}
 		},
 	},
