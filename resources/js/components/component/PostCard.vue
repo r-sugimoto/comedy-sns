@@ -38,6 +38,10 @@
 					</span>
 				</router-link>
 			</v-card-actions>
+			<SocialActions
+				v-if="post.user.social !== null && post.user.social !== undefined"
+				:socials="post.user.social"
+			/>
 			<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
 				<span class="text--disabled">{{ post.created_at }}</span>
 			</v-card-actions>
@@ -94,6 +98,10 @@
 					</span>
 				</router-link>
 			</v-card-actions>
+			<SocialActions
+				v-if="post.user.social !== null && post.user.social !== undefined"
+				:socials="post.user.social"
+			/>
 			<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
 				<span class="text--disabled">{{ post.created_at }}</span>
 			</v-card-actions>
@@ -121,6 +129,7 @@
 
 <script>
 import Like from "../component/Like.vue";
+import SocialActions from "../component/SocialActions.vue";
 import Comment from "../component/Comment.vue";
 import Product from "../component/Product.vue";
 import Tag from "../component/Tag.vue";
@@ -134,6 +143,7 @@ export default {
 	},
 	components: {
 		Tag,
+		SocialActions,
 		Like,
 		Product,
 		Comment,
