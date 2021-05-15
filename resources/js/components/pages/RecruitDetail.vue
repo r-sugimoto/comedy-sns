@@ -34,6 +34,7 @@
 						:tag-item="tag"
 						:push-name="'recruit'"
 					></Tag>
+					<RecruitContents :recruit-content="post.recruit"></RecruitContents>
 				</v-card-text>
 				<Product :product-items="post.products" class="pl-3 pr-3"></Product>
 				<v-card-actions class="pl-3 pr-3 pt-2 pb-0">

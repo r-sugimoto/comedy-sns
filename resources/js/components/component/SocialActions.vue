@@ -1,5 +1,5 @@
 <template>
-	<v-card-actions class="pt-2 pl-3 pr-3 pb-2">
+	<v-card-actions class="pl-3 pr-3 pt-0 pb-0">
 		<v-btn
 			v-if="socials.twitter_id !== null"
 			large
@@ -24,7 +24,7 @@
 		</v-btn>
 		<v-btn
 			v-if="socials.line_id !== null"
-			large
+			small
 			rounded
 			dark
 			target="_blank"

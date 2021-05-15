@@ -39,7 +39,7 @@
 				</router-link>
 			</v-card-actions>
 			<SocialActions
-				v-if="post.user.social !== null && post.user.social !== undefined"
+				v-if="post.user.social !== null"
 				:socials="post.user.social"
 			/>
 			<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
