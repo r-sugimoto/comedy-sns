@@ -253,7 +253,6 @@ export default {
 		// ユーザー情報取得
 		async getUserSetting() {
 			const { status, data } = await axios.get("/api/user/setting");
-			console.log(data);
 			if (status === OK) {
 				this.thumbnail = data.thumbnail;
 				if (this.thumbnail === null) {
