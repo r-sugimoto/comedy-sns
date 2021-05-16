@@ -28,7 +28,7 @@
 					inset
 					class="m-0 p-0"
 					color="success"
-					label="ダイレクトメッセージ"
+					label="チャット"
 					@click="postMailNotice"
 				></v-switch>
 				<v-switch
