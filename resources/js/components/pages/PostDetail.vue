@@ -52,6 +52,12 @@
 						</span>
 					</router-link>
 				</v-card-actions>
+				<div v-if="$vuetify.breakpoint.xs || $vuetify.breakpoint.sm">
+					<SocialActions
+						v-if="post.user.social !== null && post.user.social !== undefined"
+						:socials="post.user.social"
+					/>
+				</div>
 				<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
 					<span class="text--disabled">{{ post.created_at }}</span>
 				</v-card-actions>
@@ -124,6 +130,7 @@ import Comment from "../component/Comment.vue";
 import Product from "../component/Product.vue";
 import Tag from "../component/Tag.vue";
 import Reply from "../component/Reply.vue";
+import SocialActions from "../component/SocialActions.vue";
 import OptionPostDetail from "../component/OptionPostDetail.vue";
 import OptionCommentDetail from "../component/OptionCommentDetail.vue";
 import ProfileCard from "../component/ProfileCard.vue";
@@ -143,6 +150,7 @@ export default {
 		Product,
 		Tag,
 		Reply,
+		SocialActions,
 		OptionPostDetail,
 		OptionCommentDetail,
 		ProfileCard,
