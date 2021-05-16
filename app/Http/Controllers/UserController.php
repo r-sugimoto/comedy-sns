@@ -12,6 +12,7 @@ use App\Follow;
 use App\Like;
 use App\Notice;
 use App\Unsubscribe;
+use App\Social;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateUserSettingRequest;
@@ -21,7 +22,7 @@ class UserController extends Controller
     // ユーザー情報設定ページ
     public function index(){
         $user = User::select('id', 'name', 'age', 'published_age_flg', 'prefecture_id', 'published_prefecture_flg', 'introduction', 'thumbnail')
-        ->where('id', Auth::user()->id)->with(['tags:id,name'])->first();
+        ->where('id', Auth::user()->id)->with(['tags:id,name', 'social'])->first();
         return $user;
     }
 
@@ -34,12 +35,19 @@ class UserController extends Controller
             $tag = Tag::firstOrCreate(['name' => $tagName]);
             $user->tags()->attach($tag);
         });
+        $social = Social::where("user_id", Auth::user()->id)->first();
+        if(!empty($social)){
+            $social->updateSocial($request);
+        }else{
+            $social = new Social();
+            $social->createSocial($request);
+        }
         return $user;
     }
 
     // プロフィールページ情報取得
     public function profileIndex(string $id){
-        $user = User::where('id', $id)->with(['tags:id,name', 'prefecture:id,name'])->first();
+        $user = User::where('id', $id)->with(['tags:id,name', 'prefecture:id,name', 'social'])->first();
         return $user;
     }
 

@@ -34,6 +34,7 @@
 						:tag-item="tag"
 						:push-name="'recruit'"
 					></Tag>
+					<RecruitContents :recruit-content="post.recruit"></RecruitContents>
 				</v-card-text>
 				<Product :product-items="post.products" class="pl-3 pr-3"></Product>
 				<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
@@ -52,6 +53,12 @@
 						</span>
 					</router-link>
 				</v-card-actions>
+				<div v-if="$vuetify.breakpoint.xs || $vuetify.breakpoint.sm">
+					<SocialActions
+						v-if="post.user.social !== null && post.user.social !== undefined"
+						:socials="post.user.social"
+					/>
+				</div>
 				<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
 					<span class="text--disabled">{{ post.created_at }}</span>
 				</v-card-actions>
@@ -133,6 +140,8 @@ import OptionPostDetail from "../component/OptionPostDetail.vue";
 import OptionCommentDetail from "../component/OptionCommentDetail.vue";
 import Apply from "../component/recruit/Apply.vue";
 import ProfileCard from "../component/ProfileCard.vue";
+import SocialActions from "../component/SocialActions.vue";
+import RecruitContents from "../component/recruit/RecruitContents.vue";
 import RouteBack from "../component/RouteBack.vue";
 import Avatar from "../elements/Avatar.vue";
 import CreateTextUrl from "../elements/CreateTextUrl.vue";
@@ -151,8 +160,10 @@ export default {
 		Tag,
 		Reply,
 		OptionPostDetail,
+		RecruitContents,
 		OptionCommentDetail,
 		Apply,
+		SocialActions,
 		RouteBack,
 		ProfileCard,
 		Avatar,
