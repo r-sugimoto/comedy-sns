@@ -44,7 +44,7 @@ class PostController extends Controller
     // 投稿詳細
     public function post(string $id)
     {
-        $post = Post::select('id', 'user_id', 'title', 'message', 'created_at')->where('id', $id)->with(['user:id,name,thumbnail', 'tags', 'comments', 'products:name,type'])->get();
+        $post = Post::select('id', 'user_id', 'title', 'message', 'recruit_id', 'created_at')->where('id', $id)->with(['user:id,name,thumbnail', 'tags', 'comments', 'user.social', 'products:name,type', 'recruit.prefecture','recruit.prefecture.region', 'recruit.generation'])->get();
         return $post;
     }
     // 投稿機能
