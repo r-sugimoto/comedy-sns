@@ -1,5 +1,5 @@
 <template>
-	<v-card-actions class="pl-3 pr-3 pt-0 pb-0">
+	<v-card-actions class="pl-2 pr-2 pt-0 pb-0">
 		<v-btn
 			v-if="socials.twitter_id !== null"
 			large
