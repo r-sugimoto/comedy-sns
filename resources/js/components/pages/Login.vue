@@ -68,7 +68,7 @@
 					class="mt-10 twitter-auth-btn"
 				>
 					<v-icon color="white">mdi-twitter</v-icon>
-					<span class="white--text">Twitterアカウントでログインする</span>
+					<span class="white--text">Twitterアカウントでログイン</span>
 				</v-btn>
 				<div class="mt-5 text-center">
 					<router-link to="/register" class="cyan--text">
