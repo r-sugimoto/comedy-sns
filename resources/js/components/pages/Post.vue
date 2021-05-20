@@ -1,7 +1,7 @@
 <template>
 	<v-row>
 		<v-fab-transition>
-			<NewPost v-if="isLogin" @addPostReload="reloadPost"></NewPost>
+			<NewPost v-if="isLogin" @addPostReload="reloadPost" />
 		</v-fab-transition>
 		<v-col
 			cols="12"
@@ -11,7 +11,7 @@
 			class="pb-0"
 			:class="{ 'pr-0': !$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm }"
 		>
-			<SearchPost></SearchPost>
+			<SearchPost />
 		</v-col>
 		<v-col cols="12" md="8" lg="8" xl="8">
 			<v-row v-if="isLogin">

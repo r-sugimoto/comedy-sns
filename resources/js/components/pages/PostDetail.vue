@@ -66,12 +66,12 @@
 						:post-id="post.id"
 						@emitShowPostDetail="showPostDetail"
 						class="mr-1"
-					></Reply>
+					/>
 					<Like
 						:likes-count="post.likes_count"
 						:liked-by-user="post.liked_by_user"
 						:post-id="post.id"
-					></Like>
+					/>
 					<v-spacer></v-spacer>
 					<OptionPostDetail
 						:post-id="post.id"
@@ -103,7 +103,7 @@
 							:thumbnail="comment.thumbnail"
 							:url="comment.thumbnail_url"
 							class="mr-1"
-						></Avatar>
+						/>
 						<span class="va-m">
 							{{ comment.name }}
 						</span>
@@ -116,7 +116,7 @@
 						:comment-id="comment.pivot.id"
 						:user-id-check="comment.id === isLoginUserId"
 						@emitShowPostDetail="showPostDetail"
-					></OptionCommentDetail>
+					/>
 				</v-card-actions>
 			</v-card>
 		</v-col>
