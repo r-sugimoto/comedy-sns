@@ -8,7 +8,7 @@
 			class="pb-0"
 			:class="{ 'pr-0': !$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm }"
 		>
-			<ProfileCard :id="id"></ProfileCard>
+			<ProfileCard :id="id" />
 		</v-col>
 		<v-col
 			cols="12"
@@ -17,7 +17,7 @@
 			xl="8"
 			:class="{ 'pt-0': $vuetify.breakpoint.xs || $vuetify.breakpoint.sm }"
 		>
-			<ProfileTabs :user-id="id"></ProfileTabs>
+			<ProfileTabs :user-id="id" />
 		</v-col>
 	</v-row>
 </template>
