@@ -21,7 +21,7 @@
 							<ListAvatar
 								:thumbnail="n.comments[0].user.thumbnail"
 								:url="n.comments[0].user.thumbnail_url"
-							></ListAvatar>
+							/>
 						</v-list-item-avatar>
 						<v-list-item-content>
 							<v-list-item-title class="list-title"
@@ -46,7 +46,7 @@
 							<ListAvatar
 								:thumbnail="n.messages[0].user.thumbnail"
 								:url="n.messages[0].user.thumbnail_url"
-							></ListAvatar>
+							/>
 						</v-list-item-avatar>
 						<v-list-item-content>
 							<v-list-item-title class="list-title"
@@ -71,7 +71,7 @@
 							<ListAvatar
 								:thumbnail="n.partners[0].partner_user.thumbnail"
 								:url="n.partners[0].partner_user.thumbnail_url"
-							></ListAvatar>
+							/>
 						</v-list-item-avatar>
 						<v-list-item-content v-if="n.partners[0].application_flg === null">
 							<v-list-item-title class="list-title"
@@ -112,7 +112,7 @@
 							<ListAvatar
 								:thumbnail="n.partners[0].user.thumbnail"
 								:url="n.partners[0].user.thumbnail_url"
-							></ListAvatar>
+							/>
 						</v-list-item-avatar>
 						<v-list-item-content v-if="n.partners[0].application_flg === null">
 							<v-list-item-title class="list-title"

@@ -33,10 +33,10 @@
 						:key="`tags-${i}`"
 						:tag-item="tag"
 						:push-name="'recruit'"
-					></Tag>
-					<RecruitContents :recruit-content="post.recruit"></RecruitContents>
+					/>
+					<RecruitContents :recruit-content="post.recruit" />
 				</v-card-text>
-				<Product :product-items="post.products" class="pl-3 pr-3"></Product>
+				<Product :product-items="post.products" class="pl-3 pr-3" />
 				<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
 					<router-link
 						:to="`/profile/${post.user.id}`"
@@ -47,7 +47,7 @@
 							:thumbnail="post.user.thumbnail"
 							:url="post.user.thumbnail_url"
 							class="mr-1"
-						></Avatar>
+						/>
 						<span class="va-m">
 							{{ post.user.name }}
 						</span>
@@ -68,23 +68,23 @@
 						:user-id="post.user.id"
 						:user-id-check="post.user.id === isLoginUserId"
 						class="ml-1 mr-1"
-					></Apply>
+					/>
 					<Reply
 						:post-id="post.id"
 						@emitShowPostDetail="showPostDetail"
 						class="mr-1"
-					></Reply>
+					/>
 					<Like
 						:likes-count="post.likes_count"
 						:liked-by-user="post.liked_by_user"
 						:post-id="post.id"
-					></Like>
+					/>
 					<v-spacer></v-spacer>
 					<OptionPostDetail
 						:post-id="post.id"
 						:user-id-check="post.user.id === isLoginUserId"
 						:path-name="'recruit'"
-					></OptionPostDetail>
+					/>
 				</v-card-actions>
 			</v-card>
 			<v-card
@@ -110,7 +110,7 @@
 							:thumbnail="comment.thumbnail"
 							:url="comment.thumbnail_url"
 							class="mr-1"
-						></Avatar>
+						/>
 						<span class="va-m">
 							{{ comment.name }}
 						</span>
@@ -123,7 +123,7 @@
 						:comment-id="comment.pivot.id"
 						:user-id-check="comment.id === isLoginUserId"
 						@emitShowPostDetail="showPostDetail"
-					></OptionCommentDetail>
+					/>
 				</v-card-actions>
 			</v-card>
 		</v-col>

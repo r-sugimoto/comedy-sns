@@ -79,9 +79,9 @@
 					:tag-item="tag"
 					:push-name="'recruit'"
 				></Tag>
-				<RecruitContents :recruit-content="post.recruit"></RecruitContents>
+				<RecruitContents :recruit-content="post.recruit" />
 			</v-card-text>
-			<Product :product-items="post.products"></Product>
+			<Product :product-items="post.products" />
 			<v-card-actions class="pl-3 pr-3 pt-2 pb-0">
 				<router-link
 					:to="`/profile/${post.user.id}`"
@@ -92,7 +92,7 @@
 						:thumbnail="post.user.thumbnail"
 						:url="post.user.thumbnail_url"
 						class="mr-1"
-					></Avatar>
+					/>
 					<span class="va-m">
 						{{ post.user.name }}
 					</span>
@@ -110,18 +110,18 @@
 					:user-id="post.user.id"
 					:user-id-check="post.user.id === isLoginUserId"
 					class="mr-1"
-				></Apply>
+				/>
 				<Comment
 					class="ml-1"
 					:comments-count="post.comments_count"
 					:post-id="post.id"
 					:url="`/recruit/${post.id}`"
-				></Comment>
+				/>
 				<Like
 					:likes-count="post.likes_count"
 					:liked-by-user="post.liked_by_user"
 					:post-id="post.id"
-				></Like>
+				/>
 			</v-card-actions>
 		</v-card>
 	</div>
