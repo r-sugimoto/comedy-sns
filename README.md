@@ -2,7 +2,7 @@
 
 ## Comenion (コメ二オン)
 
-#### URL:<a href="https://comenion.com" target="_blank">https://comenion.com</a>
+#### URL:サービス終了しました
 
 レスポンシブ化(iPhone5 の横幅 320px まで対応)
 
