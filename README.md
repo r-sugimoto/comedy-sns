@@ -36,27 +36,27 @@
 
 ## タイムライン
 
-<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/post.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/blob/master/comedy-sns/gif/post.gif">
 
 ## 相方募集投稿
 
-<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/recruit.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/blob/master/comedy-sns/gif/recruit.gif">
 
 ## マイページ
 
-<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/mypage.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/blob/master/comedy-sns/gif/mypage.gif">
 
 ## 相方申請管理
 
-<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/partner.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/blob/master/comedy-sns/gif/partner.gif">
 
 ## チャット
 
-<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/chat.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/blob/master/comedy-sns/gif/chat.gif">
 
 ## 設定
 
-<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/setting.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/blob/master/comedy-sns/gif/setting.gif">
 
 # 機能一覧
 
@@ -105,7 +105,7 @@
 
 # インフラ構成図
 
-<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/Untitled%20Diagram.png">
+<img src="https://github.com/r-sugimoto/readme-folder/blob/master/comedy-sns/Untitled%20Diagram.png">
 
 # 工夫した点
 
