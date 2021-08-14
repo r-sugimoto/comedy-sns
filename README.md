@@ -36,27 +36,27 @@
 
 ## タイムライン
 
-<img src="https://github.com/r-sugimoto/readme-folder/blob/master/gif/post.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/post.gif">
 
 ## 相方募集投稿
 
-<img src="https://github.com/r-sugimoto/readme-folder/blob/master/gif/recruit.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/recruit.gif">
 
 ## マイページ
 
-<img src="https://github.com/r-sugimoto/readme-folder/blob/master/gif/mypage.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/mypage.gif">
 
 ## 相方申請管理
 
-<img src="https://github.com/r-sugimoto/readme-folder/blob/master/gif/partner.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/partner.gif">
 
 ## チャット
 
-<img src="https://github.com/r-sugimoto/readme-folder/blob/master/gif/chat.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/chat.gif">
 
 ## 設定
 
-<img src="https://github.com/r-sugimoto/readme-folder/blob/master/gif/setting.gif">
+<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/gif/setting.gif">
 
 # 機能一覧
 
@@ -105,7 +105,7 @@
 
 # インフラ構成図
 
-<img src="https://github.com/r-sugimoto/readme-folder/blob/master/Untitled%20Diagram.png">
+<img src="https://github.com/r-sugimoto/readme-folder/comedy-sns/blob/master/Untitled%20Diagram.png">
 
 # 工夫した点
 
@@ -131,21 +131,3 @@
 ### SNS から集客する想定だったので、Twitter ログインの実装しました。
 
 ### ページング機能で一覧ページを実装していましたが、ストレス無くご利用いただけるよう無限スクロールに変更しました。
-
-# 今後の展望
-
-### 通知機能の強化
-
-- ~~現状、ログインしないと通知に気づけない状況です。~~  
-  **~~→ SMS、メールで通知を知らせるよう実装する。~~**
-  **→メール通知実装しました。**
-
-### スマホアプリにしたい
-
-- アナリティクスで分析したところ、スマホユーザーが多く、アプリ化したいと考えています。  
-  **→ Flutter などで作り変えるのもアリかなと思っています(プッシュ通知により、通知問題の解決に繋がる)**
-
-### 登録ユーザーを増やしたい
-
-- 現状、相方募集投稿を確認し、離脱していくユーザーが多いです。  
-  **→ 大喜利機能など、登録しないと使えないコンテンツを増やしていき、解決したいと考えています。**
