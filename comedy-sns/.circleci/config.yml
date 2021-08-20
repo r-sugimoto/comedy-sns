@@ -1,0 +1,65 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.4-node-browsers
+      - image: circleci/mysql:5.7
+        environment:
+          - APP_DEBUG: true
+          - APP_ENV: testing
+          - DB_CONNECTION: circle_test
+          - MYSQL_ALLOW_EMPTY_PASSWORD: true
+    steps:
+      - checkout
+
+      - run: sudo apt update
+      - run: sudo apt-get install -y wget git zip libpq-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev unzip
+      - run: sudo docker-php-ext-install pdo_mysql
+      - run: sudo docker-php-ext-configure gd --with-freetype --with-jpeg
+      - run: sudo docker-php-ext-install gd
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+      - run: echo $ENV_FILE | base64 -di > .env.testing
+      - run: php artisan key:generate --env=testing
+      - run: php artisan migrate
+      - run: ./vendor/bin/phpunit --testdox
+      - store_artifacts:
+          path: ./storage/logs
+  deploy:
+    docker:
+      - image: circleci/php:7.4-node-browsers
+    steps:
+      - add_ssh_keys
+      - run:
+          name: deploy
+          command: |
+            ssh -o StrictHostKeyChecking=no -t ec2-user@${HOST_NAME} "cd /var/www/comedy-sns/  && \
+              git pull origin master && \
+              composer install -n --no-dev --prefer-dist && \
+              npm ci && \
+              npm run prod && \
+              php artisan migrate --force && \
+              php artisan config:cache"
+
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master

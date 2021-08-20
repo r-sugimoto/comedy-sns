@@ -1,0 +1,44 @@
+version: "3.8"
+
+volumes:
+  docker-volume:
+
+services:
+  web:
+    image: nginx:1.18
+    ports:
+      - "8000:80"
+    depends_on:
+      - app
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:delegated
+      - .:/var/www/html:delegated
+  app:
+    build: ./docker/php
+    volumes:
+      - .:/var/www/html:delegated
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: cs
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+      TZ: "Asia/Tokyo"
+    volumes:
+      - docker-volume:/var/lib/mysql
+  db_testing:
+    image: mysql:5.7
+    ports:
+      - "3300:3306"
+    environment:
+      MYSQL_DATABASE: cs_testing
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+      TZ: "Asia/Tokyo"
+    tmpfs:
+      - /var/lib/mysql
+      - /var/log/mysql
